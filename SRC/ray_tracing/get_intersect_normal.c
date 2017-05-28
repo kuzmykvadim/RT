@@ -22,12 +22,12 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 	if (RT_OBJ.sphere != NULL)
 		normal = normal_vector(sub_vector(RT_OBJ.SPHERE_POSITION, point));
 	else if (RT_OBJ.plane != NULL)
-		normal = *RT_OBJ.plane->normal;
+		set_vector(&normal, RT_OBJ.plane->normal);
 	else if (RT_OBJ.cylinder != NULL)
 		normal = find_normal_cylinder(RT_OBJ.cylinder, point);
 	else if (RT_OBJ.cone != NULL)
 		normal = find_normal_cone(RT_OBJ.cone, point);
-	// else if (RT_OBJ.disk != NULL)
-	// 	set_vector(&normal, RT_OBJ.disk->normal);
+	else if (RT_OBJ.disk != NULL)
+		set_vector(&normal, RT_OBJ.disk->normal);
 	return (normal);
 }

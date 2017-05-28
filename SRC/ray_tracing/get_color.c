@@ -12,6 +12,13 @@
 
 #include "../../head.h"
 
+void 	set_color_color(t_color *c1, t_color c2)
+{
+	c1->red = c2.red;
+	c1->blue = c2.blue;
+	c1->green = c2.green;
+}
+
 t_color		get_color(t_rtv1 *rtv1, int num_obj)
 {
 	t_color color;
@@ -20,14 +27,14 @@ t_color		get_color(t_rtv1 *rtv1, int num_obj)
 	color.blue = 0;
 	color.green = 0;
 	if (rtv1->rt_obj[num_obj].plane != NULL)
-		color = rtv1->rt_obj[num_obj].plane->color;
+		set_color_color(&color, rtv1->rt_obj[num_obj].plane->color);
 	else if (rtv1->rt_obj[num_obj].sphere != NULL)
-		color = rtv1->rt_obj[num_obj].sphere->color;
+		set_color_color(&color, rtv1->rt_obj[num_obj].sphere->color);
 	else if (rtv1->rt_obj[num_obj].cylinder != NULL)
-		color = rtv1->rt_obj[num_obj].cylinder->color;
+		set_color_color(&color, rtv1->rt_obj[num_obj].cylinder->color);
 	else if (rtv1->rt_obj[num_obj].cone != NULL)
-		color = rtv1->rt_obj[num_obj].cone->color;
+		set_color_color(&color, rtv1->rt_obj[num_obj].cone->color);
 	else if (rtv1->rt_obj[num_obj].disk != NULL)
-		color = rtv1->rt_obj[num_obj].disk->color;
+		set_color_color(&color, rtv1->rt_obj[num_obj].disk->color);
 	return (color);
 }

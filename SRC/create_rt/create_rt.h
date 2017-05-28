@@ -16,22 +16,11 @@
 # include "../Vector/vector.h"
 # include "../mlx_src/mlx_src.h"
 
-typedef struct	s_intersect
-{
-	double		t;
-}				t_intersect;
-
 typedef struct	s_light
 {
 	t_vector	*position;
 	t_color		color;
 }				t_light;
-
-typedef struct	s_material
-{
-	double		reflection;
-	t_color		color;
-}				t_material;
 
 typedef	struct	s_cylinder
 {

@@ -74,9 +74,9 @@ void		init_1(t_rtv1 *rtv1)
 	set_vector(rtv1->rt_obj[8].plane->normal, &tmp);
 
 	construct_vector(rtv1->rt_obj[9].disk->normal, 0, 0, 1);
-	construct_vector(rtv1->rt_obj[9].disk->position, 0, 0, 2000);
+	construct_vector(rtv1->rt_obj[9].disk->position, 400, 400, -150);
 	rtv1->rt_obj[9].disk->radius = 200;
-	rtv1->rt_obj[9].disk->color = create_color(0x00FFFF);
+	rtv1->rt_obj[9].disk->color = create_color(0x991111);
 
 }
 

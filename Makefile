@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = RTv1
+NAME = RT
 
-FLAGS = -c -Wall -Wextra -Werror -O2
+FLAGS = -c -Wall -Wextra -Werror
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 

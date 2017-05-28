@@ -15,10 +15,8 @@
 static t_type	*create_demo(int size)
 {
 	t_type		*type;
-	int			i;
 
 	type = (t_type*)malloc(sizeof(t_type) * size + 1);
-	i = 0;
 	type[0].name = "Sphere";
 	type[1].name = "Sphere";
 	type[2].name = "Sphere";
@@ -74,7 +72,7 @@ t_rtv1			*create_rtv1(void)
 {
 	t_rtv1		*rtv1;
 
-	rtv1 = (t_rtv1*)malloc(sizeof(t_rtv1));
+	rtv1 = (t_rtv1*)malloc(sizeof(t_rtv1) + 1);
 	rtv1->size_obj = 10;
 	rtv1->size_light = 3;
 	rtv1->light_off_on = 0;
