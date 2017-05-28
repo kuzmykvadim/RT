@@ -76,6 +76,14 @@ typedef	struct	s_ray
 	double		scalar_ray_direction;
 }				t_ray;
 
+typedef struct	s_disk
+{
+	t_color		color;
+	t_vector	*normal;
+	t_vector	*position;
+	double		radius;
+}				t_disk;
+
 typedef struct	s_screen
 {
 	t_vector	*ray;

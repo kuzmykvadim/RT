@@ -25,5 +25,7 @@ int	check_intersect_object(t_rtv1 *rtv1, double *t, int i, t_ray *ray)
 		res = intersect_cylinder(ray, RT->rt_obj[i].cylinder, t);
 	else if (RT->rt_obj[i].cone != NULL)
 		res = intersect_cone(ray, RT->rt_obj[i].cone, t);
+	else if (RT->rt_obj[i].disk != NULL)
+		res = intersect_disc(ray, RT->rt_obj[i].disk, t);
 	return (res);
 }

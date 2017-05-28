@@ -83,6 +83,7 @@ RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/intersect_obj/intersect_cone.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_cylinder.c			\
 				./SRC/ray_tracing/intersect_obj/discriminant.c					\
+				./SRC/ray_tracing/intersect_obj/intersect_disc.c				\
 				./SRC/ray_tracing/ft_light.c									\
 				./SRC/ray_tracing/get_color.c									\
 				./SRC/ray_tracing/check_intersect_object.c						\
@@ -110,6 +111,7 @@ all: $(NAME)
 
 $(NAME): $(BINS)
 	@ gcc -o $(NAME) $(BINS) $(MLX)
+	make clean
 
 %.o: %.c $(HEADER)
 	@ gcc $(FLAGS) -o  $@ $<

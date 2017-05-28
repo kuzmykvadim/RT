@@ -27,5 +27,7 @@ t_color		get_color(t_rtv1 *rtv1, int num_obj)
 		color = rtv1->rt_obj[num_obj].cylinder->color;
 	else if (rtv1->rt_obj[num_obj].cone != NULL)
 		color = rtv1->rt_obj[num_obj].cone->color;
+	else if (rtv1->rt_obj[num_obj].disk != NULL)
+		color = rtv1->rt_obj[num_obj].disk->color;
 	return (color);
 }

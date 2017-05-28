@@ -28,11 +28,11 @@ int		module_check_in(t_rtv1 *rtv1, t_vector *pos_obj)
 	{
 		set_vector(RAY_DIRECTION, &ray_1);
 		val.hit = check_intersect_object(RT, &math.t1, val.i, RT->ray);
-		if (val.hit != 0 && RT->rt_obj[val.i].of_on == 1)
+		if (val.hit != 0)
 		{
 			set_vector(RAY_DIRECTION, &ray_2);
 			val.hit = check_intersect_object(RT, &math.t1, val.i, RT->ray);
-			if (val.hit != 0 && RT->rt_obj[val.i].of_on == 1)
+			if (val.hit != 0)
 				if (rtv1->rt_obj[val.i].cone == NULL)
 					return (0);
 		}

@@ -23,7 +23,7 @@ int		light_intersect(t_rtv1 *rtv1, double *t)
 	{
 		val_t.t1 = 200000.0f;
 		val.hit = check_intersect_object(RT, &val_t.t1, val.i, RT->light_ray);
-		if (val.hit && val_t.t1 < *t && RT->rt_obj[val.i].of_on == 1)
+		if (val.hit && val_t.t1 < *t)
 			return (0);
 		val.i++;
 	}

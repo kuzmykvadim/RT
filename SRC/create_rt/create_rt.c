@@ -28,20 +28,19 @@ static t_type	*create_demo(int size)
 	type[6].name = "Cone";
 	type[7].name = "Plane";
 	type[8].name = "Plane";
+	type[9].name = "Disk";
 	return (type);
 }
 
-static void		demo_init(t_rtv1 *rtv1)
+
+t_disk	*create_disk(void)
 {
-	rtv1->rt_obj[0].of_on = 1;
-	rtv1->rt_obj[1].of_on = 1;
-	rtv1->rt_obj[2].of_on = 1;
-	rtv1->rt_obj[3].of_on = 1;
-	rtv1->rt_obj[4].of_on = 1;
-	rtv1->rt_obj[5].of_on = 1;
-	rtv1->rt_obj[6].of_on = 1;
-	rtv1->rt_obj[7].of_on = 1;
-	rtv1->rt_obj[8].of_on = 1;
+	t_disk	*disk;
+
+	disk = (t_disk*)malloc(sizeof(t_disk) * 2);
+	disk->position = create_vector();
+	disk->normal = create_vector();
+	return (disk);
 }
 
 t_object		*create_rt_obj(int size_obj)
@@ -63,6 +62,8 @@ t_object		*create_rt_obj(int size_obj)
 			new[i].cone = create_cone();
 		else if (strcmp(type[i].name, "Cylinder") == 0)
 			new[i].cylinder = create_cylinder();
+		else if (strcmp(type[i].name, "Disk") == 0)
+			new[i].disk = create_disk();
 		i++;
 	}
 	free(type);
@@ -74,7 +75,7 @@ t_rtv1			*create_rtv1(void)
 	t_rtv1		*rtv1;
 
 	rtv1 = (t_rtv1*)malloc(sizeof(t_rtv1));
-	rtv1->size_obj = 9;
+	rtv1->size_obj = 10;
 	rtv1->size_light = 3;
 	rtv1->light_off_on = 0;
 	rtv1->ray = create_ray();
@@ -85,7 +86,6 @@ t_rtv1			*create_rtv1(void)
 	rtv1->screen = create_map();
 	rtv1->screen2 = create_map();
 	init_demo(rtv1);
-	demo_init(rtv1);
 	calc(RT, calc_norm_dir);
 	return (rtv1);
 }

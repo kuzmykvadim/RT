@@ -48,8 +48,7 @@ typedef struct	s_object
 	t_plane			*plane;
 	t_cylinder		*cylinder;
 	t_cone			*cone;
-	t_intersect		*map;
-	int				of_on;
+	t_disk			*disk;
 }				t_object;
 
 typedef struct	s_type
@@ -125,6 +124,7 @@ int				intersect_sphere(t_ray *ray, t_sphere *sphere, double *t);
 int				intersect_plane(t_ray *ray, t_plane *plane, double *t);
 int				intersect_cylinder(t_ray *ray, t_cylinder *cylinder, double *t);
 int				intersect_cone(t_ray *ray, t_cone *cone, double *t);
+int				intersect_disc(t_ray *ray, t_disk *disk, double *t);
 int				discriminant(double *t, t_val_math val);
 int				light_intersect(t_rtv1 *rt, double *t);
 t_color			ft_light(t_rtv1 *rt, double *t_min, int num_obj);

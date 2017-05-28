@@ -25,7 +25,7 @@ t_color		intersect(t_rtv1 *rtv1)
 	{
 		val_t.t1 = 2000000.0f;
 		val.hit = check_intersect_object(RT, &val_t.t1, val.i, RT->ray);
-		if (val.hit != 0 && val_t.t1 < val_t.t0 && RT->rt_obj[val.i].of_on == 1)
+		if (val.hit != 0 && val_t.t1 < val_t.t0)
 		{
 			val_t.t0 = val_t.t1;
 			val.num_obj = val.i;
