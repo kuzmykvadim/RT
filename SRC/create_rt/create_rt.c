@@ -27,6 +27,7 @@ static t_type	*create_demo(int size)
 	type[7].name = "Plane";
 	type[8].name = "Plane";
 	type[9].name = "Disk";
+	type[10].name = "Poligon";
 	return (type);
 }
 
@@ -39,6 +40,18 @@ t_disk	*create_disk(void)
 	disk->position = create_vector();
 	disk->normal = create_vector();
 	return (disk);
+}
+
+t_poligon 	*create_poligon(void)
+{
+	t_poligon *poligon;
+
+	poligon = (t_poligon*)malloc(sizeof(t_poligon) + 1);
+	poligon->v0 = create_vector();
+	poligon->v1 = create_vector();
+	poligon->v2 = create_vector();
+	poligon->normal = create_vector();
+	return (poligon);
 }
 
 t_object		*create_rt_obj(int size_obj)
@@ -62,6 +75,8 @@ t_object		*create_rt_obj(int size_obj)
 			new[i].cylinder = create_cylinder();
 		else if (strcmp(type[i].name, "Disk") == 0)
 			new[i].disk = create_disk();
+		else if (strcmp(type[i].name, "Poligon") == 0)
+			new[i].poligon = create_poligon();
 		i++;
 	}
 	free(type);
@@ -73,9 +88,11 @@ t_rtv1			*create_rtv1(void)
 	t_rtv1		*rtv1;
 
 	rtv1 = (t_rtv1*)malloc(sizeof(t_rtv1) + 1);
-	rtv1->size_obj = 10;
+	rtv1->size_obj = 11;
 	rtv1->size_light = 3;
 	rtv1->light_off_on = 0;
+	rtv1->val = (t_val_vector*)malloc(sizeof(t_val_vector) * 1);
+	 rtv1->hit = (int*)malloc(sizeof(int) * SIZE_LIGHT * 1);
 	rtv1->ray = create_ray();
 	rtv1->light_ray = create_ray();
 	rtv1->rt_obj = create_rt_obj(rtv1->size_obj);

@@ -26,7 +26,6 @@ typedef	struct	s_cylinder
 {
 	t_vector	*position;
 	t_vector	*direction;
-	t_color		color;
 	double		radius;
 	double		radius_pow;
 }				t_cylinder;
@@ -35,7 +34,6 @@ typedef	struct	s_cone
 {
 	t_vector	*position;
 	t_vector	*direction;
-	t_color		color;
 	double		angle;
 	double		cone_cos_two;
 	double		cone_sin_two;
@@ -46,15 +44,21 @@ typedef	struct	s_cone
 typedef	struct	s_sphere
 {
 	t_vector	*position;
-	t_color		color;
 	double		radius;
 	double		radius_pow;
 }				t_sphere;
 
+typedef	struct	s_poligon
+{
+	t_vector	*v0;
+	t_vector	*v1;
+	t_vector	*v2;
+	t_vector	*normal;
+}				t_poligon;
+
 typedef struct	s_plane
 {
 	double		distance;
-	t_color		color;
 	t_vector	*normal;
 }				t_plane;
 
@@ -67,7 +71,6 @@ typedef	struct	s_ray
 
 typedef struct	s_disk
 {
-	t_color		color;
 	t_vector	*normal;
 	t_vector	*position;
 	double		radius;

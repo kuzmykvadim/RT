@@ -12,7 +12,9 @@
 
 NAME = RT
 
-FLAGS = -c -Wall -Wextra -Werror
+FLAGS1 = -c #-Wall -Wextra -Werror
+
+FLAGS2 = -c -O3 #-Wall -Wextra -Werror
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
@@ -46,6 +48,7 @@ VECTOR =		./SRC/Vector/add_vector.c										\
 
 EVENT = 		./SRC/event/destroy.c											\
 				./SRC/event/event_key.c											\
+				./SRC/event/event_camera.c										\
 				./SRC/event/event_mouse.c										\
 				./SRC/event/control_camera/move_back_camera.c					\
 				./SRC/event/control_camera/move_forward_camera.c				\
@@ -84,6 +87,7 @@ RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/intersect_obj/intersect_cylinder.c			\
 				./SRC/ray_tracing/intersect_obj/discriminant.c					\
 				./SRC/ray_tracing/intersect_obj/intersect_disc.c				\
+				./SRC/ray_tracing/intersect_obj/intersect_poligon.c				\
 				./SRC/ray_tracing/ft_light.c									\
 				./SRC/ray_tracing/get_color.c									\
 				./SRC/ray_tracing/check_intersect_object.c						\
@@ -96,7 +100,11 @@ RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/all_shadow.c									\
 				./SRC/ray_tracing/all_light.c									\
 
-SRC =			./SRC/main.c													\
+FT =			./SRC/function/main.c											\
+				./SRC/function/mlx_use.c										\
+				./SRC/function/error_exit.c										\
+
+SRC =			$(FT)															\
 				$(MLX_SRC)														\
 				$(FT_MATH)														\
 				$(VECTOR)														\
@@ -113,8 +121,20 @@ $(NAME): $(BINS)
 	@ gcc -o $(NAME) $(BINS) $(MLX)
 	make clean
 
-%.o: %.c $(HEADER)
-	@ gcc $(FLAGS) -o  $@ $<
+SRC/Vector/%.o: SRC/Vector/%.c
+	gcc $(FLAGS2) -o  $@ $<
+SRC/mlx_src/%.o: SRC/mlx_src/%.c
+	gcc $(FLAGS2) -o  $@ $<
+SRC/event/%.o: SRC/event/%.c
+	gcc $(FLAGS2) -o  $@ $<
+SRC/ft_math/%.o: SRC/ft_math/%.c
+	gcc $(FLAGS2) -o  $@ $<
+SRC/function/%.o: SRC/function/%.c
+	gcc $(FLAGS2) -o  $@ $<
+SRC/function/%.o: SRC/function/%.c
+	gcc $(FLAGS2) -o  $@ $<
+SRC/ray_tracing/%.o: SRC/function/%.c
+	gcc $(FLAGS2) -o  $@ $<
 
 clean:
 	@ /bin/rm -f $(BINS)

@@ -18,6 +18,7 @@
 # include "SRC/create_rt/create_rt.h"
 # include "SRC/ft_math/ft_math.h"
 # include "SRC/ray_tracing/Lighting_Model/light.h"
+# include <stdio.h>
 
 # define RAY_ORIGIN 			rtv1->ray->origin
 # define RAY_DIRECTION 			rtv1->ray->direction
@@ -49,6 +50,8 @@ typedef struct	s_object
 	t_cylinder		*cylinder;
 	t_cone			*cone;
 	t_disk			*disk;
+	t_poligon		*poligon;
+	t_color			color;
 }				t_object;
 
 typedef struct	s_type
@@ -83,6 +86,16 @@ typedef struct	s_model_light
 	double	beta;
 }				t_model_light;
 
+typedef struct	s_val_vector
+{
+	t_vector		point;
+	t_vector		n_point;
+	t_vector		tmp;
+	t_color			color;
+	t_color			rgb[4];
+	t_vector		ray;
+}				t_val_vector;
+
 typedef struct	s_rtv1
 {
 	t_mlx			*obj;
@@ -93,22 +106,14 @@ typedef struct	s_rtv1
 	t_light			*light;
 	t_screen		*screen;
 	t_screen		*screen2;
+	t_val_vector	*val;
+	int				*hit;
 	int				size_obj;
 	int				size_light;
 	int				x;
 	int				y;
 	int				light_off_on;
 }				t_rtv1;
-
-typedef struct	s_val_vector
-{
-	t_vector		point;
-	t_vector		n_point;
-	t_vector		tmp;
-	t_color			color;
-	t_color			rgb[4];
-	t_vector		ray;
-}				t_val_vector;
 
 t_rtv1			*create_rtv1(void);
 int				calc(t_rtv1 *rtv1, int (*f)());
@@ -120,11 +125,14 @@ void			ray_tracing(t_rtv1 *rtv1);
 int				module_check_in(t_rtv1 *rtv1, t_vector *pos_obj);
 t_color			intersect(t_rtv1 *rtv1);
 int				check_intersect_object(t_rtv1 *rt, double *t, int i, t_ray *r);
+
 int				intersect_sphere(t_ray *ray, t_sphere *sphere, double *t);
 int				intersect_plane(t_ray *ray, t_plane *plane, double *t);
 int				intersect_cylinder(t_ray *ray, t_cylinder *cylinder, double *t);
 int				intersect_cone(t_ray *ray, t_cone *cone, double *t);
 int				intersect_disc(t_ray *ray, t_disk *disk, double *t);
+int				intersect_poligon(t_ray *ray, t_poligon *poligon, double *t);
+
 int				discriminant(double *t, t_val_math val);
 int				light_intersect(t_rtv1 *rt, double *t);
 t_color			ft_light(t_rtv1 *rt, double *t_min, int num_obj);
@@ -139,6 +147,7 @@ t_color			get_color(t_rtv1 *rtv1, int num_obj);
 int				destroy(void);
 int				event_key(int keycode, t_rtv1 *rtv1);
 int				event_mouse(int keycode, int x, int y, t_rtv1 *rtv1);
+int				event_camera(int keycode, t_rtv1 *rt);
 void			move_left_camera(t_rtv1 *rtv1);
 void			move_right_camera(t_rtv1 *rtv1);
 void			move_forward_camera(t_rtv1 *rtv1);
@@ -149,4 +158,8 @@ void			zoom(int keycode, int x, int y, t_rtv1 *rtv1);
 void			rotation_x(t_rtv1 *rtv1, int keycode);
 void			rotation_y(t_rtv1 *rtv1, int keycode);
 void			rotation_z(t_rtv1 *rtv1, int keycode);
+
+void			mlx_use(t_rtv1 *rtv1);
+int				error_exit(char *error);
+
 #endif

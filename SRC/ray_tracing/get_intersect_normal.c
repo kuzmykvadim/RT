@@ -29,5 +29,7 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 		normal = find_normal_cone(RT_OBJ.cone, point);
 	else if (RT_OBJ.disk != NULL)
 		set_vector(&normal, RT_OBJ.disk->normal);
+	else if (RT_OBJ.poligon != NULL)
+		set_vector(&normal, RT_OBJ.poligon->normal);
 	return (normal);
 }

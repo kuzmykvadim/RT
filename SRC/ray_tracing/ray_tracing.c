@@ -22,6 +22,7 @@ void	ray_tracing(t_rtv1 *rtv1)
 	rtv1->img = create_img(rtv1->obj);
 	size = SIZE_X * SIZE_Y;
 	i = 0;
+	printf("start ray_tracing\n");
 	if (module_check_in(rtv1, RAY_ORIGIN) == 1)
 	{
 		while (i < size)
@@ -38,4 +39,5 @@ void	ray_tracing(t_rtv1 *rtv1)
 	}
 	PUT_IMG_WIN(MLX_MY, WIN_MY, rtv1->img->img, 0, 0);
 	free(rtv1->img);
+	printf("end ray_tracing\n");
 }

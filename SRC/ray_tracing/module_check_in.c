@@ -20,6 +20,7 @@ int		module_check_in(t_rtv1 *rtv1, t_vector *pos_obj)
 	t_vector		ray_2;
 
 	val.i = 0;
+	printf("start module_check_in\n");
 	construct_vector(&ray_1, pos_obj->x - 400, pos_obj->y, pos_obj->z);
 	construct_vector(&ray_2, pos_obj->x + 400, pos_obj->y, pos_obj->z);
 	ray_1 = normal_vector(sub_vector(&ray_1, pos_obj));
