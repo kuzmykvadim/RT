@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 
 #include "mlx_src.h"
-
+#include <math.h>
 void	protected_color(t_color *color)
 {
-	if (color->red > 255)
-		color->red = 255;
-	if (color->blue > 255)
-		color->blue = 255;
-	if (color->green > 255)
-		color->green = 255;
+	color->red = fabs(color->red);
+	color->blue = fabs(color->blue);
+	color->green = fabs(color->green);
+	if (color->red >= 1)
+		color->red = 1;
+	if (color->blue >= 1)
+		color->blue = 1;
+	if (color->green >= 1)
+	 	color->green = 1;
 }

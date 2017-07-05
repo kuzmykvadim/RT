@@ -23,6 +23,8 @@
 # define BUTTON_S 1
 # include <mlx.h>
 # include <stdlib.h>
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
 
 typedef	struct	s_color
 {
@@ -66,4 +68,7 @@ t_color			create_color(int color);
 void			protected_color(t_color *color);
 void			midle_color(t_color *color, int size, t_color *new);
 void			set_color(t_color *color, double r, double g, double b);
+t_color			darkroom(t_color a);
+t_color			sepia(t_color a);
+t_color			black_and_white(t_color a);
 #endif

@@ -14,7 +14,7 @@
 # define VECTOR_H
 # include <math.h>
 # include <stdlib.h>
-
+# define RAD 0.01744
 typedef	struct	s_vector
 {
 	double		x;
@@ -35,4 +35,6 @@ void			set_vector(t_vector *new, t_vector *set);
 t_vector		division_vector(t_vector *v, double a);
 t_vector		normal_vector(t_vector v);
 void			construct_vector(t_vector	*v, double x, double y, double z);
+void 			rotation_vector(t_vector *a, t_vector *rotation);
+void 			anti_rotation_vector(t_vector *a, t_vector *rotation);
 #endif

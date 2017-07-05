@@ -12,58 +12,20 @@
 
 #include "../../../head.h"
 
-void	rotation_z_forward(t_rtv1 *rtv1, int angle)
+void	rotation_z_cam(t_rtv1 *rtv1, int angle)
 {
 	t_vector	tmp;
 	int			i;
-	int			size;
 	double		y;
 	double		x;
 
 	i = 0;
-	size = SIZE_X * SIZE_Y;
-	x = RAY_ORIGIN->x * cos(angle * RAD) + RAY_ORIGIN->y * sin(angle * RAD);
-	y = -RAY_ORIGIN->x * sin(angle * RAD) + RAY_ORIGIN->y * cos(angle * RAD);
-	RAY_ORIGIN->x = x;
-	RAY_ORIGIN->y = y;
-	while (i < size)
+	while (i < SIZE)
 	{
-		x = SCREEN->x * cos(angle * RAD) + SCREEN->y * sin(angle * RAD);
-		y = -SCREEN->x * sin(angle * RAD) + SCREEN->y * cos(angle * RAD);
-		SCREEN->x = x;
-		SCREEN->y = y;
-		tmp = normal_vector(sub_vector(SCREEN, RAY_ORIGIN));
-		RT->screen[i].dir_normal->x = tmp.x;
-		RT->screen[i].dir_normal->y = tmp.y;
-		RT->screen[i].dir_normal->z = tmp.z;
-		i++;
-	}
-}
-
-void	rotation_z_back(t_rtv1 *rtv1, int angle)
-{
-	t_vector	tmp;
-	int			i;
-	int			size;
-	double		y;
-	double		x;
-
-	i = 0;
-	size = SIZE_X * SIZE_Y;
-	x = RAY_ORIGIN->x * cos(angle * RAD) - RAY_ORIGIN->y * sin(angle * RAD);
-	y = RAY_ORIGIN->x * sin(angle * RAD) + RAY_ORIGIN->y * cos(angle * RAD);
-	RAY_ORIGIN->x = x;
-	RAY_ORIGIN->y = y;
-	while (i < size)
-	{
-		x = SCREEN->x * cos(angle * RAD) - SCREEN->y * sin(angle * RAD);
-		y = SCREEN->x * sin(angle * RAD) + SCREEN->y * cos(angle * RAD);
-		SCREEN->x = x;
-		SCREEN->y = y;
-		tmp = normal_vector(sub_vector(SCREEN, RAY_ORIGIN));
-		RT->screen[i].dir_normal->x = tmp.x;
-		RT->screen[i].dir_normal->y = tmp.y;
-		RT->screen[i].dir_normal->z = tmp.z;
+		x = DIR_NORMAL->x * cos(angle * RAD) + DIR_NORMAL->y * sin(angle * RAD);
+		y = -DIR_NORMAL->x * sin(angle * RAD) + DIR_NORMAL->y * cos(angle * RAD);
+		DIR_NORMAL->x = x;
+		DIR_NORMAL->y = y;
 		i++;
 	}
 }
@@ -71,7 +33,7 @@ void	rotation_z_back(t_rtv1 *rtv1, int angle)
 void	rotation_z(t_rtv1 *rtv1, int keycode)
 {
 	if (keycode == BUTTON_A)
-		rotation_z_forward(rtv1, 1);
+		rotation_z_cam(rtv1, 1);
 	else if (keycode == BUTTON_D)
-		rotation_z_back(rtv1, 1);
+		rotation_z_cam(rtv1, -1);
 }

@@ -20,13 +20,13 @@ int		discriminant(double *t, t_val_math val)
 	val.c = sqrtf(val.d);
 	val.t0 = (-val.b + val.c) / (2 * val.a);
 	val.t1 = (-val.b - val.c) / (2 * val.a);
-	if (val.t0 < 0.001f && val.t1 < 0.001f)
+	if (val.t0 < 1 && val.t1 < 1)
 		return (0);
-	else if (val.t0 > 0.001f && val.t1 > 0.001f && val.t0 > val.t1)
+	else if (val.t0 > 1 && val.t1 > 1 && val.t0 > val.t1)
 		val.t0 = val.t1;
-	else if (val.t0 < 0.001f)
+	else if (val.t0 < 1)
 		val.t0 = val.t1;
-	if (val.t0 > 0.001f)
+	if (val.t0 > 1)
 	{
 		*t = val.t0;
 		return (1);

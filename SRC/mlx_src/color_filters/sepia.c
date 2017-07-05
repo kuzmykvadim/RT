@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_norm_dir.c                                    :+:      :+:    :+:   */
+/*   sepia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asvirido <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/28 20:11:43 by asvirido          #+#    #+#             */
-/*   Updated: 2017/04/28 20:11:44 by asvirido         ###   ########.fr       */
+/*   Created: 2017/06/17 16:34:27 by asvirido          #+#    #+#             */
+/*   Updated: 2017/06/17 16:34:28 by asvirido         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../head.h"
+#include "../mlx_src.h"
 
-int		calc_norm_dir(int i, t_rtv1 *rtv1)
+t_color		sepia(t_color a)
 {
-	t_vector	tmp;
+	t_color		new;
 
-	tmp = normal_vector(sub_vector(RT->screen[i].ray, RAY_ORIGIN));
-	RT->screen[i].dir_normal->x = tmp.x;
-	RT->screen[i].dir_normal->y = tmp.y;
-	RT->screen[i].dir_normal->z = tmp.z;
-	RT->screen2[i].dir_normal->x = tmp.x;
-	RT->screen2[i].dir_normal->y = tmp.y;
-	RT->screen2[i].dir_normal->z = tmp.z;
-	return (1);
+	new.red = (a.red * 0.393) + (a.green * 0.769) + (a.blue * 0.189);
+	new.green = (a.red * 0.349) + (a.green * 0.689) + (a.blue * 0.168);
+	new.blue = (a.red * 0.272) + (a.green * 0.534) + (a.blue * 0.131);
+	protected_color(&new);
+	return (new);
 }

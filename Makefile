@@ -12,15 +12,13 @@
 
 NAME = RT
 
-FLAGS1 = -c #-Wall -Wextra -Werror
+FLAGS = -c #-Wall -Wextra -Werror
 
 FLAGS2 = -c -O3 #-Wall -Wextra -Werror
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
 HEADER = head.h
-
-FT_MATH =		./SRC/ft_math/min.c												\
 
 MLX_SRC =		./SRC/mlx_src/create_img.c										\
 				./SRC/mlx_src/object_mlx.c										\
@@ -30,6 +28,9 @@ MLX_SRC =		./SRC/mlx_src/create_img.c										\
 				./SRC/mlx_src/protected_color.c									\
 				./SRC/mlx_src/midle_color.c										\
 				./SRC/mlx_src/set_color.c										\
+				./SRC/mlx_src/color_filters/black_and_white.c					\
+				./SRC/mlx_src/color_filters/sepia.c								\
+				./SRC/mlx_src/color_filters/darkroom.c							\
 
 
 VECTOR =		./SRC/Vector/add_vector.c										\
@@ -45,6 +46,7 @@ VECTOR =		./SRC/Vector/add_vector.c										\
 				./SRC/Vector/set_vector.c										\
 				./SRC/Vector/division_vector.c									\
 				./SRC/Vector/constuct_vector.c									\
+				./SRC/Vector/vector_rotation.c									\
 
 EVENT = 		./SRC/event/destroy.c											\
 				./SRC/event/event_key.c											\
@@ -56,7 +58,6 @@ EVENT = 		./SRC/event/destroy.c											\
 				./SRC/event/control_camera/move_left_camera.c					\
 				./SRC/event/control_camera/move_down_camera.c					\
 				./SRC/event/control_camera/move_up_camera.c						\
-				./SRC/event/control_camera/zoom_mouse_camera.c					\
 				./SRC/event/control_camera/rotation_x.c							\
 				./SRC/event/control_camera/rotation_y.c							\
 				./SRC/event/control_camera/rotation_z.c							\
@@ -69,15 +70,9 @@ CREATE_RT =		./SRC/create_rt/create_ray.c									\
 				./SRC/create_rt/create_cone.c									\
 				./SRC/create_rt/create_map.c									\
 				./SRC/create_rt/create_all_light.c								\
-				./SRC/create_rt/calc/calc.c										\
-				./SRC/create_rt/calc/calc_norm_dir.c							\
 				./SRC/create_rt/init_obj.c										\
 
-LIGH_MODEL =	./SRC/ray_tracing/Lighting_Model/ambient.c						\
-				./SRC/ray_tracing/Lighting_Model/diffuse.c						\
-				./SRC/ray_tracing/Lighting_Model/specular.c						\
-				./SRC/ray_tracing/Lighting_Model/shadow.c						\
-				./SRC/ray_tracing/Lighting_Model/bleak.c						\
+LIGH_MODEL = ./SRC/ray_tracing/Lighting_Model/shadow.c							\
 
 RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/intersect.c									\
@@ -85,9 +80,11 @@ RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/intersect_obj/intersect_plane.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_cone.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_cylinder.c			\
+				./SRC/ray_tracing/intersect_obj/intersect_half_sphere.c			\
 				./SRC/ray_tracing/intersect_obj/discriminant.c					\
 				./SRC/ray_tracing/intersect_obj/intersect_disc.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_poligon.c				\
+				./SRC/ray_tracing/intersect_obj/intersect_plane_limit.c			\
 				./SRC/ray_tracing/ft_light.c									\
 				./SRC/ray_tracing/get_color.c									\
 				./SRC/ray_tracing/check_intersect_object.c						\
@@ -106,7 +103,6 @@ FT =			./SRC/function/main.c											\
 
 SRC =			$(FT)															\
 				$(MLX_SRC)														\
-				$(FT_MATH)														\
 				$(VECTOR)														\
 				$(EVENT)														\
 				$(CREATE_RT)													\
@@ -119,22 +115,26 @@ all: $(NAME)
 
 $(NAME): $(BINS)
 	@ gcc -o $(NAME) $(BINS) $(MLX)
-	make clean
+	@ make clean
 
 SRC/Vector/%.o: SRC/Vector/%.c
-	gcc $(FLAGS2) -o  $@ $<
+	@ gcc $(FLAGS2) -o  $@ $<
 SRC/mlx_src/%.o: SRC/mlx_src/%.c
-	gcc $(FLAGS2) -o  $@ $<
+	@ gcc $(FLAGS2) -o  $@ $<
 SRC/event/%.o: SRC/event/%.c
-	gcc $(FLAGS2) -o  $@ $<
+	@ gcc $(FLAGS2) -o  $@ $<
 SRC/ft_math/%.o: SRC/ft_math/%.c
-	gcc $(FLAGS2) -o  $@ $<
+	@ gcc $(FLAGS2) -o  $@ $<
 SRC/function/%.o: SRC/function/%.c
-	gcc $(FLAGS2) -o  $@ $<
-SRC/function/%.o: SRC/function/%.c
-	gcc $(FLAGS2) -o  $@ $<
-SRC/ray_tracing/%.o: SRC/function/%.c
-	gcc $(FLAGS2) -o  $@ $<
+	@ gcc $(FLAGS2) -o  $@ $<
+SRC/ray_tracing/intersect_obj/%.o: SRC/ray_tracing/intersect_obj/%.c
+	@ gcc $(FLAGS2) -o  $@ $<
+SRC/ray_tracing/Lighting_Model/%.o: SRC/ray_tracing/Lighting_Model/%.c
+	@ gcc $(FLAGS2) -o  $@ $<
+SRC/ray_tracing/%.o: SRC/ray_tracing/%.c
+	@ gcc $(FLAGS) -o  $@ $<
+SRC/create_rt/%.o: SRC/create_rt/%.c
+	@ gcc $(FLAGS2) -o  $@ $<
 
 clean:
 	@ /bin/rm -f $(BINS)

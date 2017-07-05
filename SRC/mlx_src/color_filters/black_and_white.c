@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   min.c                                              :+:      :+:    :+:   */
+/*   black_and_white.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asvirido <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/09 21:57:26 by asvirido          #+#    #+#             */
-/*   Updated: 2017/05/09 21:57:27 by asvirido         ###   ########.fr       */
+/*   Created: 2017/06/17 16:34:33 by asvirido          #+#    #+#             */
+/*   Updated: 2017/06/17 16:34:33 by asvirido         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_math.h"
+#include "../mlx_src.h"
 
-double		min(double a, double b)
+t_color		black_and_white(t_color old)
 {
-	if (a > b)
-		return (b);
-	else
-		return (a);
+	t_color	new;
+	double	gray;
+
+	gray = (old.red + old.green + old.blue) / 3;
+	new.red = gray;
+	new.blue = gray;
+	new.green = gray;
+	return (new);
 }
