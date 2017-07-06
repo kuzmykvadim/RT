@@ -17,12 +17,9 @@ t_light		*create_all_light(int size)
 	t_light		*new;
 	int			i;
 
-	i = 0;
+	i = -1;
 	new = (t_light*)malloc(sizeof(t_light) * size + 1);
-	while (i < size)
-	{
+	while (++i < size)
 		new[i].position = create_vector();
-		i++;
-	}
 	return (new);
 }

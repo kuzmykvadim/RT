@@ -149,11 +149,11 @@ void 	option_init(t_rtv1 *rtv1)
 	OPTION.color_background = create_color(0x000000);
 	OPTION.draft_x = 1;
 	OPTION.draft_y = 1;
-	OPTION.lambert_light = 1;
+	OPTION.lambert_light = 0;
 	OPTION.view_normal = 0;
 	OPTION.view_point = 0;
 	OPTION.cel_shaded = 0;
-	OPTION.blinn_fong = 0;
+	OPTION.blinn_fong = 1;
 	OPTION.shadow = 1;
 	OPTION.fov_on = 0;
 	OPTION.fov = 45;
@@ -198,6 +198,7 @@ t_rtv1			*create_rtv1(void)
 	rtv1->obj = object_mlx();
 	rtv1->light = create_all_light(rtv1->size_light);
 	rtv1->screen = create_map();
+	rtv1->screen2 = create_map();
 	init_demo(rtv1);
 	calc(RT);
 	return (rtv1);

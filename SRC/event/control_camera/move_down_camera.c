@@ -15,4 +15,9 @@
 void	move_down_camera(t_rtv1 *rtv1)
 {
 	rtv1->ray->origin->y += 100;
+	int 	i;
+
+	i = -1;
+	while (++i < SIZE)
+		RT->screen[i].ray->y += 100;
 }

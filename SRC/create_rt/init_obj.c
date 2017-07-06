@@ -166,7 +166,7 @@ void 	init_rotation(t_rtv1 *rtv1)
 	construct_vector(RT->rt_obj[3].rotation, 0, 0, 0);
 	construct_vector(RT->rt_obj[4].rotation, 0, 0, 0);
 	construct_vector(RT->rt_obj[5].rotation, 0, 0, 0);
-	construct_vector(RT->rt_obj[6].rotation, 15, 0, 0);
+	construct_vector(RT->rt_obj[6].rotation, 0, 0, 0);
 	construct_vector(RT->rt_obj[7].rotation, 0, 0, 0);
 	construct_vector(RT->rt_obj[8].rotation, 0, 0, 0);
 	construct_vector(RT->rt_obj[9].rotation, 0, 0, 0);
@@ -184,7 +184,7 @@ void		init_demo(t_rtv1 *rtv1)
 	init_color(RT);
 	init_rotation(RT);
 	construct_vector(rtv1->ray->origin, 400.99, 400.99, -900.99);
-	construct_vector(rtv1->light[0].position, 400.99, 400.99, -800.99);
+	construct_vector(rtv1->light[0].position, -400.99, 400.99, -1800.99);
 	rtv1->light[0].color = create_color(0xFFFFFF);
 	construct_vector(rtv1->light[1].position, 0.99, 0.99, -800.99);
 	rtv1->light[1].color = create_color(0xffffff);

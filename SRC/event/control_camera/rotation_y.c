@@ -14,19 +14,26 @@
 
 void	rotation_y_cam(t_rtv1 *rtv1, int angle)
 {
-	t_vector	tmp;
+	//t_vector	tmp;
 	int			i;
 	double		x;
 	double		z;
 
-	i = 0;
-	while (i < SIZE)
+	i = -1;
+	// x = DIR_NORMAL->x * cos(angle * RAD) + DIR_NORMAL->z * sin(angle * RAD);
+	// z = -DIR_NORMAL->x * sin(angle * RAD) + DIR_NORMAL->z * cos(angle * RAD);
+	// DIR_NORMAL->x = x;
+	// DIR_NORMAL->z = z;
+	while (++i < SIZE)
 	{
 		x = DIR_NORMAL->x * cos(angle * RAD) + DIR_NORMAL->z * sin(angle * RAD);
 		z = -DIR_NORMAL->x * sin(angle * RAD) + DIR_NORMAL->z * cos(angle * RAD);
 		DIR_NORMAL->x = x;
 		DIR_NORMAL->z = z;
-		i++;
+		// x = SCREEN->x * cos(angle * RAD) + SCREEN->z * sin(angle * RAD);
+		// z = -SCREEN->x * sin(angle * RAD) + SCREEN->z * cos(angle * RAD);
+		// SCREEN->x = x;
+		// SCREEN->z = z;
 	}
 }
 

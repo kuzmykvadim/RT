@@ -15,4 +15,10 @@
 void	move_right_camera(t_rtv1 *rtv1)
 {
 	rtv1->ray->origin->x -= 100;
+
+	int 	i;
+
+	i = -1;
+	while (++i < SIZE)
+		RT->screen[i].ray->x -= 100;
 }

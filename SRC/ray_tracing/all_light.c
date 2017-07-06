@@ -81,52 +81,54 @@ void	view_point_or_normal(t_rtv1 *rtv1, t_val_vector *val)
 		val->rgb[i].blue = fabs(n_point.z);
 	}
 }
-
 void 	blinn_fong_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 {
-	// t_color 		ambient_light_color;
-	// double shiness = 64;
-	// ambient_light_color.red = 0.1;
-	// ambient_light_color.green = 0.1;
-	// ambient_light_color.blue = 0.1;
-		///// БЛИННА
-	// 	if (hit[i] == 0)
-	// 			continue ;
-	// 	 t_vector L_DIR = normal_vector(sub_vector(L.position, &val->point));
-	// 	 L_DIR.x = -L_DIR.x;
-	// 	 L_DIR.z = -L_DIR.z;
-	// 	 L_DIR.y = -L_DIR.y;
-	// 	double dot = cos_vector(&val->n_point, &L_DIR);
-	// 	 double lambert_component = MAX(dot, 0.0);
-	// 	 if (lambert_component >= 1)
-	// 	 	lambert_component = 1;
-	//
-	// 	 t_color diffuse_light;
-	// 	 diffuse_light.red = val->rgb[i].red * lambert_component;
-	// 	 diffuse_light.blue = val->rgb[i].blue * lambert_component;
-	// 	 diffuse_light.green = val->rgb[i].green * lambert_component;
-	//
-	// 	 t_vector eye_vec;
-	// 	 eye_vec.x = -val->point.x;
-	// 	 eye_vec.y = -val->point.y;
-	// 	 eye_vec.z = -val->point.z;
-	//
-	// 	 t_vector R = normal_vector(eye_vec);
-	// 	 t_vector halfwayVector = normal_vector(add_vector(&L_DIR, &R));
-	// 	 float specular = pow(MAX(dot_vector(&halfwayVector, &val->n_point), 0.001f), shiness);
-	// 	 if (specular >= 1)
-	// 	 	specular = 1;
-	// 	// t_color specular_light;
-	// 	// specular_light.red = val->rgb[i].red * specular;
-	// 	// specular_light.green = val->rgb[i].green * specular;
-	// 	// specular_light.blue = val->rgb[i].blue * specular;
-	// 	// val->rgb[i].red = (ambient_light_color.red  + diffuse_light.red + specular_light.red);
-	// 	// val->rgb[i].green = (ambient_light_color.green  + diffuse_light.green + specular_light.green);
-	// 	// val->rgb[i].blue = (ambient_light_color.blue  + diffuse_light.blue + specular_light.blue);
-	// 	val->rgb[i].red =val->rgb[i].red * (0.1 + lambert_component + specular);
-	// 	val->rgb[i].green = val->rgb[i].green * (0.1 + lambert_component + specular);
-	// 	val->rgb[i].blue = val->rgb[i].blue * (0.1 + lambert_component + specular);
-	// }
+	t_color 		ambient_light_color;
+	t_color 		diffuse_light;
+	t_color 		specular_light;
+	t_vector		l_dir;
+	t_vector 		eye_vec;
+	t_vector 		halfwayVector;
+	t_vector 		r;
+
+	double 	shiness = 8;
+	double 	dot;
+	double	lambert_component;
+	double	specular;
+	int		i;
+
+	i = -1;
+
+	ambient_light_color.red = 0.1;
+	ambient_light_color.green = 0.1;
+	ambient_light_color.blue = 0.1;
+
+	while (++i < SIZE_LIGHT)
+	{
+		l_dir = normal_vector(sub_vector(&val->point, L.position));
+		dot = cos_vector(&val->n_point, &l_dir);
+		lambert_component = MAX(dot, 0.0);
+		diffuse_light.red = val->rgb[i].red * lambert_component;
+		diffuse_light.blue = val->rgb[i].blue * lambert_component;
+		diffuse_light.green = val->rgb[i].green * lambert_component;
+
+		eye_vec.x = -val->point.x;
+		eye_vec.y = -val->point.y;
+		eye_vec.z = -val->point.z;
+
+		r = normal_vector(eye_vec);
+		halfwayVector = normal_vector(sub_vector(&l_dir, &r));
+		specular = pow(MAX(dot_vector(&halfwayVector, &val->n_point), 0.001f), shiness);
+		specular_light.red = val->rgb[i].red * specular;
+		specular_light.green = val->rgb[i].green * specular;
+		specular_light.blue = val->rgb[i].blue * specular;
+		// val->rgb[i].red = (ambient_light_color.red  + diffuse_light.red + specular_light.red);
+		// val->rgb[i].green = (ambient_light_color.green + diffuse_light.green + specular_light.green);
+		// val->rgb[i].blue = (ambient_light_color.blue  + diffuse_light.blue + specular_light.blue);
+		val->rgb[i].red = val->rgb[i].red * (0.1 + lambert_component + specular);
+		val->rgb[i].green = val->rgb[i].green * (0.1 + lambert_component + specular);
+		val->rgb[i].blue = val->rgb[i].blue * (0.1 + lambert_component + specular);
+	}
 }
 
 void	all_light(t_rtv1 *rtv1, t_val_vector *val, int *hit, int num_obj)

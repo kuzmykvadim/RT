@@ -40,8 +40,8 @@
 # define BACKGROUND				rtv1->option.color_background
 # define OPTION					rtv1->option
 # define DIR_NORMAL 			RT->screen[i].dir_normal
-# define X 						RT->screen[i].ray->x
-# define Y 						RT->screen[i].ray->y
+# define X 						RT->screen2[i].ray->x
+# define Y 						RT->screen2[i].ray->y
 # define TRUE					1
 # define FALSE					0
 # define SIZE					SIZE_X * SIZE_Y

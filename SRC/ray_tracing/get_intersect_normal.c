@@ -27,10 +27,7 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 	else if (RT_OBJ.id == 'c')
 		normal = find_normal_cone(RT_OBJ.cone, point);
 	else if (RT_OBJ.id == 'l')
-	{
 		set_vector(&normal, RT_OBJ.plane_limit->normal);
-		// rotation_vector(&normal, RT->rt_obj[num_obj].rotation);
-	}
 	// else if (RT_OBJ.id == 'd')
 	// 	set_vector(&normal, RT_OBJ.disk->normal);
 	return (normal);

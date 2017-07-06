@@ -73,6 +73,7 @@ void	ray_tracing(t_rtv1 *rtv1)
 	{
 		while (i < SIZE)
 		{
+			//t_vector tmp = normal_vector(sub_vector(RT->screen[i].ray, RAY_ORIGIN));
 			set_vector(RAY_DIRECTION, DIR_NORMAL);
 			(OPTION.fov_on == TRUE ? fov(RT, X, Y) : 0);
 			if ((int)X % OPTION.draft_x == 0 && (int)Y % OPTION.draft_y == 0)
