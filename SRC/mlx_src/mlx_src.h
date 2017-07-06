@@ -64,6 +64,7 @@ t_mlx			*object_mlx(void);
 t_img			*create_img(t_mlx *obj);
 t_xpm			*create_xpm(t_mlx *obj, char *file);
 void			put_img(t_img *img, int x, int y, t_color *color);
+t_color			get_pix(t_img *img, int x, int y);
 t_color			create_color(int color);
 void			protected_color(t_color *color);
 void			midle_color(t_color *color, int size, t_color *new);
