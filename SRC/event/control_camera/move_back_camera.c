@@ -15,9 +15,4 @@
 void	move_back_camera(t_rtv1 *rtv1)
 {
 	rtv1->ray->origin->z -= 100;
-	int 	i;
-
-	i = -1;
-	while (++i < SIZE)
-		RT->screen[i].ray->z -= 100;
 }
