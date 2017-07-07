@@ -39,14 +39,12 @@
 # define SCREEN					rtv1->screen[i].ray
 # define BACKGROUND				rtv1->option.color_background
 # define OPTION					rtv1->option
-# define DIR_NORMAL 			RT->screen[i].dir_normal
+# define DIR_NORMAL 			RT->screen[i].dir_ssaa[j]
 # define X 						RT->screen2[i].ray->x
 # define Y 						RT->screen2[i].ray->y
 # define TRUE					1
 # define FALSE					0
 # define SIZE					SIZE_X * SIZE_Y
-//#define MIN_3(a,b,c)(((a)<(b))?(((a)<(c))?(a):(c)):(((b)<(c))?(b):(c)))
-//#define MAX_3(a,b,c)(((a)>(b))?(((a)>(c))?(a):(c)):(((b)>(c))?(b):(c)))
 typedef struct	s_object
 {
 	char			id;
@@ -85,15 +83,6 @@ typedef struct	s_val_intersect
 	int		hit;
 }				t_val_intersect;
 
-typedef struct	s_model_light
-{
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	dot;
-	double	beta;
-}				t_model_light;
-
 typedef struct	s_val_vector
 {
 	t_vector		point;
@@ -119,6 +108,9 @@ typedef struct 	s_options
 
 	int			fov_on;
 	int			fov;
+
+	int			size_ssaa;
+	int			ssaa;
 
 	int			filters;
 	int			darkroom;
@@ -147,6 +139,7 @@ typedef struct	s_rtv1
 }				t_rtv1;
 
 t_rtv1			*create_rtv1(void);
+t_vector 		calc_ssaa(t_rtv1 *rtv1, t_vector *dir, int j);
 void			init_demo(t_rtv1 *rtv1);
 
 void			ray_tracing(t_rtv1 *rtv1);

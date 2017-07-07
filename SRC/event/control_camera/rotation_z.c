@@ -12,26 +12,31 @@
 
 #include "../../../head.h"
 
-void	rotation_z_cam(t_rtv1 *rtv1, int angle)
+void	rotation_z_cam(t_rtv1 *rtv1, double angle)
 {
 	int			i;
+	int			j;
 	double		y;
 	double		x;
 
 	i = -1;
 	while (++i < SIZE)
 	{
-		x = DIR_NORMAL->x * cos(angle * RAD) + DIR_NORMAL->y * sin(angle * RAD);
-		y = -DIR_NORMAL->x * sin(angle * RAD) + DIR_NORMAL->y * cos(angle * RAD);
-		DIR_NORMAL->x = x;
-		DIR_NORMAL->y = y;
+		j = -1;
+		while (++j < OPTION.size_ssaa)
+		{
+			x = DIR_NORMAL.x * cos(angle) + DIR_NORMAL.y * sin(angle);
+			y = -DIR_NORMAL.x * sin(angle) + DIR_NORMAL.y * cos(angle);
+			DIR_NORMAL.x = x;
+			DIR_NORMAL.y = y;
+		}
 	}
 }
 
 void	rotation_z(t_rtv1 *rtv1, int keycode)
 {
 	if (keycode == BUTTON_A)
-		rotation_z_cam(rtv1, 1);
+		rotation_z_cam(rtv1, 1 * RAD);
 	else if (keycode == BUTTON_D)
-		rotation_z_cam(rtv1, -1);
+		rotation_z_cam(rtv1, -1 * RAD);
 }

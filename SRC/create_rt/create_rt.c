@@ -146,15 +146,17 @@ void 	option_init(t_rtv1 *rtv1)
 {
 	OPTION.light_off_on = 0;
 	OPTION.color_background = create_color(0x000000);
-	OPTION.draft_x = 1;
-	OPTION.draft_y = 1;
+	OPTION.draft_x = 8;
+	OPTION.draft_y = 8;
+	OPTION.ssaa = 1;
+	OPTION.size_ssaa = 8;
 	OPTION.lambert_light = 0;
 	OPTION.view_normal = 0;
 	OPTION.view_point = 0;
 	OPTION.cel_shaded = 0;
 	OPTION.blinn_fong = 1;
 	OPTION.shadow = 1;
-	OPTION.fov_on = 0;
+	OPTION.fov_on = 1;
 	OPTION.fov = 45;
 	OPTION.filters = 0;
 	OPTION.sepia = 0;
@@ -162,86 +164,23 @@ void 	option_init(t_rtv1 *rtv1)
 	OPTION.darkroom = 0;
 }
 
-static t_vector add(t_vector a, float b, float c)
+void		calc(t_rtv1 *rtv1)
 {
-	t_vector res;
-
-	res.x = a.x + b;
-	res.y = a.y + c;
-	res.z = a.z;
-	return	(res);
-}
-
-#define SIZE_SSAA 4
-
-static t_vector x2_anti_alias(t_vector temp, int j)
-{
-	if (j == 1)
-		temp = add(temp, 0, -0.5);
-	else if (j == 2)
-		temp = add(temp, 0, 0.5);
-	return (temp);
-}
-
-static t_vector x4_anti_alias(t_vector temp, int j)
-{
-	if (j == 1 || j == 5)
-		temp = add(temp, 0.25, 0.25);
-	else if (j == 2 || j == 6)
-		temp = add(temp, 0.25, -0.25);
-	else if (j == 3)
-		temp = add(temp, -0.25, 0.25);
-	else if (j == 4)
-		temp = add(temp, -.25, -0.25);
-	return (temp);
-}
-
-static t_vector x8_anti_alias( t_vector temp, int j)
-{
-	if (j <= 2)
-		temp = x2_anti_alias(temp, j);
-	if (j >= 3 && j <= 6)
-		temp = x4_anti_alias(temp, j);
-	if (j == 7)
-		temp = add(temp, -0.5, 0);
-	if (j == 8)
-		temp = add(temp, 0.5, 0);
-	return (temp);
-}
-
-static t_vector anti_alias(t_rtv1 *rtv1, t_vector *dir, int j)
-{
-	t_vector res;
-	t_vector temp;
-
-	temp = sub_vector(dir, RAY_ORIGIN);
-	if (SIZE_SSAA == 2)
-		temp = x2_anti_alias(temp, j);
-	if (SIZE_SSAA == 4)
-		temp = x4_anti_alias(temp, j);
-	if (SIZE_SSAA == 8)
-		temp = x8_anti_alias(temp, j);
-	res = normal_vector(temp);
-	return (res);
-}
-
-int		calc(t_rtv1 *rtv1)
-{
-	int			size;
 	int			i;
+	int			j;
 	t_vector	tmp;
 
-	size = SIZE_X * SIZE_Y;
-	i = 0;
-	while (i < size)
+	i = -1;
+	while (++i < SIZE)
 	{
-		tmp = normal_vector(sub_vector(RT->screen[i].ray, RAY_ORIGIN));
-		RT->screen[i].dir_normal->x = tmp.x;
-		RT->screen[i].dir_normal->y = tmp.y;
-		RT->screen[i].dir_normal->z = tmp.z;
-		i++;
+		j = -1;
+		RT->screen[i].dir_ssaa = (t_vector*)malloc(sizeof(t_vector) * (OPTION.size_ssaa) + 1);
+		while (++j < OPTION.size_ssaa)
+		{
+			tmp = calc_ssaa(RT, RT->screen[i].ray, j);
+			set_vector(&DIR_NORMAL, &tmp);
+		}
 	}
-	return (1);
 }
 
 t_rtv1			*create_rtv1(void)

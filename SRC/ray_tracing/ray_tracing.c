@@ -42,30 +42,62 @@ t_color 	effect_filtres(t_rtv1 *rtv1, t_color color)
 	return (new);
 }
 
+t_color		ft_ssaa(t_rtv1 *rtv1, int i)
+{
+	t_color		color[OPTION.size_ssaa + 1];
+	t_color		new;
+	int			j;
+
+	j = -1;
+	new.red = 0;
+	new.green = 0;
+	new.blue = 0;
+	while (++j < OPTION.size_ssaa)
+	{
+		set_vector(RAY_DIRECTION, &DIR_NORMAL);
+		color[j] = intersect(rtv1);
+	}
+	midle_color(color, OPTION.size_ssaa, &new);
+	return (new);
+}
+
+t_color		just_rt(t_rtv1 *rtv1, int i)
+{
+	t_color		color;
+	int			j;
+
+	j = 0;
+	color.red = 0;
+	color.blue = 0;
+	color.green = 0;
+	set_vector(RAY_DIRECTION, &DIR_NORMAL);
+	if ((int)X % OPTION.draft_x == 0 && (int)Y % OPTION.draft_y == 0)
+	{
+		(OPTION.fov_on == TRUE ? fov(RT, X, Y) : 0);
+		color = intersect(rtv1);
+	}
+	return (color);
+}
+
 void	ray_tracing(t_rtv1 *rtv1)
 {
 	t_val_vector	val;
-	t_vector		tmp;
 	int				i;
 
 	mlx_clear_window(MLX_MY, WIN_MY);
 	rtv1->img = create_img(rtv1->obj);
-	i = 0;
+	i = -1;
 	if (module_check_in(rtv1, RAY_ORIGIN) == 1)
 	{
-		while (i < SIZE)
+		while (++i < SIZE)
 		{
-			//t_vector tmp = normal_vector(sub_vector(RT->screen[i].ray, RAY_ORIGIN));
-			set_vector(RAY_DIRECTION, DIR_NORMAL);
-			(OPTION.fov_on == TRUE ? fov(RT, X, Y) : 0);
-			if ((int)X % OPTION.draft_x == 0 && (int)Y % OPTION.draft_y == 0)
-			{
-				val.color = intersect(rtv1);
-				if (OPTION.filters == TRUE)
-					val.color = effect_filtres(RT, val.color);
-				put_img(rtv1->img, X, Y, &val.color);
-			 }
-			i++;
+			if (OPTION.ssaa == 1)
+				val.color = ft_ssaa(RT, i);
+			else if (OPTION.ssaa == 0)
+				val.color = just_rt(RT, i);
+			if (OPTION.filters == TRUE)
+				val.color = effect_filtres(RT, val.color);
+			put_img(rtv1->img, X, Y, &val.color);
 		}
 	}
 	PUT_IMG_WIN(MLX_MY, WIN_MY, rtv1->img->img, 0, 0);

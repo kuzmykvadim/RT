@@ -71,6 +71,7 @@ CREATE_RT =		./SRC/create_rt/create_ray.c									\
 				./SRC/create_rt/create_cone.c									\
 				./SRC/create_rt/create_map.c									\
 				./SRC/create_rt/create_all_light.c								\
+				./SRC/create_rt/ssaa.c											\
 				./SRC/create_rt/init_obj.c										\
 
 LIGH_MODEL = ./SRC/ray_tracing/Lighting_Model/shadow.c							\

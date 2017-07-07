@@ -98,7 +98,7 @@ typedef struct	s_disk
 typedef struct	s_screen
 {
 	t_vector	*ray;
-	t_vector	*dir_normal;
+	t_vector	*dir_ssaa;
 }				t_screen;
 
 t_sphere		*create_shpere(void);

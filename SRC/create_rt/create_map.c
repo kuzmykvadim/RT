@@ -26,7 +26,6 @@ t_screen	*create_map(void)
 	while (y < SIZE_Y)
 	{
 		new[i].ray = create_vector();
-		new[i].dir_normal = create_vector();
 		(x == SIZE_X ? y += 1 : 0);
 		(x == SIZE_X ? x = 0 : 0);
 		new[i].ray->x = x;
