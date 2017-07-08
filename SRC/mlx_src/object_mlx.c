@@ -22,6 +22,7 @@ t_mlx	*object_mlx(int size_x, int size_y, char *name)
 		printf("ERROR! Bad name window\n");
 		exit(1);
 	}
+	valid_size_win(size_x, size_y);
 	new = (t_mlx*)malloc(sizeof(t_mlx));
 	new->mlx = mlx_init();
 	new->win = mlx_new_window(new->mlx, size_x, size_y, name);

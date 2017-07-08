@@ -22,6 +22,7 @@ HEADER = head.h
 
 MLX_SRC =		./SRC/mlx_src/create_img.c										\
 				./SRC/mlx_src/object_mlx.c										\
+				./SRC/mlx_src/valid_size_win.c									\
 				./SRC/mlx_src/create_xpm.c										\
 				./SRC/mlx_src/put_img.c											\
 				./SRC/mlx_src/create_color.c									\

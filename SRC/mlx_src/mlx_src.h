@@ -64,6 +64,7 @@ typedef struct	s_xpm
 }				t_xpm;
 
 t_mlx			*object_mlx(int size_x, int size_y, char *name);
+void 			valid_size_win(int size_x, int size_y);
 t_img			*create_img(t_mlx *obj);
 t_xpm			*create_xpm(t_mlx *obj, char *file);
 void			put_img(t_img *img, int x, int y, t_color *color);

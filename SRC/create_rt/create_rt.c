@@ -152,7 +152,7 @@ void 	option_init(t_rtv1 *rtv1)
 	// ANTI_ALIASING
 	OPTION.ssaa = 0; // ЕСЛИ ВКЛ SSAA то FXAA выкл
 	OPTION.size_ssaa = 1; // ЕСЛИ OPTION.ssaa == 0 ТОГДА OPTION.size_ssaa ДОЛЖЕН БЫТЬ ОДИН
-	OPTION.fxaa = 1; // ЕСЛИ ВКЛ FXAA то motion blur вкл и size blur == 2
+	OPTION.fxaa = 0; // ЕСЛИ ВКЛ FXAA то motion blur вкл и size blur == 2
 	// LIGHT AND SHADOW
 	OPTION.lambert_light = 0;
 	OPTION.view_normal = 0;
@@ -166,12 +166,11 @@ void 	option_init(t_rtv1 *rtv1)
 	OPTION.fov = 45;
 
 	// MOTION_BLUR
-	OPTION.motion_blur = 0;
-	OPTION.size_blur = 2;
+	OPTION.motion_blur = 1;
+	OPTION.size_blur = 15;
 
-	// SCREEN MLX PARAMENT
 	OPTION.size_x = 800;
-	OPTION.size_y = 800;
+	OPTION.size_y = 600;
 	OPTION.size_screen = OPTION.size_x * OPTION.size_y;
 	OPTION.name_win = "RT";
 
@@ -180,6 +179,26 @@ void 	option_init(t_rtv1 *rtv1)
 	OPTION.sepia = 0;
 	OPTION.black_and_white = 1;
 	OPTION.darkroom = 0;
+}
+
+void 	valid_filters(t_rtv1 *rtv1)
+{
+	int 	size;
+
+	size = 0;
+	if (OPTION.sepia == TRUE)
+		size++;
+	if (OPTION.black_and_white == TRUE)
+		size++;
+	if (OPTION.darkroom == TRUE)
+		size++;
+	if (size > 1)
+		error_exit("ERROR$1: too many filters\n");
+}
+
+void 	valid_option(t_rtv1 *rtv1)
+{
+	valid_filters(RT);
 }
 
 void		calc(t_rtv1 *rtv1)
@@ -224,5 +243,6 @@ t_rtv1			*create_rtv1(void)
 	rtv1->screen2 = create_map(OPTION.size_x, OPTION.size_y);
 	init_demo(rtv1);
 	calc(RT);
+	valid_option(RT);
 	return (rtv1);
 }
