@@ -146,21 +146,39 @@ void 	option_init(t_rtv1 *rtv1)
 {
 	OPTION.light_off_on = 0;
 	OPTION.color_background = create_color(0x000000);
-	OPTION.draft_x = 8;
-	OPTION.draft_y = 8;
-	OPTION.ssaa = 1;
-	OPTION.size_ssaa = 8;
+	OPTION.draft_x = 1;
+	OPTION.draft_y = 1;
+
+	// ANTI_ALIASING
+	OPTION.ssaa = 0; // ЕСЛИ ВКЛ SSAA то FXAA выкл
+	OPTION.size_ssaa = 1; // ЕСЛИ OPTION.ssaa == 0 ТОГДА OPTION.size_ssaa ДОЛЖЕН БЫТЬ ОДИН
+	OPTION.fxaa = 1; // ЕСЛИ ВКЛ FXAA то motion blur вкл и size blur == 2
+	// LIGHT AND SHADOW
 	OPTION.lambert_light = 0;
 	OPTION.view_normal = 0;
 	OPTION.view_point = 0;
 	OPTION.cel_shaded = 0;
 	OPTION.blinn_fong = 1;
 	OPTION.shadow = 1;
-	OPTION.fov_on = 1;
+
+	// FOV
+	OPTION.fov_on = 0;
 	OPTION.fov = 45;
-	OPTION.filters = 0;
+
+	// MOTION_BLUR
+	OPTION.motion_blur = 0;
+	OPTION.size_blur = 2;
+
+	// SCREEN MLX PARAMENT
+	OPTION.size_x = 800;
+	OPTION.size_y = 800;
+	OPTION.size_screen = OPTION.size_x * OPTION.size_y;
+	OPTION.name_win = "RT";
+
+	// filters
+	OPTION.filters = 1;
 	OPTION.sepia = 0;
-	OPTION.black_and_white = 0;
+	OPTION.black_and_white = 1;
 	OPTION.darkroom = 0;
 }
 
@@ -171,7 +189,7 @@ void		calc(t_rtv1 *rtv1)
 	t_vector	tmp;
 
 	i = -1;
-	while (++i < SIZE)
+	while (++i < OPTION.size_screen)
 	{
 		j = -1;
 		RT->screen[i].dir_ssaa = (t_vector*)malloc(sizeof(t_vector) * (OPTION.size_ssaa) + 1);
@@ -193,13 +211,17 @@ t_rtv1			*create_rtv1(void)
 	option_init(RT);
 	rtv1->val = (t_val_vector*)malloc(sizeof(t_val_vector) * 1);
 	rtv1->hit = (int*)malloc(sizeof(int) * SIZE_LIGHT * 1);
+
 	rtv1->ray = create_ray();
 	rtv1->light_ray = create_ray();
+
 	rtv1->rt_obj = create_rt_obj(rtv1->size_obj);
-	rtv1->obj = object_mlx();
 	rtv1->light = create_all_light(rtv1->size_light);
-	rtv1->screen = create_map();
-	rtv1->screen2 = create_map();
+
+	rtv1->obj = object_mlx(OPTION.size_x, OPTION.size_y, OPTION.name_win);
+	rtv1->screen = create_map(OPTION.size_x, OPTION.size_y);
+	// SCREEN 2 ЗАМЕНИТЬ
+	rtv1->screen2 = create_map(OPTION.size_x, OPTION.size_y);
 	init_demo(rtv1);
 	calc(RT);
 	return (rtv1);

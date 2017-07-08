@@ -12,7 +12,7 @@
 
 #include "create_rt.h"
 
-t_screen	*create_map(void)
+t_screen	*create_map(int size_x, int size_y)
 {
 	t_screen	*new;
 	int			y;
@@ -22,12 +22,13 @@ t_screen	*create_map(void)
 	i = 0;
 	y = 0;
 	x = 0;
-	new = (t_screen*)malloc(sizeof(t_screen) * (SIZE_Y * SIZE_X) + 1);
-	while (y < SIZE_Y)
+	new = (t_screen*)malloc(sizeof(t_screen) * (size_x * size_y) + 1);
+	while (y < size_y)
 	{
 		new[i].ray = create_vector();
-		(x == SIZE_X ? y += 1 : 0);
-		(x == SIZE_X ? x = 0 : 0);
+		new[i].color = (t_color*)malloc(sizeof(t_color) + 1);
+		(x == size_x ? y += 1 : 0);
+		(x == size_x ? x = 0 : 0);
 		new[i].ray->x = x;
 		new[i].ray->y = y;
 		new[i].ray->z = 0.99;

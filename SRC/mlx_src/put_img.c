@@ -16,15 +16,14 @@ void	put_img(t_img *img, int x, int y, t_color *color)
 {
 	int	pix;
 
-	if ((y >= 0 && x >= 0) && (y < SIZE_Y && x < SIZE_X))
+	if ((y >= 0 && x >= 0) && (y < img->size_y && x < img->size_x))
 	{
 		pix = y * img->size_line + x * 4;
-		if (x < SIZE_Y * SIZE_X * 4)
+		if (x < img->size_y * img->size_x * 4)
 		{
 			img->line[pix] = (int)(color->blue);
 			img->line[pix + 1] = (int)(color->green);
 			img->line[pix + 2] = (int)(color->red);
-			//img->line[pix + 3] = (int)(color->trans * 255);
 		}
 	}
 }

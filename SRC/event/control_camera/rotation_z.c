@@ -20,7 +20,7 @@ void	rotation_z_cam(t_rtv1 *rtv1, double angle)
 	double		x;
 
 	i = -1;
-	while (++i < SIZE)
+	while (++i < OPTION.size_screen)
 	{
 		j = -1;
 		while (++j < OPTION.size_ssaa)

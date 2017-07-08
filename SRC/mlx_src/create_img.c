@@ -20,7 +20,9 @@ t_img	*create_img(t_mlx *obj)
 	new->bits = 0;
 	new->size_line = 0;
 	new->end = 0;
-	new->img = mlx_new_image(obj->mlx, SIZE_X, SIZE_Y);
+	new->size_x = obj->size_x;
+	new->size_y = obj->size_y;
+	new->img = mlx_new_image(obj->mlx, obj->size_x, obj->size_y);
 	new->line = CREATE_IMAGE(new->img, &new->bits, &new->size_line, &new->end);
 	return (new);
 }

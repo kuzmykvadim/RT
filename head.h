@@ -109,8 +109,17 @@ typedef struct 	s_options
 	int			fov_on;
 	int			fov;
 
+	int			motion_blur;
+	int			size_blur;
+
+	int			size_x;
+	int			size_y;
+	int			size_screen;
+	char		*name_win;
+
 	int			size_ssaa;
 	int			ssaa;
+	int			fxaa;
 
 	int			filters;
 	int			darkroom;

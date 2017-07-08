@@ -12,12 +12,20 @@
 
 #include "mlx_src.h"
 
-t_mlx	*object_mlx(void)
+t_mlx	*object_mlx(int size_x, int size_y, char *name)
 {
 	t_mlx		*new;
+	int			i;
 
+	if (name == NULL)
+	{
+		printf("ERROR! Bad name window\n");
+		exit(1);
+	}
 	new = (t_mlx*)malloc(sizeof(t_mlx));
 	new->mlx = mlx_init();
-	new->win = mlx_new_window(new->mlx, SIZE_X, SIZE_Y, "42");
+	new->win = mlx_new_window(new->mlx, size_x, size_y, name);
+	new->size_x = size_x;
+	new->size_y = size_y;
 	return (new);
 }

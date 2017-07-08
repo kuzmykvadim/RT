@@ -28,7 +28,6 @@ MLX_SRC =		./SRC/mlx_src/create_img.c										\
 				./SRC/mlx_src/protected_color.c									\
 				./SRC/mlx_src/midle_color.c										\
 				./SRC/mlx_src/set_color.c										\
-				./SRC/mlx_src/get_pix.c											\
 				./SRC/mlx_src/color_filters/black_and_white.c					\
 				./SRC/mlx_src/color_filters/sepia.c								\
 				./SRC/mlx_src/color_filters/darkroom.c							\

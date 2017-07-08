@@ -15,14 +15,13 @@
 # define CREATE_IMAGE mlx_get_data_addr
 # define MLX_XPM_FILE mlx_xpm_file_to_image
 # define PUT_IMG_WIN mlx_put_image_to_window
-# define SIZE_Y 800
-# define SIZE_X 800
 # define BUTTON_W 13
 # define BUTTON_A 0
 # define BUTTON_D 2
 # define BUTTON_S 1
 # include <mlx.h>
 # include <stdlib.h>
+# include <stdio.h>
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
@@ -38,11 +37,15 @@ typedef struct	s_mlx
 {
 	void	*mlx;
 	void	*win;
+	int		size_x;
+	int		size_y;
 }				t_mlx;
 
 typedef struct	s_img
 {
 	int		bits;
+	int		size_x;
+	int		size_y;
 	int		size_line;
 	int		end;
 	char	*line;
@@ -60,11 +63,10 @@ typedef struct	s_xpm
 	void	*xpm;
 }				t_xpm;
 
-t_mlx			*object_mlx(void);
+t_mlx			*object_mlx(int size_x, int size_y, char *name);
 t_img			*create_img(t_mlx *obj);
 t_xpm			*create_xpm(t_mlx *obj, char *file);
 void			put_img(t_img *img, int x, int y, t_color *color);
-t_color			get_pix(t_img *img, int x, int y);
 t_color			create_color(int color);
 void			protected_color(t_color *color);
 void			midle_color(t_color *color, int size, t_color *new);

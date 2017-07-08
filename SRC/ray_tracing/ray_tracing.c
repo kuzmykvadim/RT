@@ -16,52 +16,56 @@ void 	fov(t_rtv1 *rtv1, int x, int y)
 {
 	t_vector vect;
 
-	vect.x = (x + 0.1) / SIZE_X;
-	vect.y = (y + 0.1) / SIZE_Y;
+	vect.x = (x + 0.1) / OPTION.size_x;
+	vect.y = (y + 0.1) / OPTION.size_y;
 	vect.x = (2 * vect.x) - 1;
 	vect.y = 1 - (2 * vect.y);
-	vect.x *= (SIZE_X / (double)SIZE_Y) * tan((OPTION.fov / 2) * RAD);
+	vect.x *= (OPTION.size_x / (double)OPTION.size_y) * tan((OPTION.fov / 2) * RAD);
 	vect.y *= tan((OPTION.fov / 2) * RAD);
 	vect.z = 1;
 	set_vector(RAY_DIRECTION, &vect);
 }
 
-t_color 	effect_filtres(t_rtv1 *rtv1, t_color color)
+void 	effect_filtres(t_rtv1 *rtv1)
 {
-	t_color new;
+	int		i;
+	t_color	color;
 
-	new.red = 0;
-	new.green = 0;
-	new.blue = 0;
-	if (OPTION.sepia == TRUE)
-		new = sepia(color);
-	else if (OPTION.black_and_white == TRUE)
-		new = black_and_white(color);
-	else if (OPTION.darkroom == TRUE)
-		new = darkroom(color);
-	return (new);
+	i = -1;
+	while (++i < OPTION.size_screen)
+	{
+		if (OPTION.sepia == TRUE)
+			color = sepia(*RT->screen[i].color);
+		else if (OPTION.black_and_white == TRUE)
+			color = black_and_white(*RT->screen[i].color);
+		else if (OPTION.darkroom == TRUE)
+			color = darkroom(*RT->screen[i].color);
+		else
+			continue ;
+		RT->screen[i].color->red = color.red;
+		RT->screen[i].color->blue = color.blue;
+		RT->screen[i].color->green = color.green;
+	}
 }
 
-t_color		ft_ssaa(t_rtv1 *rtv1, int i)
+void		ft_ssaa(t_rtv1 *rtv1, int i, t_color *res)
 {
 	t_color		color[OPTION.size_ssaa + 1];
-	t_color		new;
 	int			j;
 
 	j = -1;
-	new.red = 0;
-	new.green = 0;
-	new.blue = 0;
+	res->red = 0;
+	res->green = 0;
+	res->blue = 0;
 	while (++j < OPTION.size_ssaa)
 	{
 		set_vector(RAY_DIRECTION, &DIR_NORMAL);
 		color[j] = intersect(rtv1);
 	}
-	midle_color(color, OPTION.size_ssaa, &new);
-	return (new);
+	midle_color(color, OPTION.size_ssaa, res);
 }
 
-t_color		just_rt(t_rtv1 *rtv1, int i)
+void		just_rt(t_rtv1 *rtv1, int i, t_color *res)
 {
 	t_color		color;
 	int			j;
@@ -76,7 +80,44 @@ t_color		just_rt(t_rtv1 *rtv1, int i)
 		(OPTION.fov_on == TRUE ? fov(RT, X, Y) : 0);
 		color = intersect(rtv1);
 	}
-	return (color);
+	res->red = color.red;
+	res->blue = color.blue;
+	res->green = color.green;
+}
+
+void 	motion_blur(t_rtv1 *rtv1)
+{
+	int			i;
+	int			k;
+	int			y;
+	int			len;
+	t_color		blur[OPTION.size_blur + 1];
+
+	i = -1;
+	while (++i < OPTION.size_screen)
+	{
+		k = -1;
+		y = RT->screen[i].ray->y;
+		while (++k < OPTION.size_blur)
+		{
+			len = i + k;
+			if (len >= OPTION.size_screen || RT->screen[len].ray->y != y)
+				len = i;
+			blur[k].red = RT->screen[len].color->red;
+			blur[k].green = RT->screen[len].color->green;
+			blur[k].blue = RT->screen[len].color->blue;
+		}
+		midle_color(blur, k, RT->screen[i].color);
+	}
+}
+
+void 	draw_rt(t_rtv1 *rtv1)
+{
+	int		i;
+
+	i = -1;
+	while (++i < OPTION.size_screen)
+		put_img(rtv1->img, X, Y, RT->screen[i].color);
 }
 
 void	ray_tracing(t_rtv1 *rtv1)
@@ -89,17 +130,19 @@ void	ray_tracing(t_rtv1 *rtv1)
 	i = -1;
 	if (module_check_in(rtv1, RAY_ORIGIN) == 1)
 	{
-		while (++i < SIZE)
+		while (++i < OPTION.size_screen)
 		{
 			if (OPTION.ssaa == 1)
-				val.color = ft_ssaa(RT, i);
+				ft_ssaa(RT, i, RT->screen[i].color);
 			else if (OPTION.ssaa == 0)
-				val.color = just_rt(RT, i);
-			if (OPTION.filters == TRUE)
-				val.color = effect_filtres(RT, val.color);
-			put_img(rtv1->img, X, Y, &val.color);
+				just_rt(RT, i, RT->screen[i].color);
 		}
 	}
+	if (OPTION.motion_blur == TRUE)
+		motion_blur(RT);
+	if (OPTION.filters == TRUE)
+		effect_filtres(RT);
+	draw_rt(RT);
 	PUT_IMG_WIN(MLX_MY, WIN_MY, rtv1->img->img, 0, 0);
 	free(rtv1->img);
 }

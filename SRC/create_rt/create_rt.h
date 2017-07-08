@@ -15,6 +15,7 @@
 
 # include "../Vector/vector.h"
 # include "../mlx_src/mlx_src.h"
+# include <stdio.h>
 
 typedef struct	s_light
 {
@@ -99,6 +100,7 @@ typedef struct	s_screen
 {
 	t_vector	*ray;
 	t_vector	*dir_ssaa;
+	t_color		*color;
 }				t_screen;
 
 t_sphere		*create_shpere(void);
@@ -106,7 +108,7 @@ t_ray			*create_ray(void);
 t_plane			*create_plane(void);
 t_cylinder		*create_cylinder(void);
 t_cone			*create_cone(void);
-t_screen		*create_map(void);
+t_screen		*create_map(int size_x, int size_y);
 t_light			*create_all_light(int size);
 
 #endif
