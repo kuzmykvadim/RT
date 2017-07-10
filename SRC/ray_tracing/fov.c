@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_back_camera.c                                 :+:      :+:    :+:   */
+/*   fov.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asvirido <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/10 01:23:25 by asvirido          #+#    #+#             */
-/*   Updated: 2017/05/17 22:14:31 by asvirido         ###   ########.fr       */
+/*   Created: 2017/07/09 16:25:52 by asvirido          #+#    #+#             */
+/*   Updated: 2017/07/09 16:25:53 by asvirido         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../head.h"
+#include "../../head.h"
 
-void	move_back_camera(t_rtv1 *rtv1)
+void 	fov(t_rtv1 *rtv1, int x, int y)
 {
-	rtv1->pos->z -= 100;
+	t_vector vect;
+
+	vect.x = (x + 0.1) / OPTION.size_x;
+	vect.y = (y + 0.1) / OPTION.size_y;
+	vect.x = (2 * vect.x) - 1;
+	vect.y = 1 - (2 * vect.y);
+	vect.x *= (OPTION.size_x / (double)OPTION.size_y) * tan((OPTION.fov / 2) * RAD);
+	vect.y *= tan((OPTION.fov / 2) * RAD);
+	vect.z = 1;
+	set_vector(RAY_DIRECTION, &vect);
 }

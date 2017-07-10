@@ -145,6 +145,7 @@ typedef struct	s_rtv1
 	int				*hit;
 	int				size_obj;
 	int				size_light;
+	t_vector		*pos;
 }				t_rtv1;
 
 t_rtv1			*create_rtv1(void);
@@ -152,6 +153,8 @@ t_vector 		calc_ssaa(t_rtv1 *rtv1, t_vector *dir, int j);
 void			init_demo(t_rtv1 *rtv1);
 
 void			ray_tracing(t_rtv1 *rtv1);
+void 			fov(t_rtv1 *rtv1, int x, int y);
+void 			motion_blur(t_rtv1 *rtv1);
 
 int				module_check_in(t_rtv1 *rtv1, t_vector *pos_obj);
 t_color			intersect(t_rtv1 *rtv1);

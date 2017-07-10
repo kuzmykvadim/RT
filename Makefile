@@ -89,6 +89,8 @@ RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/intersect_obj/intersect_plane_limit.c			\
 				./SRC/ray_tracing/ft_light.c									\
 				./SRC/ray_tracing/get_color.c									\
+				./SRC/ray_tracing/motion_blur.c									\
+				./SRC/ray_tracing/fov.c											\
 				./SRC/ray_tracing/check_intersect_object.c						\
 				./SRC/ray_tracing/find_point_intersect.c						\
 				./SRC/ray_tracing/get_intersect_normal.c						\

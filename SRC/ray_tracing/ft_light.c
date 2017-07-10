@@ -25,7 +25,7 @@ t_color		ft_light(t_rtv1 *rtv1, double *t_min, int num_obj)
 {
 	t_color			color;
 
-	SIZE_LIGHT = 1;
+	SIZE_LIGHT = 3;
 	RT->val->point = find_point_intersect(RT, t_min);
 	// rotation_vector(&RT->val->point, RT->rt_obj[num_obj].rotation);
 	RT->val->n_point = get_intersect_normal(RT, num_obj, &RT->val->point);

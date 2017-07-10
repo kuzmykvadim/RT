@@ -149,25 +149,25 @@ void 	option_init(t_rtv1 *rtv1)
 	OPTION.draft_x = 1;
 	OPTION.draft_y = 1;
 
-	// ANTI_ALIASING
-	OPTION.ssaa = 0; // ЕСЛИ ВКЛ SSAA то FXAA выкл
-	OPTION.size_ssaa = 1; // ЕСЛИ OPTION.ssaa == 0 ТОГДА OPTION.size_ssaa ДОЛЖЕН БЫТЬ ОДИН
+	//ANTI_ALIASING
+	OPTION.ssaa = 0; //ЕСЛИ ВКЛ SSAA то FXAA выкл
+	OPTION.size_ssaa = 1; //ЕСЛИ OPTION.ssaa == 0 ТОГДА OPTION.size_ssaa ДОЛЖЕН БЫТЬ ОДИН
 	OPTION.fxaa = 0; // ЕСЛИ ВКЛ FXAA то motion blur вкл и size blur == 2
-	// LIGHT AND SHADOW
-	OPTION.lambert_light = 0;
+	//LIGHT AND SHADOW
+	OPTION.lambert_light = 1;
 	OPTION.view_normal = 0;
 	OPTION.view_point = 0;
 	OPTION.cel_shaded = 0;
-	OPTION.blinn_fong = 1;
-	OPTION.shadow = 1;
+	OPTION.blinn_fong = 0;
+	OPTION.shadow = 0;
 
 	// FOV
 	OPTION.fov_on = 0;
 	OPTION.fov = 45;
 
 	// MOTION_BLUR
-	OPTION.motion_blur = 1;
-	OPTION.size_blur = 15;
+	OPTION.motion_blur = 0;
+	OPTION.size_blur = 0;
 
 	OPTION.size_x = 800;
 	OPTION.size_y = 600;
@@ -175,7 +175,7 @@ void 	option_init(t_rtv1 *rtv1)
 	OPTION.name_win = "RT";
 
 	// filters
-	OPTION.filters = 1;
+	OPTION.filters = 0;
 	OPTION.sepia = 0;
 	OPTION.black_and_white = 1;
 	OPTION.darkroom = 0;
@@ -233,7 +233,7 @@ t_rtv1			*create_rtv1(void)
 
 	rtv1->ray = create_ray();
 	rtv1->light_ray = create_ray();
-
+	rtv1->pos = create_vector();
 	rtv1->rt_obj = create_rt_obj(rtv1->size_obj);
 	rtv1->light = create_all_light(rtv1->size_light);
 
@@ -244,5 +244,6 @@ t_rtv1			*create_rtv1(void)
 	init_demo(rtv1);
 	calc(RT);
 	valid_option(RT);
+	set_vector(RT->pos, RAY_ORIGIN);
 	return (rtv1);
 }

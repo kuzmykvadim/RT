@@ -23,7 +23,7 @@ void		init_sphere_1(t_rtv1 *rtv1)
 	radius = 150;
 	rtv1->rt_obj[1].sphere->radius = radius;
 	rtv1->rt_obj[1].sphere->radius_pow = radius * radius;
-	construct_vector(rtv1->rt_obj[1].sphere->position, 400, 400, 200);
+	construct_vector(rtv1->rt_obj[1].sphere->position, 400, 450, 200);
 	radius = 50;
 	rtv1->rt_obj[2].sphere->radius = radius;
 	rtv1->rt_obj[2].sphere->radius_pow = radius * radius;

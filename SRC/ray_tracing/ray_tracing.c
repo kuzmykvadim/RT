@@ -12,20 +12,6 @@
 
 #include "../../head.h"
 
-void 	fov(t_rtv1 *rtv1, int x, int y)
-{
-	t_vector vect;
-
-	vect.x = (x + 0.1) / OPTION.size_x;
-	vect.y = (y + 0.1) / OPTION.size_y;
-	vect.x = (2 * vect.x) - 1;
-	vect.y = 1 - (2 * vect.y);
-	vect.x *= (OPTION.size_x / (double)OPTION.size_y) * tan((OPTION.fov / 2) * RAD);
-	vect.y *= tan((OPTION.fov / 2) * RAD);
-	vect.z = 1;
-	set_vector(RAY_DIRECTION, &vect);
-}
-
 void 	effect_filtres(t_rtv1 *rtv1)
 {
 	int		i;
@@ -75,6 +61,7 @@ void		just_rt(t_rtv1 *rtv1, int i, t_color *res)
 	color.blue = 0;
 	color.green = 0;
 	set_vector(RAY_DIRECTION, &DIR_NORMAL);
+	set_vector(RAY_ORIGIN, RT->pos);
 	if ((int)X % OPTION.draft_x == 0 && (int)Y % OPTION.draft_y == 0)
 	{
 		(OPTION.fov_on == TRUE ? fov(RT, X, Y) : 0);
@@ -83,32 +70,6 @@ void		just_rt(t_rtv1 *rtv1, int i, t_color *res)
 	res->red = color.red;
 	res->blue = color.blue;
 	res->green = color.green;
-}
-
-void 	motion_blur(t_rtv1 *rtv1)
-{
-	int			i;
-	int			k;
-	int			y;
-	int			len;
-	t_color		blur[OPTION.size_blur + 1];
-
-	i = -1;
-	while (++i < OPTION.size_screen)
-	{
-		k = -1;
-		y = RT->screen[i].ray->y;
-		while (++k < OPTION.size_blur)
-		{
-			len = i + k;
-			if (len >= OPTION.size_screen || RT->screen[len].ray->y != y)
-				len = i;
-			blur[k].red = RT->screen[len].color->red;
-			blur[k].green = RT->screen[len].color->green;
-			blur[k].blue = RT->screen[len].color->blue;
-		}
-		midle_color(blur, k, RT->screen[i].color);
-	}
 }
 
 void 	draw_rt(t_rtv1 *rtv1)
@@ -128,6 +89,9 @@ void	ray_tracing(t_rtv1 *rtv1)
 	mlx_clear_window(MLX_MY, WIN_MY);
 	rtv1->img = create_img(rtv1->obj);
 	i = -1;
+	// set_vector(RT->pos, RAY_ORIGIN);
+	printf("p x %f p y %f p z %f\n",RT->pos->x, RT->pos->y, RT->pos->z);
+	printf("pP x %f p y %f p z %f\n",RAY_ORIGIN->x, RAY_ORIGIN->y, RAY_ORIGIN->z);
 	if (module_check_in(rtv1, RAY_ORIGIN) == 1)
 	{
 		while (++i < OPTION.size_screen)

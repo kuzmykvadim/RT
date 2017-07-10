@@ -27,11 +27,11 @@ int	check_intersect_object(t_rtv1 *rtv1, double *t, int i, t_ray *ray)
 		res = intersect_plane_limit(ray, RT->rt_obj[i].plane_limit, t);
 	else if (RT->rt_obj[i].id == 's')
 		res = intersect_sphere(ray, RT->rt_obj[i].sphere, t);
-	else if (RT->rt_obj[i].id == 'C')
-		res = intersect_cylinder(ray, RT->rt_obj[i].cylinder, t);
-	else if (RT->rt_obj[i].id == 'c')
-		res = intersect_cone(ray, RT->rt_obj[i].cone, t);
-	// else if (RT->rt_obj[i].id == 'd')
+	// else if (RT->rt_obj[i].id == 'C')
+	// 	res = intersect_cylinder(ray, RT->rt_obj[i].cylinder, t);
+	// else if (RT->rt_obj[i].id == 'c')
+	// 	res = intersect_cone(ray, RT->rt_obj[i].cone, t);
+	// // else if (RT->rt_obj[i].id == 'd')
 	// 	res = intersect_disc(ray, RT->rt_obj[i].disk, t);
 	set_vector(ray->origin, &old_origin);
 	set_vector(ray->direction, &old_dir);

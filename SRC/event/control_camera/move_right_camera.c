@@ -14,5 +14,5 @@
 
 void	move_right_camera(t_rtv1 *rtv1)
 {
-	rtv1->ray->origin->x -= 100;
+	rtv1->pos->x -= 100;
 }
