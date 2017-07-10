@@ -108,17 +108,16 @@ void		init_cone_1(t_rtv1 *rtv1)
 	// construct_vector(rtv1->rt_obj[10].poligon->v0, 500, 500, -600);
 	// construct_vector(rtv1->rt_obj[10].poligon->v1, 300, 600, -600);
 	// construct_vector(rtv1->rt_obj[10].poligon->v2, 700, 600, -600);
-	calc_normal_poligon(rtv1->rt_obj[10].poligon);
+	// calc_normal_poligon(rtv1->rt_obj[10].poligon);
 	/////////////////////////////////////////////////
 	// HALF_SPHERE	///////////////////
 	/////////////////////////////////
 	///
 	double	r = 150;
 	rtv1->rt_obj[11].half_sphere->radius = r;
-	rtv1->rt_obj[11].half_sphere->n = 1;
 	rtv1->rt_obj[11].half_sphere->radius_pow = r * r;
-	construct_vector(rtv1->rt_obj[11].half_sphere->position, 200, 400, -9000);
-	construct_vector(rtv1->rt_obj[11].half_sphere->normal, 1, 0, 0);
+	construct_vector(rtv1->rt_obj[11].half_sphere->position, 200, 400, -900);
+	construct_vector(rtv1->rt_obj[11].half_sphere->normal, 0, 1, 0);
 	t_vector	tmp1;
 
 	tmp1 = normal_vector(*rtv1->rt_obj[11].half_sphere->normal);

@@ -19,5 +19,14 @@ t_color		get_color(t_rtv1 *rtv1, int num_obj)
 	color.red = RT->rt_obj[num_obj].color.red;
 	color.blue = RT->rt_obj[num_obj].color.blue;
 	color.green = RT->rt_obj[num_obj].color.green;
+	if (RT->rt_obj[num_obj].id == 'h')
+	{
+		if (RT->rt_obj[num_obj].half_sphere->light_n == 2)
+		{
+			color.red = 255;
+			color.blue = 255;//RT->rt_obj[num_obj].color.blue;
+			color.green = 255;//RT->rt_obj[num_obj].color.green;
+		}
+	}
 	return (color);
 }

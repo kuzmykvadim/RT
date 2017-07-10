@@ -48,7 +48,6 @@ typedef	struct	s_half_sphere
 	double		radius;
 	double		radius_pow;
 	t_vector	*normal;
-	int			n;
 	int			light_n;
 }				t_half_sphere;
 
@@ -77,7 +76,6 @@ typedef struct	s_plane_limit
 {
 	t_vector	*position;
 	t_vector	*normal;
-	t_vector	*rotation;
 	double		height;
 	double		weight;
 }				t_plane_limit;
@@ -86,7 +84,6 @@ typedef	struct	s_ray
 {
 	t_vector	*origin;
 	t_vector	*direction;
-	double		scalar_ray_direction;
 }				t_ray;
 
 typedef struct	s_disk

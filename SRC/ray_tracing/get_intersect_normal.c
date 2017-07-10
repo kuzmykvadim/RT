@@ -28,6 +28,13 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 		normal = find_normal_cone(RT_OBJ.cone, point);
 	else if (RT_OBJ.id == 'l')
 		set_vector(&normal, RT_OBJ.plane_limit->normal);
+	else if (RT_OBJ.id == 'h')
+	{
+		if (RT_OBJ.half_sphere->light_n == 2)
+			set_vector(&normal, RT_OBJ.half_sphere->normal);
+		else
+			normal = normal_vector(sub_vector(RT_OBJ.half_sphere->position, point));
+	}
 	// else if (RT_OBJ.id == 'd')
 	// 	set_vector(&normal, RT_OBJ.disk->normal);
 	return (normal);

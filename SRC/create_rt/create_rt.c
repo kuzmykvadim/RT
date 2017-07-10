@@ -71,7 +71,6 @@ t_plane_limit	*create_plane_limit(void)
 
 	new = (t_plane_limit*)malloc(sizeof(t_plane_limit) + 1);
 	new->position = create_vector();
-	new->rotation = create_vector();
 	new->normal = create_vector();
 	new->normal->y = 1;
 	return (new);
@@ -154,8 +153,8 @@ void 	option_init(t_rtv1 *rtv1)
 	OPTION.size_ssaa = 1; //ЕСЛИ OPTION.ssaa == 0 ТОГДА OPTION.size_ssaa ДОЛЖЕН БЫТЬ ОДИН
 	OPTION.fxaa = 0; // ЕСЛИ ВКЛ FXAA то motion blur вкл и size blur == 2
 	//LIGHT AND SHADOW
-	OPTION.lambert_light = 1;
-	OPTION.view_normal = 0;
+	OPTION.lambert_light = 0;
+	OPTION.view_normal = 1;
 	OPTION.view_point = 0;
 	OPTION.cel_shaded = 0;
 	OPTION.blinn_fong = 0;
