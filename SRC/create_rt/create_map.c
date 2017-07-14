@@ -27,6 +27,9 @@ t_screen	*create_map(int size_x, int size_y)
 	{
 		new[i].ray = create_vector();
 		new[i].color = (t_color*)malloc(sizeof(t_color) + 1);
+		new[i].color->red = 0;
+		new[i].color->blue = 0;
+		new[i].color->green = 0;
 		(x == size_x ? y += 1 : 0);
 		(x == size_x ? x = 0 : 0);
 		new[i].ray->x = x;

@@ -12,7 +12,7 @@
 
 #include "../../../head.h"
 
-void	find_a_b_c(t_ray *ray, t_cylinder *cylinder, t_val_math *val)
+void	find_a_b_c(t_ray *ray, t_object *cylinder, t_val_math *val)
 {
 	t_vector		delta_p;
 	t_vector		tmp;
@@ -20,25 +20,27 @@ void	find_a_b_c(t_ray *ray, t_cylinder *cylinder, t_val_math *val)
 	t_vector		sub_2;
 	double			res;
 
-	delta_p = sub_vector(ray->origin, cylinder->position);
-	res = dot_vector(ray->direction, cylinder->direction);
-	tmp = scalar_vector(res, cylinder->direction);
+	delta_p = sub_vector(ray->origin, &cylinder->position);
+	res = dot_vector(ray->direction, &cylinder->direction);
+	tmp = scalar_vector(res, &cylinder->direction);
 	sub_1 = sub_vector(ray->direction, &tmp);
-	res = dot_vector(&delta_p, cylinder->direction);
-	tmp = scalar_vector(res, cylinder->direction);
+	res = dot_vector(&delta_p, &cylinder->direction);
+	tmp = scalar_vector(res, &cylinder->direction);
 	sub_2 = sub_vector(&delta_p, &tmp);
 	val->a = dot_vector(&sub_1, &sub_1);
 	val->b = 2 * dot_vector(&sub_1, &sub_2);
-	val->c = dot_vector(&sub_2, &sub_2) - cylinder->radius_pow;
+	val->c = dot_vector(&sub_2, &sub_2) - cylinder->size_pow;
 }
 
-int		intersect_cylinder(t_ray *ray, t_cylinder *cylinder, double *t)
+int		intersect_cylinder(t_ray *ray, t_object object, double *t)
 {
 	t_val_math	val;
+	t_vector	p;
+	double		t_s;
 	int			res;
 
 	res = 0;
-	find_a_b_c(ray, cylinder, &val);
+	find_a_b_c(ray, &object, &val);
 	res = discriminant(t, val);
 	return (res);
 }

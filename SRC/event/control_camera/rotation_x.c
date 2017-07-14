@@ -20,10 +20,10 @@ void	rotation_x_cam(t_rtv1 *rtv1, double angle)
 	double		z;
 
 	i = -1;
-	while (++i < OPTION.size_screen)
+	while (++i < OPTION->size_screen)
 	{
 		j = -1;
-		while (++j < OPTION.size_ssaa)
+		while (++j < OPTION->size_ssaa)
 		{
 			y = DIR_NORMAL.y * cos(angle) - DIR_NORMAL.z * sin(angle);
 			z = DIR_NORMAL.y * sin(angle) + DIR_NORMAL.z * cos(angle);

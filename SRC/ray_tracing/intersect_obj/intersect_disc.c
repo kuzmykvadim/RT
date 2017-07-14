@@ -12,24 +12,24 @@
 
 #include "../../../head.h"
 
-int		intersect_disc(t_ray *ray, t_disk *disk, double *t)
+int		intersect_disc(t_ray *ray, t_object object, double *t)
 {
 	t_vector	tmp;
 	t_val_math	val;
 	t_vector	p;
 
-	val.d = dot_vector(disk->normal, ray->direction);
+	val.d = dot_vector(&object.direction, ray->direction);
 	if (val.d != 0)
 	{
-		tmp = sub_vector(disk->position, ray->origin);
-		val.t0 = dot_vector(&tmp, disk->normal) / val.d;
+		tmp = sub_vector(&object.position, ray->origin);
+		val.t0 = dot_vector(&tmp, &object.direction) / val.d;
 		if (val.t0 > 0.001)
 		{
 		   tmp = scalar_vector(val.t0, ray->direction);
 		   p = add_vector(ray->origin, &tmp);
-		   tmp = sub_vector(&p, disk->position);
+		   tmp = sub_vector(&p, &object.position);
 		   val.d = dot_vector(&tmp, &tmp);
-		   if (sqrtf(val.d) <= disk->radius)
+		   if (sqrtf(val.d) <= object.size)
 		   {
 			   *t = val.t0;
 			   return (1);

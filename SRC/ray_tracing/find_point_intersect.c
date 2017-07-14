@@ -12,12 +12,12 @@
 
 #include "../../head.h"
 
-t_vector	find_point_intersect(t_rtv1 *rtv1, double *t)
+t_vector	point_intersect(t_ray *ray, double *t)
 {
 	t_vector	new_point;
 	t_vector	scale;
 
-	scale = scalar_vector(*t, RAY_DIRECTION);
-	new_point = add_vector(&scale, RAY_ORIGIN);
+	scale = scalar_vector(*t, ray->direction);
+	new_point = add_vector(&scale, ray->origin);
 	return (new_point);
 }

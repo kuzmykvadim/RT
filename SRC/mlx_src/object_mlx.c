@@ -15,7 +15,6 @@
 t_mlx	*object_mlx(int size_x, int size_y, char *name)
 {
 	t_mlx		*new;
-	int			i;
 
 	if (name == NULL)
 	{

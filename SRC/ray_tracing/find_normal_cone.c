@@ -12,7 +12,7 @@
 
 #include "../../head.h"
 
-t_vector	find_normal_cone(t_cone *cone, t_vector *point)
+t_vector	find_normal_cone(t_object cone, t_vector *point)
 {
 	t_vector	b;
 	t_vector	a;
@@ -20,8 +20,8 @@ t_vector	find_normal_cone(t_cone *cone, t_vector *point)
 	t_vector	new;
 	t_vector	n;
 
-	b = sub_vector(point, cone->position);
-	a = scalar_vector(cos_vector(&b, cone->direction), cone->direction);
+	b = sub_vector(point, &cone.position);
+	a = scalar_vector(cos_vector(&b, &cone.direction), &cone.direction);
 	n = sub_vector(&a, &b);
 	scaled = product_vectors(&b, &n);
 	n = product_vectors(&scaled, &b);

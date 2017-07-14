@@ -16,17 +16,17 @@ t_color		get_color(t_rtv1 *rtv1, int num_obj)
 {
 	t_color color;
 
-	color.red = RT->rt_obj[num_obj].color.red;
-	color.blue = RT->rt_obj[num_obj].color.blue;
-	color.green = RT->rt_obj[num_obj].color.green;
-	if (RT->rt_obj[num_obj].id == 'h')
-	{
-		if (RT->rt_obj[num_obj].half_sphere->light_n == 2)
-		{
-			color.red = 255;
-			color.blue = 255;//RT->rt_obj[num_obj].color.blue;
-			color.green = 255;//RT->rt_obj[num_obj].color.green;
-		}
-	}
+	color.red = RT->data->all_obj[num_obj].color.red;
+	color.blue = RT->data->all_obj[num_obj].color.blue;
+	color.green = RT->data->all_obj[num_obj].color.green;
+	// if (RT->rt_obj[num_obj].id == 'h')
+	// {
+	// 	if (RT->rt_obj[num_obj].half_sphere->light_n == 2)
+	// 	{
+	// 		color.red *= 0.9;
+	// 		color.blue *= 0.9;//RT->rt_obj[num_obj].color.blue;
+	// 		color.green *= 0.9;//RT->rt_obj[num_obj].color.green;
+	// 	}
+	// }
 	return (color);
 }

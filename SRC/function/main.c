@@ -12,12 +12,24 @@
 
 #include "../../head.h"
 
+void	*ft_copy(void *data, size_t size)
+{
+	void	*shit;
+
+	shit = malloc(size);
+	memcpy(shit, data, size);
+	return (shit);
+}
+
 int		main(int argc, char **argv)
 {
 	t_rtv1		*rtv1;
+	t_env 		*e;
 
-	// (argc != 2 ? error_exit("Wrong argv") : 0);
-	rtv1 = create_rtv1();
+	if (argc != 2)
+		error_exit("bad param");
+	e = (t_env*)malloc(sizeof(t_env));
+	rtv1 = create_rtv1(e, argv[1]);
 	ray_tracing(rtv1);
 	mlx_use(rtv1);
 	return (0);

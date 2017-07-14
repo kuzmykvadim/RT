@@ -14,5 +14,5 @@
 
 void	move_back_camera(t_rtv1 *rtv1)
 {
-	rtv1->pos->z -= 100;
+	rtv1->pos->z -= 300;
 }

@@ -20,34 +20,28 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 	normal.y = 0;
 	normal.z = 0;
 
-	if (RT_OBJ.id == 's')
-		normal = normal_vector(sub_vector(RT_OBJ.SPHERE_POSITION, point));
-	else if (RT_OBJ.id == 'C')
-		normal = find_normal_cylinder(RT_OBJ.cylinder, point);
-	else if (RT_OBJ.id == 'c')
-		normal = find_normal_cone(RT_OBJ.cone, point);
-	else if (RT_OBJ.id == 'l')
-		set_vector(&normal, RT_OBJ.plane_limit->normal);
-	else if (RT_OBJ.id == 'h')
-	{
-		if (RT_OBJ.half_sphere->light_n == 2)
-			set_vector(&normal, RT_OBJ.half_sphere->normal);
-		else
-			normal = normal_vector(sub_vector(RT_OBJ.half_sphere->position, point));
-	}
-	// else if (RT_OBJ.id == 'd')
-	// 	set_vector(&normal, RT_OBJ.disk->normal);
+	if (RT_OBJ.id == SPHERE)
+		normal = normal_vector(sub_vector(&RT_OBJ.position, point));
+	else if (RT_OBJ.id == PLANE)
+		set_vector(&normal, &RT_OBJ.direction);
+	else if (RT_OBJ.id == DISC)
+		set_vector(&normal, &RT_OBJ.direction);
+	else if (RT_OBJ.id == CYLINDER)
+		normal = find_normal_cylinder(RT_OBJ, point);
+	else if (RT_OBJ.id == CONE)
+		normal = find_normal_cone(RT_OBJ, point);
+	// else if (RT_OBJ.id == 'h')
+	// {
+	// 	if (RT_OBJ.half_sphere->light_n == 2)
+	// 	{
+	// 		set_vector(&normal, RT_OBJ.half_sphere->normal);
+	// 		anti_vector(&normal);
+	// 	}
+	// 	else
+	// 		normal = normal_vector(sub_vector(RT_OBJ.half_sphere->position, point));
+	// }
 	return (normal);
 }
 
-// else if (RT_OBJ.plane != NULL)
-// 	set_vector(&normal, RT_OBJ.plane->normal);
 // else if (RT_OBJ.poligon != NULL)
 // 	set_vector(&normal, RT_OBJ.poligon->normal);
-// else if (RT_OBJ.half_sphere != NULL)
-// {
-// 	if (RT_OBJ.half_sphere->light_n == 2)
-// 		set_vector(&normal, RT_OBJ.half_sphere->normal);
-// 	else
-// 		normal = normal_vector(sub_vector(RT_OBJ.half_sphere->position, point));
-// }

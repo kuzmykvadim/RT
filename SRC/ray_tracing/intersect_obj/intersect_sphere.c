@@ -12,15 +12,15 @@
 
 #include "../../../head.h"
 
-int	intersect_sphere(t_ray *ray, t_sphere *sphere, double *t)
+int	intersect_sphere(t_ray *ray, t_object obj, double *t)
 {
 	t_val_math	val;
 	int			res;
 
-	val.dist = sub_vector(ray->origin, SPHERE_POSITION);
+	val.dist = sub_vector(ray->origin, &obj.position);
 	val.a = dot_vector(ray->direction, ray->direction);
 	val.b = 2 * dot_vector(ray->direction, &val.dist);
-	val.c = dot_vector(&val.dist, &val.dist) - SPHERE_RADIUS_POW;
+	val.c = dot_vector(&val.dist, &val.dist) - obj.size_pow;
 	res = discriminant(t, val);
 	return (res);
 }

@@ -16,82 +16,165 @@
 # include "../Vector/vector.h"
 # include "../mlx_src/mlx_src.h"
 # include <stdio.h>
+// # include <mlx.h>
+// # include <stdlib.h>
+// # include <unistd.h>
+// # include <stdio.h>
+// # include <fcntl.h>
+# include <math.h>
+// # include <time.h>
+// # include "libft/libft.h"
+// # include "libft/get_next_line.h"
+# include "CJSON/cJSON.h"
+# define SPHERE 1
+# define PLANE 2
+# define CONE 5
+# define CYLINDER 4
+# define DISC 3
+# define HALF_SPHERE 6
 
-typedef struct	s_light
+typedef struct	s_object
 {
-	t_vector	*position;
-	t_color		color;
-}				t_light;
+	char			*type;
+	int				obj_count;
+	int				id;
+	double			size;
+	double			height;
+	double			weight;
+	t_color			color;
+	t_vector		direction;
+	t_vector		position;
+	t_vector		obj_rot;
+	double			size_pow;// NO MAP
+	double			cone_cos_two;// NO MAP
+	double			cone_sin_two;// NO MAP
+	double			two_cone_cos_two;// NO MAP
+	double			two_cone_sin_two;// NO MAP
+}				t_object;
 
-typedef	struct	s_cylinder
+typedef struct	s_json_obj
 {
-	t_vector	*position;
-	t_vector	*direction;
-	double		radius;
-	double		radius_pow;
-}				t_cylinder;
+	cJSON		*j_root;
+	cJSON		*j_format;
+	cJSON		*j_object;
+	cJSON		*j_color;
+	cJSON		*j_type;
+	cJSON		*j_position;
+	cJSON		*pos_x1;
+	cJSON		*pos_y1;
+	cJSON		*pos_z1;
+	cJSON		*j_obj_rot;
+	cJSON		*j_direction;
+	cJSON		*dir_x1;
+	cJSON		*dir_y1;
+	cJSON		*dir_z1;
+	cJSON		*rot_x1;
+	cJSON		*rot_y1;
+	cJSON		*rot_z1;
+	cJSON		*j_red;
+	cJSON		*j_green;
+	cJSON		*j_blue;
+	cJSON		*j_size;
+	cJSON		*j_weight;
+	cJSON		*j_height;
+}				t_json_obj;
 
-typedef	struct	s_cone
+typedef struct	s_options_json
 {
-	t_vector	*position;
-	t_vector	*direction;
-	double		angle;
-	double		cone_cos_two;
-	double		cone_sin_two;
-	double		two_cone_cos_two;
-	double		two_cone_sin_two;
-}				t_cone;
+	cJSON		*root;
+	cJSON		*opt;
+	cJSON		*light_off_on;
+	cJSON		*lambert_light;
+	cJSON		*cel_shaded;
+	cJSON		*blinn_fong;
+	cJSON		*shadow;
+	cJSON		*view_normal;
+	cJSON		*view_point;
+	cJSON		*fieldofview;
+	cJSON		*fov_on;
+	cJSON		*fov;
+	cJSON		*motion_blur;
+	cJSON		*size_blur;
+	cJSON		*size_x;
+	cJSON		*size_y;
+	cJSON		*size_screen;
+	cJSON		*name_win;
+	cJSON		*size_ssaa;
+	cJSON		*ssaa;
+	cJSON		*fxaa;
+	cJSON		*filters;
+	cJSON		*darkroom;
+	cJSON		*black_and_white;
+	cJSON		*sepia;
+	cJSON		*draft_x;
+	cJSON		*draft_y;
+	cJSON		*camera_position;
+	cJSON		*cam_x;
+	cJSON		*cam_y;
+	cJSON		*cam_z;
+	cJSON		*j_lights;
+	cJSON		*j_arr_lght;
+	cJSON		*lght_pos;
+	cJSON		*lght_x;
+	cJSON		*lght_y;
+	cJSON		*lght_z;
+	cJSON		*lght_dir;
+	cJSON		*l_dir_x;
+	cJSON		*l_dir_y;
+	cJSON		*l_dir_z;
+	cJSON		*lght_col;
+	cJSON		*l_col_r;
+	cJSON		*l_col_g;
+	cJSON		*l_col_b;
+	cJSON		*j_depth_rec;
+	cJSON		*j_speed;
+	cJSON		*j_bg_color;
+	cJSON		*j_screen_size;
+	cJSON		*j_size_y;
+	cJSON		*j_size_x;
 
-typedef	struct	s_half_sphere
-{
-	t_vector	*position;
-	double		radius;
-	double		radius_pow;
-	t_vector	*normal;
-	int			light_n;
-}				t_half_sphere;
+}				t_options_json;
 
-typedef	struct	s_sphere
+typedef struct	s_options
 {
-	t_vector	*position;
-	double		radius;
-	double		radius_pow;
-}				t_sphere;
-
-typedef	struct	s_poligon
-{
-	t_vector	*v0;
-	t_vector	*v1;
-	t_vector	*v2;
-	t_vector	*normal;
-}				t_poligon;
-
-typedef struct	s_plane
-{
-	double		distance;
-	t_vector	*normal;
-}				t_plane;
-
-typedef struct	s_plane_limit
-{
-	t_vector	*position;
-	t_vector	*normal;
-	double		height;
-	double		weight;
-}				t_plane_limit;
+	t_color		bg_color;
+	int			light_off_on;
+	int			lambert_light;
+	int			cel_shaded;
+	int			blinn_fong;
+	int			shadow;
+	int			view_normal;
+	int			view_point;
+	int			fov_on;
+	int			fov;
+	int			motion_blur;
+	int			size_blur;
+	int			size_screen;
+	char		*name_win;
+	int			size_ssaa;
+	int			ssaa;
+	int			fxaa;
+	int			fieldofview;
+	int			filters;
+	int			darkroom;
+	int			black_and_white;
+	int			sepia;
+	int			draft_x;
+	int			draft_y;
+	t_vector	cam_pos;
+	int			depth_rec;
+	int			lght_count;
+	int			objects_count;
+	int			speed;
+	int			size_x;
+	int			size_y;
+}				t_options;
 
 typedef	struct	s_ray
 {
 	t_vector	*origin;
 	t_vector	*direction;
 }				t_ray;
-
-typedef struct	s_disk
-{
-	t_vector	*normal;
-	t_vector	*position;
-	double		radius;
-}				t_disk;
 
 typedef struct	s_screen
 {
@@ -100,12 +183,48 @@ typedef struct	s_screen
 	t_color		*color;
 }				t_screen;
 
-t_sphere		*create_shpere(void);
+typedef struct	s_light
+{
+	int			id;
+	t_vector	position;
+	t_vector	direction;
+	t_color		color;
+}				t_light;
+
+typedef struct	s_all_data
+{
+	t_object	*all_obj;
+	t_light		*light_pos;
+	t_options	*all_opt;
+}				t_all_data;
+
+typedef struct	s_env
+{
+	int			fd;
+}				t_env;
+
 t_ray			*create_ray(void);
-t_plane			*create_plane(void);
-t_cylinder		*create_cylinder(void);
-t_cone			*create_cone(void);
 t_screen		*create_map(int size_x, int size_y);
 t_light			*create_all_light(int size);
+
+
+// JSON
+void			ft_init(t_env *e, char *file);
+t_all_data		*ft_parsing(t_env *e);
+char			*ft_read_file(t_env *e);
+void			ft_json_parser_obj(char *str, t_all_data *data);
+void			ft_json_parser_general(char *file, t_all_data *data);
+void			ft_pars_err(char *str);
+void			ft_pars_lights(char *file, t_all_data *data);
+void			ft_json_parser_general5(t_options *o, t_options_json *oj);
+void			ft_json_parser_general4(t_options *o, t_options_json *oj);
+void			ft_json_parser_general3(t_options *o, t_options_json *oj);
+void			ft_json_parser_general2(t_options *o, t_options_json *oj);
+void			ft_json_parser_general1(t_options *o, t_options_json *oj);
+void			ft_check_objtype(char *str, t_all_data *data, int i);
+void			ft_parse_opt(t_json_obj *j, t_all_data *data, int i);
+void			ft_pars_pos_rot(t_json_obj *j, t_all_data *data, int i);
+void			ft_pars_color(t_json_obj *j, t_all_data *data, int i);
+void			ft_parse_all_obj(t_json_obj *j, t_object *o, t_all_data *data);
 
 #endif

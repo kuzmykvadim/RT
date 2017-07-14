@@ -18,7 +18,7 @@ int			event_key(int keycode, t_rtv1 *rt)
 		exit(1);
 	else if (keycode == 36)
 	{
-		rt->option.light_off_on = (rt->option.light_off_on == 0 ? 1 : 0);
+		rt->data->all_opt->light_off_on = (rt->data->all_opt->light_off_on == 0 ? 1 : 0);
 		ray_tracing(rt);
 	}
 	return (1);

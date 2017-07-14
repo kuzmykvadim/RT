@@ -18,22 +18,22 @@ static void 	init_rgb_all_light(t_rtv1 *rtv1, int num_obj, t_val_vector *val)
 
 	i = -1;
 	while (++i < SIZE_LIGHT)
+	{
+		// printf("pos x %fy %fz %f\n",rtv1->data->light_pos[i].position.x, rtv1->data->light_pos[i].position.y, rtv1->data->light_pos[i].position.z);
 		val->rgb[i] = get_color(RT, num_obj);
+		// printf("ERROR @\n");
+	}
 }
 
 t_color		ft_light(t_rtv1 *rtv1, double *t_min, int num_obj)
 {
 	t_color			color;
 
-	SIZE_LIGHT = 3;
-	RT->val->point = find_point_intersect(RT, t_min);
-	// rotation_vector(&RT->val->point, RT->rt_obj[num_obj].rotation);
+	RT->val->point = point_intersect(RT->ray, t_min);
 	RT->val->n_point = get_intersect_normal(RT, num_obj, &RT->val->point);
-	//rotation_vector(&RT->val->n_point, RT->rt_obj[num_obj].rotation);
-
 	init_rgb_all_light(RT, num_obj, RT->val);
 	set_vector(L_RAY_ORIGIN, &RT->val->point);
-	if (OPTION.shadow == TRUE)
+	if (OPTION->shadow == TRUE)
 		all_shadow(RT, num_obj, RT->val, RT->hit);
 	all_light(RT, RT->val, RT->hit, num_obj);
 	midle_color(RT->val->rgb, SIZE_LIGHT, &color);

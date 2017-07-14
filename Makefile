@@ -6,7 +6,7 @@
 #    By: asvirido <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/04 14:27:54 by asvirido          #+#    #+#              #
-#    Updated: 2017/05/18 18:29:36 by asvirido         ###   ########.fr        #
+#    Updated: 2017/07/13 19:38:34 by asvirido         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = RT
 
 FLAGS = -c #-Wall -Wextra -Werror
 
-FLAGS2 = -c -O3 #-Wall -Wextra -Werror
+FLAGS2 = -c -g -Wall -Wextra
 
-MLX = -lmlx -framework OpenGL -framework AppKit
+MLX = -lmlx -framework OpenGL -framework AppKit SRC/create_rt/CJSON/cJSON.c
 
 HEADER = head.h
 
@@ -65,21 +65,19 @@ EVENT = 		./SRC/event/destroy.c											\
 
 CREATE_RT =		./SRC/create_rt/create_ray.c									\
 				./SRC/create_rt/create_rt.c										\
-				./SRC/create_rt/create_sphere.c									\
-				./SRC/create_rt/create_plane.c									\
-				./SRC/create_rt/create_cylinder.c								\
-				./SRC/create_rt/create_cone.c									\
 				./SRC/create_rt/create_map.c									\
-				./SRC/create_rt/create_all_light.c								\
 				./SRC/create_rt/ssaa.c											\
 				./SRC/create_rt/init_obj.c										\
+	 			./SRC/create_rt/ft_json_parser_obj.c							\
+	   			./SRC/create_rt/ft_json_parser_general.c						\
+	   			./SRC/create_rt/ft_pars_light.c									\
+
 
 LIGH_MODEL = ./SRC/ray_tracing/Lighting_Model/shadow.c							\
 
 RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/intersect.c									\
 				./SRC/ray_tracing/intersect_obj/intersect_sphere.c				\
-				./SRC/ray_tracing/intersect_obj/intersect_plane.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_cone.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_cylinder.c			\
 				./SRC/ray_tracing/intersect_obj/intersect_half_sphere.c			\
@@ -97,21 +95,29 @@ RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/find_normal_cylinder.c						\
 				./SRC/ray_tracing/find_normal_cone.c							\
 				./SRC/ray_tracing/light_intersect.c								\
-				./SRC/ray_tracing/module_check_in.c								\
 				./SRC/ray_tracing/all_shadow.c									\
 				./SRC/ray_tracing/all_light.c									\
 
 FT =			./SRC/function/main.c											\
 				./SRC/function/mlx_use.c										\
 				./SRC/function/error_exit.c										\
+				./SRC/function/ft_bzero.c										\
+				./SRC/function/ft_memset.c										\
+				./SRC/function/ft_strchr.c										\
+				./SRC/function/ft_strdup.c										\
+				./SRC/function/ft_strjoin.c										\
+				./SRC/function/ft_strlen.c										\
+				./SRC/function/ft_memalloc.c									\
+				./SRC/function/ft_strnew.c										\
+				./SRC/function/get_next_line.c									\
 
 SRC =			$(FT)															\
-				$(MLX_SRC)														\
 				$(VECTOR)														\
-				$(EVENT)														\
 				$(CREATE_RT)													\
+				$(MLX_SRC)														\
 				$(LIGH_MODEL)													\
 				$(RT)															\
+				$(EVENT)														\
 
 BINS = $(SRC:.c=.o)
 

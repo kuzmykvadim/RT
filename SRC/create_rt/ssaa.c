@@ -63,11 +63,11 @@ t_vector 			calc_ssaa(t_rtv1 *rtv1, t_vector *dir, int j)
 	t_vector temp;
 
 	temp = sub_vector(dir, RAY_ORIGIN);
-	if (OPTION.size_ssaa == 2)
+	if (OPTION->size_ssaa == 2)
 		temp = x2_anti_alias(temp, j);
-	if (OPTION.size_ssaa == 4)
+	if (OPTION->size_ssaa == 4)
 		temp = x4_anti_alias(temp, j);
-	if (OPTION.size_ssaa == 8)
+	if (OPTION->size_ssaa == 8)
 		temp = x8_anti_alias(temp, j);
 	res = normal_vector(temp);
 	return (res);
