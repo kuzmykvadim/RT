@@ -27,6 +27,6 @@ void	all_shadow(t_rtv1 *rtv1, int num_obj, t_val_vector *val, int *hit)
 		t = module_vector(&val->tmp);
 		hit[i] = light_intersect(rtv1, &t);
 		if (hit[i] == 0)
-			val->rgb[i] = shadow(val->rgb[i], 0.1);
+			val->rgb[i] = shadow(val->rgb[i], 0);
 	}
 }

@@ -23,7 +23,12 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 	if (RT_OBJ.id == SPHERE)
 		normal = normal_vector(sub_vector(&RT_OBJ.position, point));
 	else if (RT_OBJ.id == PLANE)
+	{
 		set_vector(&normal, &RT_OBJ.direction);
+		normal.x = fabs(normal.x);
+		normal.y = fabs(normal.y);
+		normal.z = fabs(normal.z);
+	}
 	else if (RT_OBJ.id == DISC)
 		set_vector(&normal, &RT_OBJ.direction);
 	else if (RT_OBJ.id == CYLINDER)

@@ -14,5 +14,5 @@
 
 void	move_forward_camera(t_rtv1 *rtv1)
 {
-	rtv1->pos->z += 300;
+	rtv1->pos->z += OPTION->speed;
 }

@@ -40,11 +40,11 @@ void 	lambert_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
-		if (dot <= 0)
-		{
-			anti_vector(&val->n_point);
-			dot = cos_vector(&val->n_point, &l_dir);
-		}
+		// if (dot <= 0)
+		// {
+		// 	anti_vector(&val->n_point);
+		// 	dot = cos_vector(&val->n_point, &l_dir);
+		// }
 		lambert_component = MAX(dot, 0.0);
 		color_multi(&val->rgb[i], lambert_component);
 	}
@@ -80,7 +80,7 @@ void 	cel_shaded(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 void	view_point_or_normal(t_rtv1 *rtv1, t_val_vector *val)
 {
 	t_color		color;
-	t_vector	n_point;
+	t_vector		n_point;
 	int			i;
 
 	i = -1;

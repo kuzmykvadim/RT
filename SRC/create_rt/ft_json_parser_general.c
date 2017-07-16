@@ -42,9 +42,9 @@ void	ft_json_parser_general2(t_options *o, t_options_json *oj)
 	if (!cJSON_IsBool(oj->view_normal))
 		ft_pars_err("view_normal parameter error");
 	o->view_normal = oj->view_normal->valueint;
-	oj->view_point = cJSON_GetObjectItemCaseSensitive(oj->opt, "view_normal");
+	oj->view_point = cJSON_GetObjectItemCaseSensitive(oj->opt, "view_point");
 	if (!cJSON_IsBool(oj->view_point))
-		ft_pars_err("view_normal parameter error");
+		ft_pars_err("view_point parameter error");
 	o->view_point = oj->view_point->valueint;
 	oj->ssaa = cJSON_GetObjectItemCaseSensitive(oj->opt, "ssaa");
 	if (!cJSON_IsBool(oj->ssaa))

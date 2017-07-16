@@ -14,5 +14,5 @@
 
 void	move_up_camera(t_rtv1 *rtv1)
 {
-	rtv1->pos->y -= 100;
+	rtv1->pos->y -= OPTION->speed;
 }

@@ -145,6 +145,8 @@ t_all_data		*ft_parsing(t_env *e)
 	return (data);
 }
 
+// IF direction object == 0, 0, 0, error direction
+
 t_rtv1			*create_rtv1(t_env *e, char *file)
 {
 	t_rtv1		*rtv1;
@@ -160,7 +162,7 @@ t_rtv1			*create_rtv1(t_env *e, char *file)
 	rtv1->pos = create_vector();
 	rtv1->obj = object_mlx(OPTION->size_x, OPTION->size_y, OPTION->name_win);
 	rtv1->screen = create_map(OPTION->size_x, OPTION->size_y);
-	////// SCREEN 2 ЗАМЕНИТЬ
+	printf("OPTION %d\n",OPTION->view_point);
 	rtv1->screen2 = create_map(OPTION->size_x, OPTION->size_y);
 	construct_vector(rtv1->ray->origin, OPTION->size_x / 2, OPTION->size_y / 2, -1700.99);
 	t_vector tmp = add_vector(RAY_ORIGIN, &OPTION->cam_pos);
