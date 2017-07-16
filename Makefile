@@ -14,17 +14,17 @@ NAME = RT
 
 FLAGS = -c #-Wall -Wextra -Werror
 
-FLAGS2 = -c -g -Wall -Wextra
+FLAGS2 = -c #-Wall -Wextra
 
 MLX = -lmlx -framework OpenGL -framework AppKit SRC/create_rt/CJSON/cJSON.c
 
 HEADER = head.h
 
-MLX_SRC =		./SRC/mlx_src/create_img.c										\
-				./SRC/mlx_src/object_mlx.c										\
-				./SRC/mlx_src/valid_size_win.c									\
-				./SRC/mlx_src/create_xpm.c										\
-				./SRC/mlx_src/put_img.c											\
+MLX_SRC =		./SRC/mlx_src/create_img.c													\
+				./SRC/mlx_src/object_mlx.c														\
+				./SRC/mlx_src/valid_size_win.c												\
+				./SRC/mlx_src/create_xpm.c														\
+				./SRC/mlx_src/put_img.c															\
 				./SRC/mlx_src/create_color.c									\
 				./SRC/mlx_src/protected_color.c									\
 				./SRC/mlx_src/midle_color.c										\

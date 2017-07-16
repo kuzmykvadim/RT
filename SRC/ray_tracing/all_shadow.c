@@ -19,7 +19,7 @@ void	all_shadow(t_rtv1 *rtv1, int num_obj, t_val_vector *val, int *hit)
 	double	t;
 
 	i = -1;
-	while (++i < 1)
+	while (++i < SIZE_LIGHT)
 	{
 		val->tmp = normal_vector(sub_vector(&L.position, &val->point));
 		set_vector(L_RAY_DIRECTION, &val->tmp);

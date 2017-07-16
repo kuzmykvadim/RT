@@ -75,23 +75,23 @@ typedef struct	s_val_vector
 	t_vector		point;
 	t_vector		n_point;
 	t_vector		tmp;
-	t_color			color;
-	t_color			rgb[4];
+	t_color		color;
+	t_color		*rgb;
 	t_vector		ray;
 }				t_val_vector;
 
 typedef struct	s_rtv1
 {
-	t_mlx			*obj;
+	t_mlx			   *obj;
 	t_all_data		*data;
-	t_img			*img;
-	t_ray			*ray;
-	t_ray			*light_ray;
-	t_screen		*screen;
-	t_screen		*screen2;
+	t_img			   *img;
+	t_ray			   *ray;
+	t_ray			   *light_ray;
+	t_screen		 *screen;
+	t_screen		 *screen2;
 	t_val_vector	*val;
-	int				*hit;
-	t_vector		*pos; // KACTИЛЬ
+	int				   *hit;
+	t_vector		 *pos; // KACTИЛЬ
 }				t_rtv1;
 
 t_rtv1			*create_rtv1(t_env *e, char *s);

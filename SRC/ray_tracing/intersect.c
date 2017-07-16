@@ -32,9 +32,9 @@ t_color		intersect(t_rtv1 *rtv1)
 		}
 	}
 	 if (val.num_obj != -1 && OPTION->light_off_on == 1)
-		color = ft_light(RT, &val_t.t0, val.num_obj);
+		color = ft_light(rtv1, &val_t.t0, val.num_obj);
 	else if (val.num_obj != -1 && OPTION->light_off_on == 0)
-		color = get_color(RT, val.num_obj);
+		color = get_color(rtv1, val.num_obj);
 	else
 		set_color(&color, BACKGROUND.red, BACKGROUND.blue, BACKGROUND.green);
 	color.red = MIN(color.red * 255.0f, 255.0f);

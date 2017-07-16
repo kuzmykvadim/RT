@@ -81,12 +81,11 @@ void		calc(t_rtv1 *rtv1)
 	while (++i < OPTION->size_screen)
 	{
 		j = -1;
-		RT->screen[i].dir_ssaa = (t_vector*)malloc(sizeof(t_vector) * (OPTION->size_ssaa) + 1);
+		RT->screen[i].dir_ssaa = (t_vector*)malloc(sizeof(t_vector) * (OPTION->size_ssaa + 1));
 		while (++j < OPTION->size_ssaa)
 		{
 			tmp = calc_ssaa(RT, RT->screen[i].ray, j);
 			set_vector(&DIR_NORMAL, &tmp);
-			printf("DIR_NORMAL x %f y %f z %f\n", DIR_NORMAL.x, DIR_NORMAL.y, DIR_NORMAL.z);
 		}
 	}
 }
@@ -153,8 +152,9 @@ t_rtv1			*create_rtv1(t_env *e, char *file)
 	ft_init(e, file);
 	rtv1 = (t_rtv1*)malloc(sizeof(t_rtv1) + 1);
 	rtv1->data = ft_parsing(e);
-	rtv1->val = (t_val_vector*)malloc(sizeof(t_val_vector) * 1);
-	rtv1->hit = (int*)malloc(sizeof(int) * SIZE_LIGHT + 1);
+	rtv1->val = (t_val_vector*)malloc(sizeof(t_val_vector) + 1);
+	rtv1->hit = (int*)malloc(sizeof(int) * (SIZE_LIGHT));
+	rtv1->val->rgb = (t_color*)malloc(sizeof(t_color) * SIZE_LIGHT + 1);
 	rtv1->ray = create_ray();
 	rtv1->light_ray = create_ray();
 	rtv1->pos = create_vector();
@@ -169,7 +169,5 @@ t_rtv1			*create_rtv1(t_env *e, char *file)
 	calc(RT);
 	init_demo(RT);
 	set_vector(RT->pos, RAY_ORIGIN);
-	printf("ERRROR\n");
-	// sleep(1000);
 	return (rtv1);
 }

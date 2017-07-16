@@ -18,11 +18,7 @@ static void 	init_rgb_all_light(t_rtv1 *rtv1, int num_obj, t_val_vector *val)
 
 	i = -1;
 	while (++i < SIZE_LIGHT)
-	{
-		// printf("pos x %fy %fz %f\n",rtv1->data->light_pos[i].position.x, rtv1->data->light_pos[i].position.y, rtv1->data->light_pos[i].position.z);
 		val->rgb[i] = get_color(RT, num_obj);
-		// printf("ERROR @\n");
-	}
 }
 
 t_color		ft_light(t_rtv1 *rtv1, double *t_min, int num_obj)

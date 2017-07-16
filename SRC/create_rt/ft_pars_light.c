@@ -77,7 +77,7 @@ void	ft_pars_lights(char *file, t_all_data *data)
 	if (!cJSON_IsArray(lj->j_lights))
 		ft_pars_err("map error (lights must be array)");
 	lght_count = cJSON_GetArraySize(lj->j_lights);
-	data->light_pos = (t_light*)malloc(sizeof(t_light) * lght_count + 1);
+	data->light_pos = (t_light*)malloc(sizeof(t_light) * (lght_count + 1));
 	data->all_opt->lght_count = lght_count;
 	while (i < lght_count)
 	{
@@ -86,5 +86,5 @@ void	ft_pars_lights(char *file, t_all_data *data)
 		ft_lght_color(lj, data, i);
 		i++;
 	}
-	//free(lj);
+	free(lj);
 }

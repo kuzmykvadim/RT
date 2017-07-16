@@ -16,7 +16,7 @@ t_vector	*create_vector(void)
 {
 	t_vector	*new;
 
-	new = (t_vector*)malloc(sizeof(t_vector) + 1);
+	new = (t_vector*)malloc(sizeof(t_vector));
 	new->x = 0;
 	new->y = 0;
 	new->z = 0;
