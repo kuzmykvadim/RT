@@ -7,15 +7,15 @@
               "height": 600
             },
             "name_win": "Raytrace by RT_MAFIA",
-            "light_off_on": true,
+            "light_off_on": false,
             "lambert_light":  true,
             "cel_shaded":  false,
             "blinn_fong":  false,
             "shadow":  true,
             "view_normal":  false,
             "view_point":  false,
-            "ssaa":  false,
-            "size_ssaa": 1,
+            "ssaa":  true,
+            "size_ssaa": 2,
             "fxaa":  false,
             "filters":  false,
             "darkroom":  false,
@@ -34,15 +34,15 @@
               "g": 0,
               "b": 0},
             "camera_position": {
-              "x": 0,
-              "y": 0,
+              "x": 400,
+              "y": 12,
               "z": 0}
           },
     "light": "Lights",
       "lights":
       [
           {
-            "position":{"x": -400,"y": -400,"z": -1700},
+            "position":{"x": 400,"y": 400,"z": -2700},
             "direction":{"x": -12,"y": -11,"z": -112},
             "color":{"r": 25, "g": 123, "b": 70}
 			}
@@ -51,14 +51,34 @@
         "objects":
         [
           {
-            "type":	"Cylinder",
+            "type":	"Half_sphere",
             "size":    111,
             "height":   190,
             "weight":   170,
             "position":{"x": 11, "y": 12,   "z": 13},
-            "rotation":{ "x": 190, "y": 160, "z": 190},
-            "direction":{"x": 0, "y": 1, "z": 0},
-            "color": { "r": 255,  "g": 0,  "b": 255}
-			}
+            "rotation":{ "x": 0, "y": 0, "z": 0},
+            "direction":{"x": 0.3, "y": 0.9, "z": 0},
+            "color": { "r": 255,  "g": 255,  "b": 0}
+			},
+			{
+			  "type":	"Half_sphere",
+			  "size":    111,
+			  "height":   190,
+			  "weight":   170,
+			  "position":{"x": 11, "y": 50,   "z": 13},
+			  "rotation":{ "x": 0, "y": 0, "z": 0},
+			  "direction":{"x": 0.3, "y": -0.9, "z": 0},
+			  "color": { "r": 255,  "g": 255,  "b": 0}
+		  },
+		  {
+			 "type":	"Sphere",
+			 "size":    15,
+			 "height":   190,
+			 "weight":   170,
+			 "position":{"x": 10, "y": -30,   "z": -90},
+			 "rotation":{ "x": 0, "y": 0, "z": 0},
+			 "direction":{"x": 0.3, "y": -0.9, "z": 0},
+			 "color": { "r": 255,  "g": 255,  "b": 255}
+		 }
         ]
 }

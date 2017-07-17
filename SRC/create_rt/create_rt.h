@@ -44,7 +44,11 @@ typedef struct	s_object
 	t_color			color;
 	t_vector		direction;
 	t_vector		position;
+	t_vector		position1;
+	t_vector		position2;
 	t_vector		obj_rot;
+	double			light_n;
+	double			radius_disc;
 	double			size_pow;// NO MAP
 	double			cone_cos_two;// NO MAP
 	double			cone_sin_two;// NO MAP

@@ -19,14 +19,14 @@ t_color		get_color(t_rtv1 *rtv1, int num_obj)
 	color.red = RT->data->all_obj[num_obj].color.red;
 	color.blue = RT->data->all_obj[num_obj].color.blue;
 	color.green = RT->data->all_obj[num_obj].color.green;
-	// if (RT->rt_obj[num_obj].id == 'h')
-	// {
-	// 	if (RT->rt_obj[num_obj].half_sphere->light_n == 2)
-	// 	{
-	// 		color.red *= 0.9;
-	// 		color.blue *= 0.9;//RT->rt_obj[num_obj].color.blue;
-	// 		color.green *= 0.9;//RT->rt_obj[num_obj].color.green;
-	// 	}
-	// }
+	if (RT_OBJ.id == HALF_SPHERE)
+	{
+		if (RT_OBJ.light_n == 2)
+		{
+			color.red *= 0.5;
+			color.blue *= 0.5;
+			color.green *= 0.5;
+		}
+	}
 	return (color);
 }

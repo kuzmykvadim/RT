@@ -35,16 +35,18 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 		normal = find_normal_cylinder(RT_OBJ, point);
 	else if (RT_OBJ.id == CONE)
 		normal = find_normal_cone(RT_OBJ, point);
-	// else if (RT_OBJ.id == 'h')
-	// {
-	// 	if (RT_OBJ.half_sphere->light_n == 2)
-	// 	{
-	// 		set_vector(&normal, RT_OBJ.half_sphere->normal);
-	// 		anti_vector(&normal);
-	// 	}
-	// 	else
-	// 		normal = normal_vector(sub_vector(RT_OBJ.half_sphere->position, point));
-	// }
+	else if (RT_OBJ.id == HALF_SPHERE)
+	{
+		if (RT_OBJ.light_n == 2)
+		{
+			set_vector(&normal, &RT_OBJ.direction);
+			normal.x = fabs(normal.x);
+			normal.y = fabs(normal.y);
+			normal.z = fabs(normal.z);
+		}
+		else
+			normal = normal_vector(sub_vector(&RT_OBJ.position, point));
+	}
 	return (normal);
 }
 

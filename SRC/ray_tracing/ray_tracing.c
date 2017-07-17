@@ -45,6 +45,7 @@ void		ft_ssaa(t_rtv1 *rtv1, int i, t_color *res)
 	res->blue = 0;
 	while (++j < OPTION->size_ssaa)
 	{
+		set_vector(RAY_ORIGIN, RT->pos);
 		set_vector(RAY_DIRECTION, &DIR_NORMAL);
 		color[j] = intersect(rtv1);
 	}
@@ -60,12 +61,8 @@ void		just_rt(t_rtv1 *rtv1, int i, t_color *res)
 	color.red = 0;
 	color.blue = 0;
 	color.green = 0;
-	RAY_DIRECTION->x = DIR_NORMAL.x;
-	RAY_DIRECTION->y = DIR_NORMAL.y;
-	RAY_DIRECTION->z = DIR_NORMAL.z;
-	RAY_ORIGIN->x = RT->pos->x;
-	RAY_ORIGIN->y = RT->pos->y;
-	RAY_ORIGIN->z = RT->pos->z;
+	set_vector(RAY_DIRECTION, &DIR_NORMAL);
+	set_vector(RAY_ORIGIN, RT->pos);
 	if ((int)X % OPTION->draft_x == 0 && (int)Y % OPTION->draft_y == 0)
 	{
 		(OPTION->fov_on == TRUE ? fov(RT, X, Y) : 0);

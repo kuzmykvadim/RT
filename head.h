@@ -49,7 +49,7 @@
 # define CYLINDER				4
 # define CONE					5
 # define HALF_SPHERE			6
-# define MINIMUM				0.005f
+# define MINIMUM				1.5
 // # define SIZE					SIZE_X * SIZE_Y
 
 typedef struct	s_val_math
@@ -110,7 +110,7 @@ int				intersect_cylinder(t_ray *r, t_object c, double *t);
 int				intersect_cone(t_ray *r, t_object c, double *t);
 int				intersect_disc(t_ray *r, t_object obj, double *t);
 // int				intersect_poligon(t_ray *r, t_poligon *p, double *t);
-// int				intersect_half_sphere(t_ray *r, t_h *s, double *t);
+int				intersect_half_sphere(t_ray *r, t_object *obj, double *t);
 int				intersect_plane_limit(t_ray *ray, t_object plane, double *t);
 
 int				discriminant(double *t, t_val_math val);

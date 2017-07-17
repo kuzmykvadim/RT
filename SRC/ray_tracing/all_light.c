@@ -46,7 +46,7 @@ void 	lambert_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 		// 	dot = cos_vector(&val->n_point, &l_dir);
 		// }
 		lambert_component = MAX(dot, 0.0);
-		color_multi(&val->rgb[i], lambert_component);
+		color_multi(&val->rgb[i], lambert_component + 0.5);
 	}
 }
 

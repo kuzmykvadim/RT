@@ -106,7 +106,7 @@ char	*ft_read_file(t_env *e)
 	line = NULL;
 	if (!(str = (char*)malloc(sizeof(char))))
 		return (0);
-	while ((nb = get_next_line(e->fd, &line)))
+	while ((nb = get_next_line(e->fd, &line)) && nb != -1)
 	{
 		tmp = str;
 		str = ft_strjoin(str, line);
@@ -164,8 +164,8 @@ t_rtv1			*create_rtv1(t_env *e, char *file)
 	rtv1->screen = create_map(OPTION->size_x, OPTION->size_y);
 	printf("OPTION %d\n",OPTION->view_point);
 	rtv1->screen2 = create_map(OPTION->size_x, OPTION->size_y);
-	construct_vector(rtv1->ray->origin, OPTION->size_x / 2, OPTION->size_y / 2, -1700.99);
-	t_vector tmp = add_vector(RAY_ORIGIN, &OPTION->cam_pos);
+	construct_vector(rtv1->ray->origin, (OPTION->size_x / 2) + 0.99, (OPTION->size_y / 2) + 0.99, -1700.99);
+	t_vector tmp = sub_vector(RAY_ORIGIN, &OPTION->cam_pos);
 	set_vector(RAY_ORIGIN, &tmp);
 	valid_option(RT);
 	calc(RT);

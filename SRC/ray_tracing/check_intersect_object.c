@@ -27,8 +27,8 @@ int	check_intersect_object(t_rtv1 *rtv1, double *t, int i, t_ray *ray)
 		res = intersect_cylinder(ray,RT->data->all_obj[i], t);
 	else if (RT->data->all_obj[i].id == CONE)
 		res = intersect_cone(ray, RT->data->all_obj[i], t);
-	// else if (RT->rt_obj[i].id == 'h')
-	// 	res = intersect_half_sphere(ray, RT->rt_obj[i].half_sphere, t);
+	else if (RT->data->all_obj[i].id == HALF_SPHERE)
+		res = intersect_half_sphere(ray, &RT->data->all_obj[i], t);
 	return (res);
 }
 // else if (RT->rt_obj[i].id == 't')

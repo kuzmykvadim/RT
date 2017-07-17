@@ -7,7 +7,7 @@
               "height": 600
             },
             "name_win": "Raytrace by RT_MAFIA",
-            "light_off_on": true,
+            "light_off_on": false,
             "lambert_light":  true,
             "cel_shaded":  false,
             "blinn_fong":  false,
@@ -51,14 +51,24 @@
         "objects":
         [
           {
-            "type":	"Cylinder",
+            "type":	"Half_sphere",
             "size":    111,
             "height":   190,
             "weight":   170,
             "position":{"x": 11, "y": 12,   "z": 13},
-            "rotation":{ "x": 190, "y": 160, "z": 190},
-            "direction":{"x": 0, "y": 1, "z": 0},
-            "color": { "r": 255,  "g": 0,  "b": 255}
-			}
+            "rotation":{ "x": 0, "y": 0, "z": 0},
+            "direction":{"x": 1, "y": 0, "z": -1},
+            "color": { "r": 255,  "g": 255,  "b": 255}
+			},
+			{
+			  "type":	"Half_sphere",
+			  "size":    111,
+			  "height":   190,
+			  "weight":   170,
+			  "position":{"x": 11, "y": 12,   "z": 13},
+			  "rotation":{ "x": 0, "y": 0, "z": 0},
+			  "direction":{"x": 0, "y": 1, "z": 0},
+			  "color": { "r": 255,  "g": 0,  "b": 0}
+		  }
         ]
 }
