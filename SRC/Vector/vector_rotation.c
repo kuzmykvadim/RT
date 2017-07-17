@@ -50,18 +50,8 @@ void 	rotation_vector(t_vector *a, t_vector *rotation)
 {
 	if (rotation->x != 0)
 		rot_x(a, rotation->x);
-	// if (rotation->y != 0)
- 	// 	rot_y(a, rotation->y);
+	if (rotation->y != 0)
+ 		rot_y(a, rotation->y);
 	if (rotation->z != 0)
 		rot_z(a, rotation->z);
-}
-
-void 	anti_rotation_vector(t_vector *a, t_vector *rotation)
-{
-	if (rotation->x != 0)
-		rot_x(a, -rotation->x);
-	// if (rotation->y != 0)
- // 		rot_y(a, -rotation->y);
-	if (rotation->z != 0)
-		rot_z(a, -rotation->z);
 }

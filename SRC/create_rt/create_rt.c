@@ -12,44 +12,10 @@
 
 #include "../../head.h"
 
-// void 	option_init(t_rtv1 *rtv1)
-// {
-// 	OPTION.light_off_on = 0;
-// 	OPTION.color_background = create_color(0x000000);
-// 	OPTION.draft_x = 1;
-// 	OPTION.draft_y = 1;
-//
 // 	//ANTI_ALIASING
 // 	OPTION.ssaa = 0; //ЕСЛИ ВКЛ SSAA то FXAA выкл
 // 	OPTION.size_ssaa = 1; //ЕСЛИ OPTION.ssaa == 0 ТОГДА OPTION.size_ssaa ДОЛЖЕН БЫТЬ ОДИН
 // 	OPTION.fxaa = 0; // ЕСЛИ ВКЛ FXAA то motion blur вкл и size blur == 2
-// 	//LIGHT AND SHADOW
-// 	OPTION.lambert_light = 0;
-// 	OPTION.view_normal = 0;
-// 	OPTION.view_point = 0;
-// 	OPTION.cel_shaded = 0;
-// 	OPTION.blinn_fong = 1;
-// 	OPTION.shadow = 1;
-//
-// 	// FOV
-// 	OPTION.fov_on = 0;
-// 	OPTION.fov = 45;
-//
-// 	// MOTION_BLUR
-// 	OPTION.motion_blur = 0;
-// 	OPTION.size_blur = 0;
-//
-// 	OPTION.size_x = 800;
-// 	OPTION.size_y = 600;
-// 	OPTION.size_screen = OPTION.size_x * OPTION.size_y;
-// 	OPTION.name_win = "";
-//
-// 	// filters
-// 	OPTION.filters = 0;
-// 	OPTION.sepia = 0;
-// 	OPTION.black_and_white = 1;
-// 	OPTION.darkroom = 0;
-// }
 
 void 	valid_filters(t_rtv1 *rtv1)
 {
@@ -145,8 +111,6 @@ t_all_data		*ft_parsing(t_env *e)
 	return (data);
 }
 
-// IF direction object == 0, 0, 0, error direction
-
 t_rtv1			*create_rtv1(t_env *e, char *file)
 {
 	t_rtv1		*rtv1;
@@ -162,7 +126,6 @@ t_rtv1			*create_rtv1(t_env *e, char *file)
 	rtv1->pos = create_vector();
 	rtv1->obj = object_mlx(OPTION->size_x, OPTION->size_y, OPTION->name_win);
 	rtv1->screen = create_map(OPTION->size_x, OPTION->size_y);
-	printf("OPTION %d\n",OPTION->view_point);
 	rtv1->screen2 = create_map(OPTION->size_x, OPTION->size_y);
 	construct_vector(rtv1->ray->origin, (OPTION->size_x / 2) + 0.99, (OPTION->size_y / 2) + 0.99, -1700.99);
 	t_vector tmp = sub_vector(RAY_ORIGIN, &OPTION->cam_pos);

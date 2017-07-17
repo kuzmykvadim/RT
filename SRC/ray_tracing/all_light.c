@@ -40,13 +40,8 @@ void 	lambert_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
-		// if (dot <= 0)
-		// {
-		// 	anti_vector(&val->n_point);
-		// 	dot = cos_vector(&val->n_point, &l_dir);
-		// }
 		lambert_component = MAX(dot, 0.0);
-		color_multi(&val->rgb[i], lambert_component + 0.5);
+		color_multi(&val->rgb[i], lambert_component + L.ambient);
 	}
 }
 
@@ -99,13 +94,10 @@ void	view_point_or_normal(t_rtv1 *rtv1, t_val_vector *val)
 void 	blinn_fong_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 {
 	t_vector		l_dir;
-	t_vector 		eye_vec;
-	t_vector 		halfwayVector;
-	t_vector 		r;
-	t_vector		tmp;
+	t_vector 	eye_dir;
 
-	double 	shiness = 2;
 	double 	dot;
+	double	shines = 64;
 	double	lambert_component;
 	double	specular;
 	int		i;
@@ -118,14 +110,11 @@ void 	blinn_fong_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
 		lambert_component = MAX(dot, 0.0);
-		t_vector eye_dir;
 		set_vector(&eye_dir, RAY_DIRECTION);
 		anti_vector(&eye_dir);
-		t_vector add = normal_vector(sub_vector(&l_dir, &eye_dir));
-		specular = pow(MAX(dot_vector(&val->n_point, &add), 0), shiness);
-		val->rgb[i].red = val->rgb[i].red * (0.1 + lambert_component + specular);
-		val->rgb[i].green = val->rgb[i].green * (0.1 + lambert_component + specular);
-		val->rgb[i].blue = val->rgb[i].blue * (0.1 + lambert_component + specular);
+		l_dir = normal_vector(sub_vector(&l_dir, &eye_dir));
+		specular = pow(MAX(dot_vector(&val->n_point, &l_dir), 0), shines);
+		color_multi(&val->rgb[i], L.ambient + lambert_component + specular);
 	}
 }
 

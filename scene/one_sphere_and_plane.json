@@ -8,9 +8,9 @@
             },
             "name_win": "Raytrace by RT_MAFIA",
             "light_off_on": true,
-            "lambert_light":  true,
+            "lambert_light":  false,
             "cel_shaded":  false,
-            "blinn_fong":  false,
+            "blinn_fong":  true,
             "shadow":  true,
             "view_normal":  false,
             "view_point":  false,
@@ -42,9 +42,9 @@
       "lights":
       [
           {
-            "position":{"x": -400,"y": -400,"z": -1700},
+            "position":{"x": 0,"y": 0,"z": -1700},
             "direction":{"x": -12,"y": -11,"z": -112},
-            "color":{"r": 25, "g": 123, "b": 70}
+            "color":{"r": 255, "g": 255, "b":255}
 			}
       ],
     "name": "Objects",

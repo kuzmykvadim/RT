@@ -18,7 +18,7 @@ void	find_a_b_c(t_ray *ray, t_object *cylinder, t_val_math *val)
 	t_vector		tmp;
 	t_vector		sub_1;
 	t_vector		sub_2;
-	double			res;
+	double		res;
 
 	delta_p = sub_vector(ray->origin, &cylinder->position);
 	res = dot_vector(ray->direction, &cylinder->direction);
@@ -32,111 +32,14 @@ void	find_a_b_c(t_ray *ray, t_object *cylinder, t_val_math *val)
 	val->c = dot_vector(&sub_2, &sub_2) - cylinder->size_pow;
 }
 
-int		disc1(t_ray *ray, t_object *half, double *t)
-{
-	t_vector		tmp;
-	t_val_math	val;
-	t_vector		p;
-
-	val.d = dot_vector(&half->direction, ray->direction);
-	if (val.d != 0)
-	{
-		tmp = sub_vector(&half->position2, ray->origin);
-		val.t0 = dot_vector(&tmp, &half->direction) / val.d;
-		if (val.t0 > 0.001)
-		{
-		   tmp = scalar_vector(val.t0, ray->direction);
-		   p = add_vector(ray->origin, &tmp);
-		   tmp = sub_vector(&p, &half->position2);
-		   val.d = dot_vector(&tmp, &tmp);
-		   if (sqrtf(val.d) <= half->size)
-		   {
-			   *t = val.t0;
-			   return (1);
-		   }
-		}
-	}
-	return (0);
-}
-
-int		disc2(t_ray *ray, t_object *half, double *t)
-{
-	t_vector		tmp;
-	t_val_math	val;
-	t_vector		p;
-
-	val.d = dot_vector(&half->direction, ray->direction);
-	if (val.d != 0)
-	{
-		tmp = sub_vector(&half->position1, ray->origin);
-		val.t0 = dot_vector(&tmp, &half->direction) / val.d;
-		if (val.t0 > 0.001)
-		{
-		   tmp = scalar_vector(val.t0, ray->direction);
-		   p = add_vector(ray->origin, &tmp);
-		   tmp = sub_vector(&p, &half->position1);
-		   val.d = dot_vector(&tmp, &tmp);
-		   if (sqrtf(val.d) <= half->size)
-		   {
-			   *t = val.t0;
-			   return (1);
-		   }
-		}
-	}
-	return (0);
-}
-
 int		intersect_cylinder(t_ray *ray, t_object object, double *t)
 {
 	t_val_math	val;
-	t_vector		p_s;
-	t_vector		p_d1;
-	t_vector		p_d2;
-	double		t_s;
-	double		t_d1;
-	double		t_d2;
 	int			res;
-	int			res1;
-	int			res2;
 
 	res = 0;
 	find_a_b_c(ray, &object, &val);
 	if ((res = discriminant(t, val)) == 0)
 		return (0);
-	// FIND POINT AND T for two dick and CYLINDER
-	// p_s = point_intersect(ray, t);
-	// t_s = *t;
-	//
-	// res1 = disc1(ray, &object, t);
-	// t_d1 = *t;
-	// p_d1 = point_intersect(ray, t);
-	//
-	//
-	// res2 = disc2(ray, &object, t);
-	// t_d2 = *t;
-	// p_d2 = point_intersect(ray, t);
-	// ///// FIND NORMAL
-	// t_vector	cylinder_d1;
-	// t_vector	normal_d1;
-	// t_vector normal_d2;
-	//
-	// // set_vector(&normal_d1, &object.direction);
-	// // normal_d1 = normal_vector(sub_vector(&object.position, &p_d1));
-	// // normal_d2 = normal_vector(sub_vector(&object.position, &p_d2));
-	// cylinder_d1 = normal_vector(sub_vector(&p_s, &object.position));
-	// double dot1 = dot_vector(&object.direction, &cylinder_d1);
-	// normal_d1 = normal_vector(sub_vector(&p_s, &object.position1));
-	// double dot2 = dot_vector(&object.direction, &normal_d1);
-	// if (dot1 <= 0 && dot2 <= 0)
-	// {
-	// 	*t = t_s;
-	// 	return (1);
-	// }
-	// // if (dot2 <= 0)
-	// // {
-	// // 	*t = t_s;
-	// // 	return (1);
-	// // }
-	// return (0);
 	return (res);
 }

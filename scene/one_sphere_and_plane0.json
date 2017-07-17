@@ -42,14 +42,14 @@
       "lights":
       [
           {
-            "position":{"x": 0,"y": 0,"z": -2700},
+            "position":{"x": 0,"y": 0,"z": 0},
             "direction":{"x": -12,"y": -11,"z": -112},
-            "color":{"r": 0, "g": 0, "b": 0}
+            "color":{"r": 0, "g": 0, "b":0}
 			},
 			{
-			  "position":{"x": 0, "y": 0,"z": -2700},
+			  "position":{"x": 800,"y": 800,"z": 0},
 			  "direction":{"x": -12,"y": -11,"z": -112},
-			  "color":{"r": 0, "g": 0, "b": 0}
+			  "color":{"r": 0, "g": 0, "b":0}
 		  }
       ],
     "name": "Objects",
@@ -57,11 +57,13 @@
         [
           {
             "type":	"Sphere",
-            "size":    100,
-            "position":{"x": 400, "y": 300,   "z": 300},
+            "size":    111 ,
+            "height":   190,
+            "weight":   170,
+            "position":{"x": 400, "y": 0,   "z": 400},
             "rotation":{ "x": 190, "y": 160, "z": 190},
             "direction":{"x": -19, "y": -18, "z": -17},
-            "color": { "r": 255,  "g": 255,  "b": 100}
-			}
+            "color": { "r": 255,  "g": 123,  "b": 100}
+          }
         ]
 }

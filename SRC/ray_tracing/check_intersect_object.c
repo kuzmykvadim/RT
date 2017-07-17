@@ -29,6 +29,8 @@ int	check_intersect_object(t_rtv1 *rtv1, double *t, int i, t_ray *ray)
 		res = intersect_cone(ray, RT->data->all_obj[i], t);
 	else if (RT->data->all_obj[i].id == HALF_SPHERE)
 		res = intersect_half_sphere(ray, &RT->data->all_obj[i], t);
+	else if (RT->data->all_obj[i].id == ELLIPSOID)
+		res = intersect_ellipsoid(ray, RT->data->all_obj[i], t);
 	return (res);
 }
 // else if (RT->rt_obj[i].id == 't')

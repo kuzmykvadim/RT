@@ -35,18 +35,15 @@
 
 typedef struct	s_object
 {
-	char			*type;
+	char				*type;
 	int				obj_count;
 	int				id;
 	double			size;
-	double			height;
-	double			weight;
 	t_color			color;
-	t_vector		direction;
-	t_vector		position;
-	t_vector		position1;
-	t_vector		position2;
-	t_vector		obj_rot;
+	t_vector			direction;
+	t_vector			position;
+	t_vector			obj_rot;
+	double			shines;
 	double			light_n;
 	double			radius_disc;
 	double			size_pow;// NO MAP
@@ -79,8 +76,6 @@ typedef struct	s_json_obj
 	cJSON		*j_green;
 	cJSON		*j_blue;
 	cJSON		*j_size;
-	cJSON		*j_weight;
-	cJSON		*j_height;
 }				t_json_obj;
 
 typedef struct	s_options_json
@@ -190,14 +185,15 @@ typedef struct	s_screen
 typedef struct	s_light
 {
 	int			id;
-	t_vector	position;
-	t_vector	direction;
+	t_vector		position;
+	t_vector		direction;
 	t_color		color;
+	double		ambient;
 }				t_light;
 
 typedef struct	s_all_data
 {
-	t_object	*all_obj;
+	t_object		*all_obj;
 	t_light		*light_pos;
 	t_options	*all_opt;
 }				t_all_data;

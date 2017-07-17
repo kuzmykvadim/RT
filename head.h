@@ -43,12 +43,13 @@
 # define Y 						RT->screen2[i].ray->y
 # define TRUE					1
 # define FALSE					0
-# define SPHERE					1
+# define SPHERE				1
 # define PLANE					2
 # define DISC					3
 # define CYLINDER				4
 # define CONE					5
 # define HALF_SPHERE			6
+# define ELLIPSOID			7
 # define MINIMUM				1.5
 // # define SIZE					SIZE_X * SIZE_Y
 
@@ -109,7 +110,7 @@ int				intersect_sphere(t_ray *r, t_object obj, double *t);
 int				intersect_cylinder(t_ray *r, t_object c, double *t);
 int				intersect_cone(t_ray *r, t_object c, double *t);
 int				intersect_disc(t_ray *r, t_object obj, double *t);
-// int				intersect_poligon(t_ray *r, t_poligon *p, double *t);
+int				intersect_ellipsoid(t_ray *ray, t_object ellips, double *t);
 int				intersect_half_sphere(t_ray *r, t_object *obj, double *t);
 int				intersect_plane_limit(t_ray *ray, t_object plane, double *t);
 

@@ -12,23 +12,12 @@
 
 #include "../../head.h"
 
-// double 	find_half_radius(double radius_sphere_two, double len_two)
-// {
-// 	return (sqrt(radius_sphere_two - len_two));
-// }
-//
-// // 	t_vector	tmp3 = sub_vector(rtv1->rt_obj[11].half_sphere->position, rtv1->rt_obj[11].half_sphere->position);
-// // 	rtv1->rt_obj[11].half_sphere->len = module_vector(&tmp3);
-// // 	rtv1->rt_obj[11].half_sphere->len_two = module_vector(&tmp3) * module_vector(&tmp3);
-// // 	rtv1->rt_obj[11].half_sphere->radius_disc = find_half_radius(rtv1->rt_obj[11].half_sphere->radius_pow, rtv1->rt_obj[11].half_sphere->len_two);
-
-
 void 	parsing_color(t_rtv1 *rtv1)
 {
 	int 	num_obj;
 
 	num_obj = -1;
-	while (++num_obj <= SIZE_OBJ)
+	while (++num_obj < SIZE_OBJ)
 	{
 		RT_OBJ.color.red *= 0.00255;
 		RT_OBJ.color.blue *= 0.00255;
@@ -57,16 +46,6 @@ void 	parcing_size_pow(t_rtv1 *rtv1)
 	while (++num_obj < SIZE_OBJ)
 		RT_OBJ.size_pow = RT_OBJ.size * RT_OBJ.size;
 }
-
-// double 	find_half_radius(double radius_sphere_two, double len_two)
-// {
-// 	return (sqrt(radius_sphere_two - len_two));
-// }
-//
-// // 	t_vector	tmp3 = sub_vector(rtv1->rt_obj[11].half_sphere->position, rtv1->rt_obj[11].half_sphere->position);
-// // 	rtv1->rt_obj[11].half_sphere->len = module_vector(&tmp3);
-// // 	rtv1->rt_obj[11].half_sphere->len_two = module_vector(&tmp3) * module_vector(&tmp3);
-// // 	rtv1->rt_obj[11].half_sphere->radius_disc = find_half_radius(rtv1->rt_obj[11].half_sphere->radius_pow, rtv1->rt_obj[11].half_sphere->len_two);
 
 void 	parcing_half_sphere(t_rtv1 *rtv1)
 {
@@ -105,30 +84,70 @@ void 	parcing_cone(t_rtv1 *rtv1)
 	}
 }
 
-void 	parcing_cylinder_limit(t_rtv1 *rtv1)
+void parcing_light_ambient(t_rtv1 *rtv1)
 {
-	int		num_obj;
-	double	angle;
+	int		i;
+
+	i = -1;
+	while (++i < SIZE_LIGHT)
+	{
+		L.color.red *= 0.00255;
+		L.color.blue *= 0.00255;
+		L.color.green *= 0.00255;
+		L.ambient = (L.color.red + L.color.green + L.color.blue) / 3;
+	}
+}
+
+void parcing_light_position(t_rtv1 *rtv1)
+{
+	int		i;
+
+	i = -1;
+	while (++i < SIZE_LIGHT)
+	{
+		L.position.x += 0.99;
+		L.position.y += 0.99;
+		L.position.z += 0.99;
+	}
+}
+
+// void parcing_rotation(t_rtv1 *rtv1)
+// {
+// 	int	num_obj;
+//
+// 	num_obj = -1;
+// 	while(++num_obj < SIZE_OBJ)
+// 	{
+// 		rotation_vector(RT_OBJ.direction)
+// 	}
+// }
+
+void 	parcing_direction_two(t_rtv1 *rtv1)
+{
+	int	num_obj;
 
 	num_obj = -1;
 	while (++num_obj < SIZE_OBJ)
 	{
-		if (RT_OBJ.id == CYLINDER)
-		{
-			set_vector(&RT_OBJ.position2, &RT_OBJ.position);
-			set_vector(&RT_OBJ.position1, &RT_OBJ.position);
-			RT_OBJ.position1.y -= RT_OBJ.height / 2;
-			RT_OBJ.position2.y += RT_OBJ.height / 2;
-		}
+		if (RT_OBJ.id == SPHERE)
+			continue ;
+		if (RT_OBJ.direction.x == 0)
+			if (RT_OBJ.direction.y == 0 && RT_OBJ.direction.z == 0)
+			{
+					printf("Bad direction: num object %d\n",num_obj + 1);
+					exit(1);
+			}
 	}
 }
-
 
 void		init_demo(t_rtv1 *rtv1)
 {
 	parsing_color(RT);
 	parcing_size_pow(RT);
 	parsing_direction(RT);
+	parcing_direction_two(RT);
 	parcing_cone(RT);
 	parcing_half_sphere(RT);
+	parcing_light_ambient(RT);
+	parcing_light_position(RT);
 }
