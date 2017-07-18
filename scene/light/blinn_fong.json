@@ -11,7 +11,7 @@
             "lambert_light":  false,
             "cel_shaded":  false,
             "blinn_fong":  true,
-            "shadow":  true,
+            "shadow": true,
             "view_normal":  false,
             "view_point":  false,
             "ssaa":  false,
@@ -42,33 +42,42 @@
       "lights":
       [
           {
-            "position":{"x": 0,"y": 0,"z": -1700},
+            "position":{"x": 0,"y": 0,"z": 0},
             "direction":{"x": -12,"y": -11,"z": -112},
-            "color":{"r": 255, "g": 255, "b":255}
-			}
+            "color":{"r": 0, "g": 0, "b": 0}
+			},
+			{
+			  "position":{"x": 400,"y": 400,"z": 0},
+			  "direction":{"x": -12,"y": -11,"z": -112},
+			  "color":{"r": 0, "g": 0, "b": 0}
+		  }
       ],
     "name": "Objects",
         "objects":
         [
           {
             "type":	"Sphere",
-            "size":    111 ,
-            "height":   190,
-            "weight":   170,
-            "position":{"x": 11, "y": 12,   "z": 13},
-            "rotation":{ "x": 190, "y": 160, "z": 190},
+            "size":    100,
+				"reflection": false,
+				"refraction": false,
+				"param_refract": 0,
+				"shines": 32,
+            "position":{"x": 400, "y": 300,   "z": 300},
+            "rotation":{ "x": 0, "y": 0, "z": 0},
             "direction":{"x": -19, "y": -18, "z": -17},
-            "color": { "r": 255,  "g": 123,  "b": 100}
-          },
- 			 {
- 			   "type":	"Plane",
- 			   "size":    111 ,
- 			   "height":   190,
- 			   "weight":   170,
- 			   "position":{"x": 11, "y": 500,   "z": 13},
- 			   "rotation":{ "x": 190, "y": 0, "z": 190},
- 			   "direction":{"x": 0, "y": -1, "z": 0},
- 			   "color": { "r": 255,  "g": 255,  "b": 100}
- 			 }
+            "color": { "r": 255,  "g": 255,  "b": 255}
+			},
+			{
+			  "type":	"Plane",
+			  "size":    100,
+			  "reflection": false,
+			  "refraction": false,
+			  "param_refract": 0,
+			  "shines": 600,
+			  "position":{"x": 400, "y": 600,   "z": 300},
+			  "rotation":{ "x": 0, "y": 0, "z": 0},
+			  "direction":{"x": 0, "y": 0, "z": 1},
+			  "color": { "r": 255,  "g": 255,  "b": 100}
+		  }
         ]
 }

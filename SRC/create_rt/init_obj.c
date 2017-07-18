@@ -111,16 +111,17 @@ void parcing_light_position(t_rtv1 *rtv1)
 	}
 }
 
-// void parcing_rotation(t_rtv1 *rtv1)
-// {
-// 	int	num_obj;
-//
-// 	num_obj = -1;
-// 	while(++num_obj < SIZE_OBJ)
-// 	{
-// 		rotation_vector(RT_OBJ.direction)
-// 	}
-// }
+void parcing_rotation(t_rtv1 *rtv1)
+{
+	int	num_obj;
+
+	num_obj = -1;
+	while(++num_obj < SIZE_OBJ)
+	{
+		rotation_vector(&RT_OBJ.direction, &RT_OBJ.rotation);
+		// printf("x %f y %f z %z\n", );
+	}
+}
 
 void 	parcing_direction_two(t_rtv1 *rtv1)
 {
@@ -150,4 +151,5 @@ void		init_demo(t_rtv1 *rtv1)
 	parcing_half_sphere(RT);
 	parcing_light_ambient(RT);
 	parcing_light_position(RT);
+	parcing_rotation(RT);
 }

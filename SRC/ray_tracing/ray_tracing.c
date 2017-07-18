@@ -65,7 +65,7 @@ void		just_rt(t_rtv1 *rtv1, int i, t_color *res)
 	set_vector(RAY_ORIGIN, RT->pos);
 	if ((int)X % OPTION->draft_x == 0 && (int)Y % OPTION->draft_y == 0)
 	{
-		(OPTION->fov_on == TRUE ? fov(RT, X, Y) : 0);
+		// (OPTION->fov_on == TRUE ? fov(RT, X, Y) : 0);
 		color = intersect(rtv1);
 	}
 	res->red = color.red;
@@ -89,9 +89,20 @@ void	ray_tracing(t_rtv1 *rtv1)
 
 	mlx_clear_window(MLX_MY, WIN_MY);
 	rtv1->img = create_img(rtv1->obj);
+	system("clear");
 	i = -1;
+	RT->count = 0;
+	RT->loading_progress = 0;
 	while (++i < OPTION->size_screen)
 	{
+		RT->count++;
+		if (RT->count == RT->procent_one)
+		{
+			RT->loading_progress++;
+			RT->count = 0;
+			printf("\r%s%s%d%s", GREEN, "Loading % ", RT->loading_progress, RESET);
+			fflush(stdout);
+		}
 		if (OPTION->ssaa == 1)
 			ft_ssaa(RT, i, RT->screen[i].color);
 		else if (OPTION->ssaa == 0)

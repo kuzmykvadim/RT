@@ -8,9 +8,9 @@
             },
             "name_win": "Raytrace by RT_MAFIA",
             "light_off_on": true,
-            "lambert_light": true,
+            "lambert_light":  true,
             "cel_shaded":  false,
-            "blinn_fong":  true,
+            "blinn_fong":  false,
             "shadow":  true,
             "view_normal":  false,
             "view_point":  false,
@@ -24,7 +24,7 @@
             "motion_blur":  false,
             "size_blur": 45,
             "fov_on":  false,
-			     "speed": 100,
+			"speed": 100,
             "depth_rec": 222,
             "fieldofview": 111,
             "draft_x":  1,
@@ -42,28 +42,25 @@
       "lights":
       [
           {
-            "position":{"x": 11,"y": 600,"z": 13},
+            "position":{"x": -400,"y": -400,"z": -1700},
             "direction":{"x": -12,"y": -11,"z": -112},
-            "color":{"r": 255, "g": 255, "b": 255}
-			},
-			{
-			  "position":{"x": 400,"y": 400,"z": 200},
-			  "direction":{"x": -12,"y": -11,"z": -112},
-			  "color":{"r": 255, "g": 255, "b": 255}
-		  }
+            "color":{"r": 25, "g": 123, "b": 70}
+			}
       ],
     "name": "Objects",
         "objects":
         [
           {
-            "type":	"Ellipsoid",
-            "size":    15,
-            "height":   10,
-            "weight":   170,
-            "position":{"x": 400, "y": 400,   "z": 0},
-            "rotation":{ "x": 190, "y": 160, "z": 190},
-            "direction":{"x": 155, "y": 1550, "z": 0},
-            "color": { "r": 255,  "g": 123,  "b": 100}
+            "type":	"Cone",
+            "size":    45,
+				"reflection": false,
+				"refraction": false,
+				"param_refract": 0,
+				"shines": 40,
+            "position":{"x": 400, "y": 400,   "z": 13},
+            "rotation":{ "x": 0, "y": 0, "z": 0},
+            "direction":{"x": 0, "y": 1, "z": 0},
+            "color": { "r": 255,  "g": 0,  "b": 255}
 			}
-	 ]
+        ]
 }

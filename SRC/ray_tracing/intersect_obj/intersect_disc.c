@@ -14,9 +14,9 @@
 
 int		intersect_disc(t_ray *ray, t_object object, double *t)
 {
-	t_vector	tmp;
+	t_vector		tmp;
 	t_val_math	val;
-	t_vector	p;
+	t_vector		p;
 
 	val.d = dot_vector(&object.direction, ray->direction);
 	if (val.d != 0)

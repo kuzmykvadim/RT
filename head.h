@@ -29,6 +29,7 @@
 # define CONE_SIN_22			cone.two_cone_sin_two
 # define CONE_SIN_2				cone.cone_sin_two
 # define RT_OBJ					rtv1->data->all_obj[num_obj]
+# define GRT_OBJ					rtv1->data->all_obj[g_num_obj]
 # define RT						rtv1
 # define SIZE_OBJ 				rtv1->data->all_opt->objects_count
 # define SIZE_LIGHT 			rtv1->data->all_opt->lght_count
@@ -41,6 +42,8 @@
 # define DIR_NORMAL 			RT->screen[i].dir_ssaa[j]
 # define X 						RT->screen2[i].ray->x
 # define Y 						RT->screen2[i].ray->y
+# define GREEN					"\033[32;1m"
+# define RESET					"\033[0m"
 # define TRUE					1
 # define FALSE					0
 # define SPHERE				1
@@ -92,6 +95,9 @@ typedef struct	s_rtv1
 	t_screen		 *screen2;
 	t_val_vector	*val;
 	int				   *hit;
+	int				procent_one;
+	int				loading_progress;
+	int				count;
 	t_vector		 *pos; // KACTИЛЬ
 }				t_rtv1;
 

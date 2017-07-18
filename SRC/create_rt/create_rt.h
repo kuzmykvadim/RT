@@ -16,15 +16,7 @@
 # include "../Vector/vector.h"
 # include "../mlx_src/mlx_src.h"
 # include <stdio.h>
-// # include <mlx.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-// # include <stdio.h>
-// # include <fcntl.h>
 # include <math.h>
-// # include <time.h>
-// # include "libft/libft.h"
-// # include "libft/get_next_line.h"
 # include "CJSON/cJSON.h"
 # define SPHERE 1
 # define PLANE 2
@@ -42,8 +34,11 @@ typedef struct	s_object
 	t_color			color;
 	t_vector			direction;
 	t_vector			position;
-	t_vector			obj_rot;
-	double			shines;
+	t_vector			rotation;
+	int				reflection;
+	int 				refraction;
+	double 			param_refract;
+	int 				shines;
 	double			light_n;
 	double			radius_disc;
 	double			size_pow;// NO MAP
@@ -76,6 +71,10 @@ typedef struct	s_json_obj
 	cJSON		*j_green;
 	cJSON		*j_blue;
 	cJSON		*j_size;
+	cJSON    *j_reflection;
+	cJSON    *j_refraction;
+	cJSON    *j_param_refract;
+	cJSON   	*j_shines;
 }				t_json_obj;
 
 typedef struct	s_options_json

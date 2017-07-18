@@ -26,7 +26,7 @@ static inline void 	color_multi(t_color *color, double a)
 	color->green *= a;
 }
 
-void 	lambert_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
+void 	lambert_light(t_rtv1 *rtv1, t_val_vector *val, int *hit, int id)
 {
 	int			i;
 	double		dot;
@@ -40,12 +40,17 @@ void 	lambert_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
+		if ((id == PLANE || id == DISC) && dot <= 0)
+		{
+			anti_vector(&val->n_point);
+			dot = cos_vector(&val->n_point, &l_dir);
+		}
 		lambert_component = MAX(dot, 0.0);
 		color_multi(&val->rgb[i], lambert_component + L.ambient);
 	}
 }
 
-void 	cel_shaded(t_rtv1 *rtv1, t_val_vector *val, int *hit)
+void 	cel_shaded(t_rtv1 *rtv1, t_val_vector *val, int *hit, int id)
 {
 	int			i;
 	double		dot;
@@ -59,6 +64,11 @@ void 	cel_shaded(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
+		if ((id == PLANE || id == DISC) && dot <= 0)
+		{
+			anti_vector(&val->n_point);
+			dot = cos_vector(&val->n_point, &l_dir);
+		}
 		lambert_component = MAX(dot, 0.0);
 		if (lambert_component > 0.95)
 			continue ;
@@ -91,16 +101,13 @@ void	view_point_or_normal(t_rtv1 *rtv1, t_val_vector *val)
 	}
 }
 
-void 	blinn_fong_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
+void 	blinn_fong_light(t_rtv1 *rtv1, t_val_vector *val, int *hit, t_object obj)
 {
 	t_vector		l_dir;
 	t_vector 	eye_dir;
-
-	double 	dot;
-	double	shines = 64;
-	double	lambert_component;
-	double	specular;
-	int		i;
+	double 		dot;
+	double		beta;
+	int			i;
 
 	i = -1;
 	while (++i < SIZE_LIGHT)
@@ -109,23 +116,28 @@ void 	blinn_fong_light(t_rtv1 *rtv1, t_val_vector *val, int *hit)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
-		lambert_component = MAX(dot, 0.0);
+		if ((obj.id == PLANE || obj.id == DISC) && dot <= 0)
+		{
+			anti_vector(&val->n_point);
+			dot = cos_vector(&val->n_point, &l_dir);
+		}
+		beta = MAX(dot, 0.0);
 		set_vector(&eye_dir, RAY_DIRECTION);
 		anti_vector(&eye_dir);
 		l_dir = normal_vector(sub_vector(&l_dir, &eye_dir));
-		specular = pow(MAX(dot_vector(&val->n_point, &l_dir), 0), shines);
-		color_multi(&val->rgb[i], L.ambient + lambert_component + specular);
+		beta += pow(MAX(dot_vector(&val->n_point, &l_dir), 0), obj.shines);
+		color_multi(&val->rgb[i], L.ambient + beta);
 	}
 }
 
 void	all_light(t_rtv1 *rtv1, t_val_vector *val, int *hit, int num_obj)
 {
 	if (OPTION->lambert_light == TRUE)
-		lambert_light(RT, val, hit);
+		lambert_light(RT, val, hit, RT_OBJ.id);
 	else if (OPTION->cel_shaded == TRUE)
-		cel_shaded(RT, val, hit);
+		cel_shaded(RT, val, hit, RT_OBJ.id);
 	else if (OPTION->blinn_fong == TRUE)
-		blinn_fong_light(RT, val, hit);
+		blinn_fong_light(RT, val, hit, RT_OBJ);
 	else if (OPTION->view_normal || OPTION->view_point)
 		view_point_or_normal(RT, val);
 }

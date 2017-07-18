@@ -11,9 +11,9 @@
             "lambert_light":  false,
             "cel_shaded":  false,
             "blinn_fong":  false,
-            "shadow":  false,
-            "view_normal":  true,
-            "view_point":  false,
+            "shadow":  true,
+            "view_normal":  false,
+            "view_point":  true,
             "ssaa":  false,
             "size_ssaa": 1,
             "fxaa":  false,
@@ -42,9 +42,9 @@
       "lights":
       [
           {
-            "position":{"x": -400,"y": -400,"z": -1700},
+            "position":{"x": 600,"y": -500,"z": 13},
             "direction":{"x": -12,"y": -11,"z": -112},
-            "color":{"r": 25, "g": 123, "b": 70}
+            "color":{"r": 255, "g": 255, "b": 255}
 			}
       ],
     "name": "Objects",
@@ -52,43 +52,43 @@
         [
           {
             "type":	"Sphere",
-            "size":    111 ,
+            "size":    111,
             "height":   190,
             "weight":   170,
+				"reflection": false,
+				"refraction": false,
+				"param_refract": 0,
+				"shines": 40,
             "position":{"x": 600, "y": 12,   "z": 13},
-            "rotation":{ "x": 190, "y": 160, "z": 190},
+            "rotation":{ "x": 0, "y": 0, "z": 0},
             "direction":{"x": -19, "y": -18, "z": -17},
             "color": { "r": 255,  "g": 123,  "b": 100}
 			},
+			{
+			  "type":	"Sphere",
+			  "size":    111,
+			  "height":   190,
+			  "weight":   170,
+			  "reflection": false,
+			  "refraction": false,
+			  "param_refract": 0,
+			  "shines": 40,
+			  "position":{"x": 300, "y": 12,   "z": 13},
+			  "rotation":{ "x": 0, "y": 0, "z": 0},
+			  "direction":{"x": -19, "y": -18, "z": -17},
+			  "color": { "r": 255,  "g": 255,  "b": 100}
+		  },
 			 {
 			   "type":	"Plane",
 			   "size":    0,
-			   "height":   190,
-			   "weight":   170,
+				"reflection": false,
+				"refraction": false,
+				"param_refract": 0,
+				"shines": 40,
 			   "position":{"x": 11, "y": 600,   "z": 13},
-			   "rotation":{ "x": 190, "y": 160, "z": 190},
+			   "rotation":{ "x": 0, "y": 0, "z": 0},
 			   "direction":{"x": 0, "y": -1, "z": 0},
 			   "color": { "r": 255,  "g": 123,  "b": 100}
-			 },
- 			 {
- 			   "type":	"Cone",
- 			   "size":    45,
- 			   "height":   190,
- 			   "weight":   170,
- 			   "position":{"x": 11, "y": 300,   "z": 13},
- 			   "rotation":{ "x": 190, "y": 160, "z": 190},
- 			   "direction":{"x": 0, "y": 1, "z": 0},
- 			   "color": { "r": 0,  "g": 255,  "b": 100}
- 			 },
- 			 {
- 			   "type":	"Cylinder",
- 			   "size":    60,
- 			   "height":   190,
- 			   "weight":   170,
- 			   "position":{"x": 0, "y": 350,   "z": 13},
- 			   "rotation":{ "x": 190, "y": 160, "z": 190},
- 			   "direction":{"x": -1, "y": 0, "z": 0},
- 			   "color": { "r": 0,  "g": 255,  "b": 100}
- 			 }
+			 }
         ]
 }

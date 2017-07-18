@@ -12,14 +12,11 @@
 
 #include "../../head.h"
 
-int			event_key(int keycode, t_rtv1 *rt)
+int			event_key(int keycode, t_rtv1 *rtv1)
 {
 	if (keycode == 53)
 		exit(1);
 	else if (keycode == 36)
-	{
-		rt->data->all_opt->light_off_on = (rt->data->all_opt->light_off_on == 0 ? 1 : 0);
-		ray_tracing(rt);
-	}
+		OPTION->light_off_on = (OPTION->light_off_on == 0 ? 1 : 0);
 	return (1);
 }

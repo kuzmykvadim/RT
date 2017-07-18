@@ -20,6 +20,11 @@ t_color		darkroom(t_color a)
 	new.green = (a.red + a.green + a.blue) / 150;
 	new.blue = (a.red + a.green + a.blue) / 150;
 	new.red = (new.red + new.green + new.blue) / 3;
-	protected_color(&new);
+	if (new.red >= 255)
+		new.red = 255;
+	if (new.green >= 255)
+		new.green = 255;
+	if (new.blue >= 255)
+		new.blue = 255;
 	return (new);
 }

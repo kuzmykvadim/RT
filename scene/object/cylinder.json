@@ -8,9 +8,9 @@
             },
             "name_win": "Raytrace by RT_MAFIA",
             "light_off_on": true,
-            "lambert_light":  false,
+            "lambert_light":  true,
             "cel_shaded":  false,
-            "blinn_fong":  true,
+            "blinn_fong":  false,
             "shadow":  true,
             "view_normal":  false,
             "view_point":  false,
@@ -42,26 +42,25 @@
       "lights":
       [
           {
-            "position":{"x": 0,"y": 0,"z": -2700},
+            "position":{"x": -400,"y": -400,"z": -1700},
             "direction":{"x": -12,"y": -11,"z": -112},
-            "color":{"r": 0, "g": 0, "b": 0}
-			},
-			{
-			  "position":{"x": 0, "y": 0,"z": -2700},
-			  "direction":{"x": -12,"y": -11,"z": -112},
-			  "color":{"r": 0, "g": 0, "b": 0}
-		  }
+            "color":{"r": 25, "g": 123, "b": 70}
+			}
       ],
     "name": "Objects",
         "objects":
         [
           {
-            "type":	"Sphere",
-            "size":    100,
-            "position":{"x": 400, "y": 300,   "z": 300},
-            "rotation":{ "x": 190, "y": 160, "z": 190},
-            "direction":{"x": -19, "y": -18, "z": -17},
-            "color": { "r": 255,  "g": 255,  "b": 100}
+            "type":	"Cylinder",
+            "size":    111,
+				"reflection": false,
+				"refraction": false,
+				"param_refract": 0,
+				"shines": 40,
+            "position":{"x": 400, "y": 400,   "z": 13},
+            "rotation":{ "x": 0, "y": 0, "z": 0},
+            "direction":{"x": 0, "y": 1, "z": 0},
+            "color": { "r": 255,  "g": 0,  "b": 255}
 			}
         ]
 }

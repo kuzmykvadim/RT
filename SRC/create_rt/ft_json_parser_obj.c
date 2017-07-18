@@ -75,9 +75,9 @@ void	ft_pars_pos_rot(t_json_obj *j, t_all_data *data, int i)
 	if (!cJSON_IsNumber(j->rot_x1) || !cJSON_IsNumber(j->rot_y1)
 			|| !cJSON_IsNumber(j->rot_y1))
 		ft_pars_err("Rotation parameters error");
-	data->all_obj[i].obj_rot.x = j->rot_x1->valuedouble;
-	data->all_obj[i].obj_rot.y = j->rot_y1->valuedouble;
-	data->all_obj[i].obj_rot.z = j->rot_z1->valuedouble;
+	data->all_obj[i].rotation.x = j->rot_x1->valuedouble;
+	data->all_obj[i].rotation.y = j->rot_y1->valuedouble;
+	data->all_obj[i].rotation.z = j->rot_z1->valuedouble;
 }
 
 void	ft_pars_color(t_json_obj *j, t_all_data *data, int i)
@@ -100,6 +100,26 @@ void	ft_pars_color(t_json_obj *j, t_all_data *data, int i)
 		ft_pars_err("Color parameters error, use from 0 to 255");
 }
 
+void    ft_pars_smthg(t_json_obj *j, t_all_data *data, int i)
+{
+    j->j_reflection = cJSON_GetObjectItemCaseSensitive(j->j_object, "reflection");
+    if (!cJSON_IsBool(j->j_reflection))
+        ft_pars_err("reflection parameters error");
+    data->all_obj[i].reflection = j->j_reflection->valueint;
+    j->j_refraction = cJSON_GetObjectItemCaseSensitive(j->j_object, "refraction");
+    if (!cJSON_IsBool(j->j_refraction))
+        ft_pars_err("refraction parameters error");
+    data->all_obj[i].refraction = j->j_refraction->valueint;
+    j->j_param_refract = cJSON_GetObjectItemCaseSensitive(j->j_object, "param_refract");
+    if (!cJSON_IsNumber(j->j_param_refract))
+        ft_pars_err("Param_refract parameters error");
+    data->all_obj[i].param_refract = j->j_param_refract->valuedouble;
+    j->j_shines = cJSON_GetObjectItemCaseSensitive(j->j_object, "shines");
+    if (!cJSON_IsNumber(j->j_shines))
+        ft_pars_err("shines parameters error");
+    data->all_obj[i].shines = j->j_shines->valuedouble;
+}
+
 void	ft_parse_all_obj(t_json_obj *j, t_object *o, t_all_data *data)
 {
 	int i;
@@ -111,6 +131,7 @@ void	ft_parse_all_obj(t_json_obj *j, t_object *o, t_all_data *data)
 		ft_parse_opt(j, data, i);
 		ft_pars_pos_rot(j, data, i);
 		ft_pars_color(j, data, i);
+		ft_pars_smthg(j, data, i);
 		j->j_direction = cJSON_GetObjectItemCaseSensitive(j->j_object,
 				"direction");
 		j->dir_x1 = cJSON_GetObjectItemCaseSensitive(j->j_direction, "x");

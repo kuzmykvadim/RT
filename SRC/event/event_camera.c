@@ -12,7 +12,7 @@
 
 #include "../../head.h"
 
-int		event_camera(int keycode, t_rtv1 *rtv1)
+int		event_camera(int keycode, t_rtv1 *rtv1) // ПЕРЕРИСОВКА РАБОТАЕТ НА ЛЮБУЮ КНОПКУ
 {
 	if (keycode == 126)
 		move_forward_camera(rtv1);

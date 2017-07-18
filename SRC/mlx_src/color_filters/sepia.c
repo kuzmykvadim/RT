@@ -19,6 +19,11 @@ t_color		sepia(t_color a)
 	new.red = (a.red * 0.393) + (a.green * 0.769) + (a.blue * 0.189);
 	new.green = (a.red * 0.349) + (a.green * 0.689) + (a.blue * 0.168);
 	new.blue = (a.red * 0.272) + (a.green * 0.534) + (a.blue * 0.131);
-	protected_color(&new);
+	if (new.red >= 255)
+		new.red = 255;
+	if (new.green >= 255)
+		new.green = 255;
+	if (new.blue >= 255)
+		new.blue = 255;
 	return (new);
 }
