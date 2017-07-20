@@ -17,6 +17,6 @@ int	error_exit(char *error)
 	if (error == NULL)
 		printf("ERROR\n");
 	else
-		printf("%s\n",error);
+		printf("%s\n", error);
 	exit(1);
 }

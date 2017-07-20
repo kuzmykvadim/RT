@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include 	"../../head.h"
+#include "../../head.h"
 
-static t_vector 	add(t_vector a, float b, float c)
+static t_vector		add(t_vector a, float b, float c)
 {
 	t_vector res;
 
 	res.x = a.x + b;
 	res.y = a.y + c;
 	res.z = a.z;
-	return	(res);
+	return (res);
 }
 
-static t_vector 	x2_anti_alias(t_vector temp, int j)
+static t_vector		x2_anti_alias(t_vector temp, int j)
 {
 	if (j == 1)
 		temp = add(temp, 0, -0.5);
@@ -31,7 +31,7 @@ static t_vector 	x2_anti_alias(t_vector temp, int j)
 	return (temp);
 }
 
-static t_vector 	x4_anti_alias(t_vector temp, int j)
+static t_vector		x4_anti_alias(t_vector temp, int j)
 {
 	if (j == 1 || j == 5)
 		temp = add(temp, 0.25, 0.25);
@@ -44,7 +44,7 @@ static t_vector 	x4_anti_alias(t_vector temp, int j)
 	return (temp);
 }
 
-static t_vector 	x8_anti_alias( t_vector temp, int j)
+static t_vector		x8_anti_alias(t_vector temp, int j)
 {
 	if (j <= 2)
 		temp = x2_anti_alias(temp, j);
@@ -57,7 +57,7 @@ static t_vector 	x8_anti_alias( t_vector temp, int j)
 	return (temp);
 }
 
-t_vector 			calc_ssaa(t_rtv1 *rtv1, t_vector *dir, int j)
+t_vector			calc_ssaa(t_rtv1 *rtv1, t_vector *dir, int j)
 {
 	t_vector res;
 	t_vector temp;

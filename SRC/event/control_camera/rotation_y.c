@@ -36,7 +36,7 @@ void	rotation_y_cam(t_rtv1 *rtv1, double angle)
 void	rotation_y(t_rtv1 *rtv1, int keycode)
 {
 	if (keycode == BUTTON_W)
-		rotation_y_cam(rtv1, 1 * RAD);
+		rotation_y_cam(rtv1, 5 * RAD);
 	else if (keycode == BUTTON_S)
-		rotation_y_cam(rtv1, -1 * RAD);
+		rotation_y_cam(rtv1, -5 * RAD);
 }

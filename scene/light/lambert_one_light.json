@@ -22,10 +22,14 @@
             "black_and_white":  false,
             "sepia":  false,
             "motion_blur":  false,
-            "size_blur": 45,
+            "size_blur": 1,
             "fov_on":  false,
+				"recursion": false,
+				"horizont": false,
+				"outline": false,
+				"carton": false,
 			"speed": 100,
-            "depth_rec": 15,
+            "depth_rec": 3,
             "fieldofview": 111,
             "draft_x":  1,
             "draft_y":  1,
@@ -33,6 +37,12 @@
               "r": 0,
               "g": 0,
               "b": 0},
+				  "outline_color":
+				  {
+					 "r": 0,
+					 "g": 0,
+					 "b": 0
+				  },
             "camera_position": {
               "x": 0,
               "y": 0,
@@ -42,7 +52,7 @@
       "lights":
       [
           {
-            "position":{"x": 0,"y": 150,"z": -220},
+            "position":{"x": 400,"y": 0,"z": 300},
             "direction":{"x": -12,"y": -11,"z": -112},
             "color":{"r": 0, "g": 0, "b": 0}
 			}
@@ -53,9 +63,9 @@
           {
             "type":	"Sphere",
             "size":    100,
-				"reflection": true,
+				"reflection": false,
 				"refraction": false,
-				"param_refract": 20,
+				"param_refract": 40,
 				"shines": 40,
             "position":{"x": 400, "y": 300,   "z": 300},
             "rotation":{ "x": 0, "y": 0, "z": 0},
@@ -73,6 +83,18 @@
 			  "rotation":{ "x": 0, "y": 0, "z": 0},
 			  "direction":{"x": 0, "y": 1, "z": 0},
 			  "color": { "r": 255,  "g": 255,  "b": 255}
-		  }
+		  },
+		  {
+			 "type":	"Plane",
+			 "size":    100,
+			 "reflection": false,
+			 "refraction": false,
+			 "param_refract": 0,
+			 "shines": 40,
+			 "position":{"x": 400, "y": 600,   "z": -2500},
+			 "rotation":{ "x": 0, "y": 0, "z": 0},
+			 "direction":{"x": 0, "y": 0, "z": 1},
+			 "color": { "r": 0,  "g": 255,  "b": 0}
+		 }
         ]
 }

@@ -23,13 +23,10 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 	if (RT_OBJ.id == SPHERE)
 		normal = normal_vector(sub_vector(&RT_OBJ.position, point));
 	else if (RT_OBJ.id == PLANE)
-	{
 		set_vector(&normal, &RT_OBJ.direction);
-		// normal.x = fabs(normal.x);
-		// normal.y = fabs(normal.y);
-		// normal.z = fabs(normal.z); // ХЗ нужно ли это теперь
-	}
 	else if (RT_OBJ.id == DISC)
+		set_vector(&normal, &RT_OBJ.direction);
+	else if (RT_OBJ.id == CD_DISC)
 		set_vector(&normal, &RT_OBJ.direction);
 	else if (RT_OBJ.id == CYLINDER)
 		normal = find_normal_cylinder(RT_OBJ, point);
@@ -38,17 +35,9 @@ t_vector	get_intersect_normal(t_rtv1 *rtv1, int num_obj, t_vector *point)
 	else if (RT_OBJ.id == HALF_SPHERE)
 	{
 		if (RT_OBJ.light_n == 2)
-		{
 			set_vector(&normal, &RT_OBJ.direction);
-			// normal.x = fabs(normal.x);
-			// normal.y = fabs(normal.y); // ХЗ нужно ли это теперь
-			// normal.z = fabs(normal.z);
-		}
 		else
 			normal = normal_vector(sub_vector(&RT_OBJ.position, point));
 	}
 	return (normal);
 }
-
-// else if (RT_OBJ.poligon != NULL)
-// 	set_vector(&normal, RT_OBJ.poligon->normal);

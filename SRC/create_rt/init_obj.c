@@ -44,7 +44,27 @@ void 	parcing_size_pow(t_rtv1 *rtv1)
 
 	num_obj = -1;
 	while (++num_obj < SIZE_OBJ)
+	{
+		if (RT_OBJ.size < 0)
+			error_exit("Bad size object: too small size object[0-1999999]");
+		if (RT_OBJ.size >= 2000000)
+			error_exit("Bad size object: too big size object[1-1999999]");
 		RT_OBJ.size_pow = RT_OBJ.size * RT_OBJ.size;
+	}
+}
+
+void 	parcing_shines(t_rtv1 *rtv1)
+{
+	int		num_obj;
+
+	num_obj = -1;
+	while (++num_obj < SIZE_OBJ)
+	{
+		if (RT_OBJ.shines <= 0)
+			error_exit("Bad shines: too small shines [1-600]");
+		if (RT_OBJ.shines > 600)
+			error_exit("Bad shines: too big shines [1-600]");
+	}
 }
 
 void 	parcing_half_sphere(t_rtv1 *rtv1)
@@ -75,6 +95,8 @@ void 	parcing_cone(t_rtv1 *rtv1)
 	{
 		if (RT_OBJ.id == CONE)
 		{
+			if (RT_OBJ.size >= 360 || RT_OBJ.size <= 0)
+				error_exit("ERROR angle cone size");
 			angle = RT_OBJ.size * RAD;
 			RT_OBJ.cone_cos_two = cos(angle) * cos(angle);
 			RT_OBJ.cone_sin_two = sin(angle) * sin(angle);
@@ -117,10 +139,7 @@ void parcing_rotation(t_rtv1 *rtv1)
 
 	num_obj = -1;
 	while(++num_obj < SIZE_OBJ)
-	{
 		rotation_vector(&RT_OBJ.direction, &RT_OBJ.rotation);
-		// printf("x %f y %f z %z\n", );
-	}
 }
 
 void 	parcing_direction_two(t_rtv1 *rtv1)
@@ -152,4 +171,5 @@ void		init_demo(t_rtv1 *rtv1)
 	parcing_light_ambient(RT);
 	parcing_light_position(RT);
 	parcing_rotation(RT);
+	parcing_shines(RT);
 }

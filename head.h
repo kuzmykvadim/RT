@@ -16,9 +16,9 @@
 # include <string.h>
 # include "SRC/mlx_src/mlx_src.h"
 # include "SRC/create_rt/create_rt.h"
-# include "SRC/ray_tracing/Lighting_Model/light.h"
 # include <stdio.h>
 # include <string.h>
+# include <pthread.h>
 
 # define RAY_ORIGIN 			rtv1->ray->origin
 # define RAY_DIRECTION 			rtv1->ray->direction
@@ -53,6 +53,7 @@
 # define CONE					5
 # define HALF_SPHERE			6
 # define ELLIPSOID			7
+# define CD_DISC				8
 # define MINIMUM				1.5
 // # define SIZE					SIZE_X * SIZE_Y
 
@@ -109,7 +110,7 @@ void			ray_tracing(t_rtv1 *rtv1);
 void 			fov(t_rtv1 *rtv1, int x, int y);
 void 			motion_blur(t_rtv1 *rtv1);
 
-t_color			intersect(t_rtv1 *rtv1);
+t_color			intersect(t_rtv1 *rtv1, int i);
 int				check_intersect_object(t_rtv1 *rt, double *t, int i, t_ray *r);
 
 int				intersect_sphere(t_ray *r, t_object obj, double *t);
@@ -119,6 +120,7 @@ int				intersect_disc(t_ray *r, t_object obj, double *t);
 int				intersect_ellipsoid(t_ray *ray, t_object ellips, double *t);
 int				intersect_half_sphere(t_ray *r, t_object *obj, double *t);
 int				intersect_plane_limit(t_ray *ray, t_object plane, double *t);
+int				intersect_cd_disc(t_ray *ray, t_object object, double *t);
 
 int				discriminant(double *t, t_val_math val);
 int				light_intersect(t_rtv1 *rt, double *t);
@@ -145,6 +147,7 @@ void			zoom(int keycode, int x, int y, t_rtv1 *rtv1);
 void			rotation_x(t_rtv1 *rtv1, int keycode);
 void			rotation_y(t_rtv1 *rtv1, int keycode);
 void			rotation_z(t_rtv1 *rtv1, int keycode);
+void 			valid_option(t_rtv1 *rtv1);
 
 void			mlx_use(t_rtv1 *rtv1);
 int				error_exit(char *error);
@@ -157,6 +160,7 @@ size_t			ft_strlen(const char *str);
 void			*ft_memalloc(size_t size);
 char			*ft_strnew(size_t size);
 void			*ft_copy(void *data, size_t size);
+void 			becap(t_rtv1 *rtv1);
 
 int				get_next_line(int fd, char **line);
 

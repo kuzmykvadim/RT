@@ -12,7 +12,7 @@
 
 #include "vector.h"
 
-void rot_z(t_vector *v, int angle)
+void	rot_z(t_vector *v, int angle)
 {
 	double	x;
 	double	y;
@@ -23,7 +23,7 @@ void rot_z(t_vector *v, int angle)
 	v->y = y;
 }
 
-void rot_y(t_vector *v, int angle)
+void	rot_y(t_vector *v, int angle)
 {
 	double	x;
 	double	z;
@@ -32,10 +32,9 @@ void rot_y(t_vector *v, int angle)
 	z = v->x * sin(angle * RAD) + v->z * cos(angle * RAD);
 	v->x = x;
 	v->z = z;
-
 }
 
-void rot_x(t_vector *v, int angle)
+void	rot_x(t_vector *v, int angle)
 {
 	double	y;
 	double	z;
@@ -46,12 +45,12 @@ void rot_x(t_vector *v, int angle)
 	v->z = z;
 }
 
-void 	rotation_vector(t_vector *a, t_vector *rotation)
+void	rotation_vector(t_vector *a, t_vector *rotation)
 {
 	if (rotation->x != 0)
 		rot_x(a, rotation->x);
 	if (rotation->y != 0)
- 		rot_y(a, rotation->y);
+		rot_y(a, rotation->y);
 	if (rotation->z != 0)
 		rot_z(a, rotation->z);
 }

@@ -20,11 +20,11 @@ MLX = -lmlx -framework OpenGL -framework AppKit SRC/create_rt/CJSON/cJSON.c
 
 HEADER = head.h
 
-MLX_SRC =		./SRC/mlx_src/create_img.c													\
-				./SRC/mlx_src/object_mlx.c														\
-				./SRC/mlx_src/valid_size_win.c												\
-				./SRC/mlx_src/create_xpm.c														\
-				./SRC/mlx_src/put_img.c															\
+MLX_SRC =		./SRC/mlx_src/create_img.c										\
+				./SRC/mlx_src/object_mlx.c										\
+				./SRC/mlx_src/valid_size_win.c									\
+				./SRC/mlx_src/create_xpm.c										\
+				./SRC/mlx_src/put_img.c											\
 				./SRC/mlx_src/create_color.c									\
 				./SRC/mlx_src/protected_color.c									\
 				./SRC/mlx_src/midle_color.c										\
@@ -71,24 +71,23 @@ CREATE_RT =		./SRC/create_rt/create_ray.c									\
 	 			./SRC/create_rt/ft_json_parser_obj.c							\
 	   			./SRC/create_rt/ft_json_parser_general.c						\
 	   			./SRC/create_rt/ft_pars_light.c									\
+	   			./SRC/create_rt/valid.c 										\
 
-
-LIGH_MODEL = ./SRC/ray_tracing/Lighting_Model/shadow.c							\
 
 RT =			./SRC/ray_tracing/ray_tracing.c									\
 				./SRC/ray_tracing/intersect.c									\
 				./SRC/ray_tracing/intersect_obj/intersect_sphere.c				\
+				./SRC/ray_tracing/intersect_obj/intersect_cd_disc.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_cone.c				\
 				./SRC/ray_tracing/intersect_obj/intersect_cylinder.c			\
 				./SRC/ray_tracing/intersect_obj/intersect_half_sphere.c			\
 				./SRC/ray_tracing/intersect_obj/discriminant.c					\
-				./SRC/ray_tracing/intersect_obj/intersect_disc.c							\
-				./SRC/ray_tracing/intersect_obj/intersect_ellipsoid.c						\
-				./SRC/ray_tracing/intersect_obj/intersect_plane_limit.c					\
+				./SRC/ray_tracing/intersect_obj/intersect_disc.c				\
+				./SRC/ray_tracing/intersect_obj/intersect_ellipsoid.c			\
+				./SRC/ray_tracing/intersect_obj/intersect_plane_limit.c			\
 				./SRC/ray_tracing/ft_light.c									\
 				./SRC/ray_tracing/get_color.c									\
 				./SRC/ray_tracing/motion_blur.c									\
-				./SRC/ray_tracing/fov.c											\
 				./SRC/ray_tracing/check_intersect_object.c						\
 				./SRC/ray_tracing/find_point_intersect.c						\
 				./SRC/ray_tracing/get_intersect_normal.c						\
@@ -110,12 +109,12 @@ FT =			./SRC/function/main.c											\
 				./SRC/function/ft_memalloc.c									\
 				./SRC/function/ft_strnew.c										\
 				./SRC/function/get_next_line.c									\
+				./SRC/function/becap.c 											\
 
 SRC =			$(FT)															\
 				$(VECTOR)														\
 				$(CREATE_RT)													\
 				$(MLX_SRC)														\
-				$(LIGH_MODEL)													\
 				$(RT)															\
 				$(EVENT)														\
 

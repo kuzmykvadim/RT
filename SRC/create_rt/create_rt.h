@@ -27,25 +27,25 @@
 
 typedef struct	s_object
 {
-	char				*type;
+	char			*type;
 	int				obj_count;
 	int				id;
 	double			size;
 	t_color			color;
-	t_vector			direction;
-	t_vector			position;
-	t_vector			rotation;
+	t_vector		direction;
+	t_vector		position;
+	t_vector		rotation;
 	int				reflection;
-	int 				refraction;
-	double 			param_refract;
-	int 				shines;
+	int				refraction;
+	double			param_refract;
+	int				shines;
 	double			light_n;
 	double			radius_disc;
-	double			size_pow;// NO MAP
-	double			cone_cos_two;// NO MAP
-	double			cone_sin_two;// NO MAP
-	double			two_cone_cos_two;// NO MAP
-	double			two_cone_sin_two;// NO MAP
+	double			size_pow;
+	double			cone_cos_two;
+	double			cone_sin_two;
+	double			two_cone_cos_two;
+	double			two_cone_sin_two;
 }				t_object;
 
 typedef struct	s_json_obj
@@ -71,10 +71,10 @@ typedef struct	s_json_obj
 	cJSON		*j_green;
 	cJSON		*j_blue;
 	cJSON		*j_size;
-	cJSON    *j_reflection;
-	cJSON    *j_refraction;
-	cJSON    *j_param_refract;
-	cJSON   	*j_shines;
+	cJSON		*j_reflection;
+	cJSON		*j_refraction;
+	cJSON		*j_param_refract;
+	cJSON		*j_shines;
 }				t_json_obj;
 
 typedef struct	s_options_json
@@ -124,18 +124,27 @@ typedef struct	s_options_json
 	cJSON		*l_col_r;
 	cJSON		*l_col_g;
 	cJSON		*l_col_b;
+	cJSON		*o_col_r;
+	cJSON		*o_col_g;
+	cJSON		*o_col_b;
 	cJSON		*j_depth_rec;
 	cJSON		*j_speed;
 	cJSON		*j_bg_color;
+	cJSON		*ol_color;
 	cJSON		*j_screen_size;
 	cJSON		*j_size_y;
 	cJSON		*j_size_x;
+	cJSON		*recursion;
+	cJSON		*horizont;
+	cJSON		*outline;
+	cJSON		*carton;
 
 }				t_options_json;
 
 typedef struct	s_options
 {
 	t_color		bg_color;
+	t_color		outline_color;
 	int			light_off_on;
 	int			lambert_light;
 	int			cel_shaded;
@@ -166,6 +175,10 @@ typedef struct	s_options
 	int			speed;
 	int			size_x;
 	int			size_y;
+	int			recursion;
+	int			horizont;
+	int			outline;
+	int			carton;
 }				t_options;
 
 typedef	struct	s_ray
@@ -179,20 +192,22 @@ typedef struct	s_screen
 	t_vector	*ray;
 	t_vector	*dir_ssaa;
 	t_color		*color;
+	int			id;
+	int			w;
 }				t_screen;
 
 typedef struct	s_light
 {
 	int			id;
-	t_vector		position;
-	t_vector		direction;
+	t_vector	position;
+	t_vector	direction;
 	t_color		color;
 	double		ambient;
 }				t_light;
 
 typedef struct	s_all_data
 {
-	t_object		*all_obj;
+	t_object	*all_obj;
 	t_light		*light_pos;
 	t_options	*all_opt;
 }				t_all_data;
@@ -206,8 +221,6 @@ t_ray			*create_ray(void);
 t_screen		*create_map(int size_x, int size_y);
 t_light			*create_all_light(int size);
 
-
-// JSON
 void			ft_init(t_env *e, char *file);
 t_all_data		*ft_parsing(t_env *e);
 char			*ft_read_file(t_env *e);

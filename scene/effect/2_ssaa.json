@@ -24,7 +24,11 @@
             "motion_blur":  false,
             "size_blur": 45,
             "fov_on":  false,
-			"speed": 100,
+				"recursion": false,
+				"horizont": false,
+				"outline": false,
+				"carton": false,
+				"speed": 100,
             "depth_rec": 222,
             "fieldofview": 111,
             "draft_x":  1,
@@ -33,6 +37,12 @@
               "r": 0,
               "g": 0,
               "b": 0},
+				  "outline_color":
+				  {
+					 "r": 0,
+					 "g": 0,
+					 "b": 0
+				  },
             "camera_position": {
               "x": 0,
               "y": 0,

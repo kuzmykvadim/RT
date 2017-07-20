@@ -30,6 +30,8 @@ void	ft_check_objtype(char *str, t_all_data *data, int i)
 		data->all_obj[i].id = HALF_SPHERE;
 	else if (strcmp(str, "Ellipsoid") == 0)
 		data->all_obj[i].id = ELLIPSOID;
+	else if (strcmp(str, "Cd_disc") == 0)
+		data->all_obj[i].id = CD_DISC;
 	else
 		ft_pars_err("Object type error");
 }
@@ -46,14 +48,6 @@ void	ft_parse_opt(t_json_obj *j, t_all_data *data, int i)
 	if (!cJSON_IsNumber(j->j_size))
 		ft_pars_err("Size parameters error");
 	data->all_obj[i].size = j->j_size->valuedouble;
-	// j->j_height = cJSON_GetObjectItemCaseSensitive(j->j_object, "height");
-	// if (!cJSON_IsNumber(j->j_height))
-	// 	ft_pars_err("Height parameters error");
-	// data->all_obj[i].height = j->j_height->valuedouble;
-	// j->j_weight = cJSON_GetObjectItemCaseSensitive(j->j_object, "weight");
-	// if (!cJSON_IsNumber(j->j_weight))
-	// 	ft_pars_err("Weight parameters error");
-	// data->all_obj[i].weight = j->j_weight->valuedouble;
 }
 
 void	ft_pars_pos_rot(t_json_obj *j, t_all_data *data, int i)

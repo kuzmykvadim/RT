@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_disc.c                                   :+:      :+:    :+:   */
+/*   intersect_cd_disc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asvirido <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/26 05:01:40 by asvirido          #+#    #+#             */
-/*   Updated: 2017/05/26 05:01:42 by asvirido         ###   ########.fr       */
+/*   Created: 2017/07/19 18:17:38 by asvirido          #+#    #+#             */
+/*   Updated: 2017/07/19 18:17:39 by asvirido         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../head.h"
 
-int		intersect_disc(t_ray *ray, t_object object, double *t)
+int		intersect_cd_disc(t_ray *ray, t_object object, double *t)
 {
 	t_vector		tmp;
 	t_val_math	val;
@@ -31,8 +31,13 @@ int		intersect_disc(t_ray *ray, t_object object, double *t)
 		   val.d = dot_vector(&tmp, &tmp);
 		   if (sqrtf(val.d) <= object.size)
 		   {
-				*t = val.t0;
-				return (1);
+				if (sqrtf(val.d) <= object.size / 3)
+					return (0);
+				else
+				{
+					*t = val.t0;
+					return (1);
+				}
 		   }
 		}
 	}

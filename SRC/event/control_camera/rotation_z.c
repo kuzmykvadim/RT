@@ -36,7 +36,7 @@ void	rotation_z_cam(t_rtv1 *rtv1, double angle)
 void	rotation_z(t_rtv1 *rtv1, int keycode)
 {
 	if (keycode == BUTTON_A)
-		rotation_z_cam(rtv1, 1 * RAD);
+		rotation_z_cam(rtv1, 5 * RAD);
 	else if (keycode == BUTTON_D)
-		rotation_z_cam(rtv1, -1 * RAD);
+		rotation_z_cam(rtv1, -5 * RAD);
 }

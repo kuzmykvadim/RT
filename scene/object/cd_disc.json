@@ -61,16 +61,16 @@
         "objects":
         [
           {
-            "type":	"Cylinder",
-            "size":    111,
+            "type":	"Cd_disc",
+            "size":    600,
 				"reflection": false,
 				"refraction": false,
 				"param_refract": 0,
 				"shines": 40,
             "position":{"x": 400, "y": 400,   "z": 13},
             "rotation":{ "x": 0, "y": 0, "z": 0},
-            "direction":{"x": 0, "y": 1, "z": 0},
-            "color": { "r": 255,  "g": 0,  "b": 255}
+            "direction":{"x": 0, "y": -1, "z": -0.3},
+            "color": { "r": 255,  "g": 255,  "b": 255}
 			}
         ]
 }

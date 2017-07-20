@@ -155,6 +155,45 @@ void	ft_json_parser_general5(t_options *o, t_options_json *oj)
 	o->speed = oj->j_speed->valueint;
 }
 
+void 	ft_json_parser_asvirido(t_options *o, t_options_json *oj)
+{
+	oj->recursion = cJSON_GetObjectItemCaseSensitive(oj->opt, "recursion");
+	if (!cJSON_IsBool(oj->recursion))
+		ft_pars_err("recursion parameter error");
+	o->recursion = oj->recursion->valueint;
+	oj->horizont = cJSON_GetObjectItemCaseSensitive(oj->opt, "horizont");
+	if (!cJSON_IsBool(oj->horizont))
+		ft_pars_err("horizont parameter error");
+	o->horizont = oj->horizont->valueint;
+	oj->outline = cJSON_GetObjectItemCaseSensitive(oj->opt, "outline");
+	if (!cJSON_IsBool(oj->outline))
+		ft_pars_err("outline parameter error");
+	o->outline = oj->outline->valueint;
+	oj->carton = cJSON_GetObjectItemCaseSensitive(oj->opt, "carton");
+	if (!cJSON_IsBool(oj->carton))
+		ft_pars_err("carton parameter error");
+	o->carton = oj->carton->valueint;
+}
+
+void ft_json_parser_outline_color(t_options *o, t_options_json *oj)
+{
+	oj->ol_color = cJSON_GetObjectItemCaseSensitive(oj->opt,
+			"outline_color");
+	oj->o_col_r = cJSON_GetObjectItemCaseSensitive(oj->ol_color, "r");
+	oj->o_col_g = cJSON_GetObjectItemCaseSensitive(oj->ol_color, "g");
+	oj->o_col_b = cJSON_GetObjectItemCaseSensitive(oj->ol_color, "b");
+	if (!cJSON_IsNumber(oj->o_col_r) || !cJSON_IsNumber(oj->o_col_g)
+			|| !cJSON_IsNumber(oj->o_col_b))
+		ft_pars_err("Lights color parameters error");
+	o->outline_color.red = oj->o_col_r->valuedouble;
+	o->outline_color.green = oj->o_col_g->valuedouble;
+	o->outline_color.blue = oj->o_col_b->valuedouble;
+	if (o->outline_color.red > 255 || o->bg_color.red < 0 ||
+			o->outline_color.green > 255 || o->outline_color.green < 0 ||
+			o->outline_color.blue > 255 || o->outline_color.blue < 0)
+		ft_pars_err("Background color parameters error, use from 0 to 255");
+}
+
 void	ft_json_parser_general(char *file, t_all_data *data)
 {
 	t_options		*o;
@@ -175,6 +214,8 @@ void	ft_json_parser_general(char *file, t_all_data *data)
 	ft_json_parser_general3(o, oj);
 	ft_json_parser_general4(o, oj);
 	ft_json_parser_general5(o, oj);
+	ft_json_parser_asvirido(o, oj);
+	ft_json_parser_outline_color(o, oj);
 	data->all_opt = ft_copy(o, sizeof(t_options));
 	data->all_opt->objects_count = data->all_obj->obj_count;
 	free(o);

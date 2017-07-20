@@ -40,7 +40,7 @@ void 	lambert_light(t_rtv1 *rtv1, t_val_vector *val, int *hit, int id)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
-		if ((id == PLANE || id == DISC) && dot <= 0)
+		if ((id == PLANE || id == DISC || id == CD_DISC) && dot <= 0)
 		{
 			anti_vector(&val->n_point);
 			dot = cos_vector(&val->n_point, &l_dir);
@@ -64,7 +64,7 @@ void 	cel_shaded(t_rtv1 *rtv1, t_val_vector *val, int *hit, int id)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
-		if ((id == PLANE || id == DISC) && dot <= 0)
+		if ((id == PLANE || id == DISC || id == CD_DISC) && dot <= 0)
 		{
 			anti_vector(&val->n_point);
 			dot = cos_vector(&val->n_point, &l_dir);
@@ -116,7 +116,7 @@ void 	blinn_fong_light(t_rtv1 *rtv1, t_val_vector *val, int *hit, t_object obj)
 			continue ;
 		l_dir = normal_vector(sub_vector(&val->point, &L.position));
 		dot = cos_vector(&val->n_point, &l_dir);
-		if ((obj.id == PLANE || obj.id == DISC) && dot <= 0)
+		if ((obj.id == PLANE || obj.id == DISC || obj.id == CD_DISC) && dot <= 0)
 		{
 			anti_vector(&val->n_point);
 			dot = cos_vector(&val->n_point, &l_dir);

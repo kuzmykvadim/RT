@@ -12,7 +12,7 @@
 
 #include "mlx_src.h"
 
-static int		valid_size_win_one(int size_x, int size_y)
+int		valid_size_win_one(int size_x, int size_y)
 {
 	if (size_x == 320 && size_y == 240)
 		return (1);
@@ -39,7 +39,7 @@ static int		valid_size_win_one(int size_x, int size_y)
 	return (0);
 }
 
-static int		valid_size_win_two(int size_x, int size_y)
+int		valid_size_win_two(int size_x, int size_y)
 {
 	if (size_x == 848 && size_y == 486)
 		return (1);
@@ -68,7 +68,7 @@ static int		valid_size_win_two(int size_x, int size_y)
 	return (0);
 }
 
-static int		valid_size_win_three(int size_x, int size_y)
+int		valid_size_win_three(int size_x, int size_y)
 {
 	if (size_x == 1500 && size_y == 1024)
 		return (1);
@@ -89,7 +89,7 @@ static int		valid_size_win_three(int size_x, int size_y)
 	return (0);
 }
 
-void 	valid_size_win(int size_x, int size_y)
+void	valid_size_win(int size_x, int size_y)
 {
 	if ((valid_size_win_one(size_x, size_y)) == 1)
 		return ;

@@ -13,7 +13,6 @@
 #include "../../head.h"
 
 void	mlx_use(t_rtv1 *rtv1)
-
 {
 	mlx_key_hook(WIN_MY, event_key, rtv1);
 	mlx_hook(WIN_MY, 2, 5, event_camera, rtv1);

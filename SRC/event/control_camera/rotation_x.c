@@ -36,7 +36,7 @@ void	rotation_x_cam(t_rtv1 *rtv1, double angle)
 void	rotation_x(t_rtv1 *rtv1, int keycode)
 {
 	if (keycode == 16)
-		rotation_x_cam(rtv1, 1 * RAD);
+		rotation_x_cam(rtv1, 5 * RAD);
 	else if (keycode == 4)
-		rotation_x_cam(rtv1, -1 * RAD);
+		rotation_x_cam(rtv1, -5 * RAD);
 }

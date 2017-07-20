@@ -15,7 +15,7 @@
 t_vector	normal_vector(t_vector v)
 {
 	double		lenght;
-	t_vector		new;
+	t_vector	new;
 
 	new.x = 0;
 	new.y = 0;

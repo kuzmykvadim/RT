@@ -38,6 +38,8 @@ int		check_intersect_object(t_rtv1 *rtv1, double *t, int i, t_ray *ray)
 		// RAY_ORIGIN->z -= rtv1->data->all_obj[i].position.z;
 		res = intersect_ellipsoid(ray, RT->data->all_obj[i], t);
 	}
+	else if (RT->data->all_obj[i].id == CD_DISC)
+		res = intersect_cd_disc(ray, RT->data->all_obj[i], t);
 	set_vector(RAY_ORIGIN, &old_origin);
 	return (res);
 }

@@ -24,7 +24,7 @@ void	*ft_copy(void *data, size_t size)
 int		main(int argc, char **argv)
 {
 	t_rtv1		*rtv1;
-	t_env 		*e;
+	t_env		*e;
 
 	if (argc != 2)
 		error_exit("bad param");
